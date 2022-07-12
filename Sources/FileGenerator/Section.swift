@@ -22,7 +22,7 @@ extension Section {
 // MARK: - Content
 
 extension Section: Content {
-    public typealias Body = Never
+    public var body: some Content { Builtin() }
 }
 
 // MARK: - Generator

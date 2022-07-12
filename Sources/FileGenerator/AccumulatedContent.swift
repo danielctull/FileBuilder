@@ -7,7 +7,7 @@ struct AccumulatedContent<A: Content, B: Content> {
 // MARK: - Content
 
 extension AccumulatedContent: Content {
-    typealias Body = Never
+    var body: some Content { Builtin() }
 }
 
 // MARK: - Generator

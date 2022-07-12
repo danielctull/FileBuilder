@@ -6,8 +6,8 @@ public protocol Content {
 
 // MARK: - Builtin Content
 
-extension Content where Body == Never {
-    public var body: Never { fatalError("This should never be called.") }
+struct Builtin: Content {
+    var body: Never { fatalError("\(self) is builtin content, so this should not be called.") }
 }
 
 extension Never: Content {

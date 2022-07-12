@@ -18,7 +18,7 @@ extension Line: ExpressibleByStringLiteral {
 // MARK: - Content {
 
 extension Line: Content {
-    public typealias Body = Never
+    public var body: some Content { Builtin() }
 }
 
 // MARK: - Generator
