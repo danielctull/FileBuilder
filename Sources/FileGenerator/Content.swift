@@ -16,6 +16,18 @@ extension Content {
     public static func section(_ section: Section) -> Self { Self(kind: .section(section)) }
 }
 
+// MARK: - Generation
+
+extension Content {
+
+    func generate(indentation: Indentation, level: Indentation.Level) -> String {
+        switch kind {
+        case let .line(line): return line.generate(indentation: indentation, level: level)
+        case let .section(section): return section.generate(indentation: indentation, level: level)
+        }
+    }
+}
+
 // MARK: - Builder
 
 @resultBuilder

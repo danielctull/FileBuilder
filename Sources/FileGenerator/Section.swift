@@ -18,3 +18,17 @@ extension Section {
             footer: footer)
     }
 }
+
+// MARK: - Generate
+
+extension Section {
+
+    func generate(indentation: Indentation, level: Indentation.Level) -> String {
+
+        return content
+            .map { content in
+                content.generate(indentation: indentation, level: level.next)
+            }
+            .joined(separator: "\n")
+    }
+}

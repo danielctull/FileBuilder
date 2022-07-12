@@ -14,3 +14,12 @@ extension Line: ExpressibleByStringLiteral {
         self.init(value)
     }
 }
+
+// MARK: - Generate
+
+extension Line {
+
+    func generate(indentation: Indentation, level: Indentation.Level) -> String {
+        level.prefix(for: indentation) + rawValue
+    }
+}

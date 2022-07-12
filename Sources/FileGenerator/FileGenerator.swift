@@ -14,3 +14,12 @@ extension FileGenerator {
         self.init(indentation: indentation, contents: build())
     }
 }
+
+extension FileGenerator {
+
+    public func callAsFunction() -> String {
+        contents
+            .map { $0.generate(indentation: indentation, level: .zero) }
+            .joined(separator: "\n")
+    }
+}
