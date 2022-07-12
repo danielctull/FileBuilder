@@ -22,21 +22,18 @@ extension Section {
 // MARK: - Content
 
 extension Section: Content {
-    public var body: some Content { Builtin() }
-}
 
-// MARK: - Generator
+    public var body: some Content {
 
-extension Section: Generator {
-
-    func generate(indentation: Indentation, level: Indentation.Level) -> String {
-        let generated = [
-            header?.generate(indentation: indentation, level: level),
-            content.generate(indentation: indentation, level: level.next),
-            footer?.generate(indentation: indentation, level: level)
-        ]
-        return generated
-            .compactMap { $0 }
-            .joined(separator: "\n")
+        Generator { indentation, level in
+            let generated = [
+                header?.generate(indentation: indentation, level: level),
+                content.generate(indentation: indentation, level: level.next),
+                footer?.generate(indentation: indentation, level: level)
+            ]
+            return generated
+                .compactMap { $0 }
+                .joined(separator: "\n")
+        }
     }
 }

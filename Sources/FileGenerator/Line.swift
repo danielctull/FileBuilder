@@ -18,14 +18,11 @@ extension Line: ExpressibleByStringLiteral {
 // MARK: - Content {
 
 extension Line: Content {
-    public var body: some Content { Builtin() }
-}
 
-// MARK: - Generator
+    public var body: some Content {
 
-extension Line: Generator {
-
-    func generate(indentation: Indentation, level: Indentation.Level) -> String {
-        level.prefix(for: indentation) + rawValue
+        Generator { indentation, level in
+            level.prefix(for: indentation) + rawValue
+        }
     }
 }

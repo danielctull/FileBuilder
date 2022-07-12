@@ -7,17 +7,14 @@ struct AccumulatedContent<A: Content, B: Content> {
 // MARK: - Content
 
 extension AccumulatedContent: Content {
-    var body: some Content { Builtin() }
-}
 
-// MARK: - Generator
+    var body: some Content {
 
-extension AccumulatedContent: Generator {
-
-    func generate(indentation: Indentation, level: Indentation.Level) -> String {
-        [
-            a.generate(indentation: indentation, level: level),
-            b.generate(indentation: indentation, level: level)
-        ].joined(separator: "\n")
+        Generator { indentation, level in
+            [
+                a.generate(indentation: indentation, level: level),
+                b.generate(indentation: indentation, level: level)
+            ].joined(separator: "\n")
+        }
     }
 }
