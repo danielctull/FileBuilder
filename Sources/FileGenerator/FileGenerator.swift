@@ -1,38 +1,24 @@
 
 public struct FileGenerator {
     public let indentation: Indentation
-    public let lines: [Line]
+    public let contents: [Content]
     
     public init(
         indentation: Indentation = .spaces(4),
-        lines: [Line]
+        contents: [Content]
     ) {
         self.indentation = indentation
-        self.lines = lines
+        self.contents = contents
     }
 }
 
-// MARK: - Builder
 
 extension FileGenerator {
 
-    public init(indentation: Indentation, @Builder build: () -> [Line]) {
-        self.init(indentation: indentation, lines: build())
-    }
-
-    @resultBuilder
-    public enum Builder {
-
-        public static func buildPartialBlock(first: Line) -> [Line] {
-            [first]
-        }
-
-        public static func buildPartialBlock(accumulated: [Line], next: Line) -> [Line] {
-            accumulated + [next]
-        }
-
-        public static func buildFinalResult(_ component: [Line]) -> [Line] {
-            component
-        }
+    public init(
+        indentation: Indentation,
+        @ContentBuilder build: () -> [Content]
+    ) {
+        self.init(indentation: indentation, contents: build())
     }
 }
