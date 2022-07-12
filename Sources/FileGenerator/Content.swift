@@ -28,7 +28,7 @@ public enum ContentBuilder {
     }
 
     public static func buildPartialBlock(accumulated: some Content, next: some Content) -> some Content {
-        AccumulatedContent(a: accumulated, b: next)
+        SuccessiveContent(first: accumulated, second: next)
     }
 
     public static func buildFinalResult(_ component: some Content) -> some Content {
