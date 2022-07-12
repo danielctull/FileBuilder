@@ -1,10 +1,10 @@
 
-public struct FileGenerator<C: Content> {
+public struct File<C: Content> {
     public let indentation: Indentation
     public let content: C
 }
 
-extension FileGenerator {
+extension File {
 
     public init(
         indentation: Indentation,
@@ -14,7 +14,7 @@ extension FileGenerator {
     }
 }
 
-extension FileGenerator {
+extension File {
 
     public func callAsFunction() -> String {
         content

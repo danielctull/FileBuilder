@@ -6,7 +6,7 @@ import XCTest
 final class FileGeneratorTests: XCTestCase {
 
     func testGeneration() {
-        let generator = FileGenerator(indentation: .spaces(2)) {
+        let generator = File(indentation: .spaces(2)) {
             Function(name: "function")
             Line("Hello")
             Section(header: "Header", footer: "Footer") {
