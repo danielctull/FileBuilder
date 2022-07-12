@@ -23,16 +23,10 @@ extension Section {
 
 extension Section: Content {
 
+    @ContentBuilder
     public var body: some Content {
-
-        Builtin { indentation in
-            [
-                header?.generate(indentation: indentation),
-                content.indented().generate(indentation: indentation),
-                footer?.generate(indentation: indentation)
-            ]
-            .compactMap { $0 }
-            .flatMap { $0 }
-        }
+        header
+        content.indented()
+        footer
     }
 }
