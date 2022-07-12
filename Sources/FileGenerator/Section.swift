@@ -24,11 +24,13 @@ extension Section {
 extension Section {
 
     func generate(indentation: Indentation, level: Indentation.Level) -> String {
-
-        return content
-            .map { content in
-                content.generate(indentation: indentation, level: level.next)
-            }
+        let generated = [
+            header?.generate(indentation: indentation, level: level),
+            content.generate(indentation: indentation, level: level.next),
+            footer?.generate(indentation: indentation, level: level)
+        ]
+        return generated
+            .compactMap { $0 }
             .joined(separator: "\n")
     }
 }

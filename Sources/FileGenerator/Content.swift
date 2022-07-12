@@ -28,6 +28,14 @@ extension Content {
     }
 }
 
+extension Array where Element == Content {
+
+    func generate(indentation: Indentation, level: Indentation.Level) -> String {
+        self.map { $0.generate(indentation: indentation, level: level) }
+            .joined(separator: "\n")
+    }
+}
+
 // MARK: - Builder
 
 @resultBuilder
