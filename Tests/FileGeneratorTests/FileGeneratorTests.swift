@@ -5,8 +5,15 @@ import XCTest
 final class FileGeneratorTests: XCTestCase {
 
     func testInit() {
-        XCTAssertEqual(FileGenerator().indentation, .spaces(4))
-        XCTAssertEqual(FileGenerator(indentation: .tab).indentation, .tab)
-        XCTAssertEqual(FileGenerator(indentation: .spaces(2)).indentation, .spaces(2))
+        do {
+            let generator = FileGenerator(lines: "Hello", "World")
+            XCTAssertEqual(generator.indentation, .spaces(4))
+            XCTAssertEqual(generator.lines, ["Hello", "World"])
+        }
+        do {
+            let generator = FileGenerator(indentation: .tab, lines: "Hello")
+            XCTAssertEqual(generator.indentation, .tab)
+            XCTAssertEqual(generator.lines, ["Hello"])
+        }
     }
 }
