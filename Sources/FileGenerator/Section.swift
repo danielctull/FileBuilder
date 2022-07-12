@@ -25,7 +25,7 @@ extension Section: Content {
 
     public var body: some Content {
 
-        Generator { indentation, level in
+        Builtin { indentation, level in
             let generated = [
                 header?.generate(indentation: indentation, level: level),
                 content.generate(indentation: indentation, level: level.next),

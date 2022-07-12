@@ -10,7 +10,7 @@ extension AccumulatedContent: Content {
 
     var body: some Content {
 
-        Generator { indentation, level in
+        Builtin { indentation, level in
             [
                 a.generate(indentation: indentation, level: level),
                 b.generate(indentation: indentation, level: level)

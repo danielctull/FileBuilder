@@ -10,8 +10,8 @@ extension Content {
 
     func generate(indentation: Indentation, level: Indentation.Level) -> String {
 
-        if let generator = self as? Generator {
-            return generator.generate(indentation: indentation, level: level)
+        if let builtin = self as? Builtin {
+            return builtin.generate(indentation: indentation, level: level)
         }
 
         return body.generate(indentation: indentation, level: level)

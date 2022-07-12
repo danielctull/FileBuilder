@@ -21,7 +21,7 @@ extension Line: Content {
 
     public var body: some Content {
 
-        Generator { indentation, level in
+        Builtin { indentation, level in
             level.prefix(for: indentation) + rawValue
         }
     }
