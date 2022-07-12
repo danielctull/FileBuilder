@@ -7,7 +7,7 @@ final class FileGeneratorTests: XCTestCase {
 
     func testGeneration() {
         let file = File(indentation: .spaces(2)) {
-            Func(name: "function") {
+            Func(.public, name: "function") {
                 "let this and var that"
             }
             "Hello"
@@ -22,7 +22,7 @@ final class FileGeneratorTests: XCTestCase {
             "World"
         }
         XCTAssertEqual(file.content, """
-        func function() {
+        public func function() {
           let this and var that
         }
         Hello
