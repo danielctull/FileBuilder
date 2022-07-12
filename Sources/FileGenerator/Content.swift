@@ -19,12 +19,12 @@ extension Never: Content {
 extension Content {
 
     func generate(indentation: Indentation, level: Indentation.Level) -> String {
-        switch self {
-        case let generator as any Generator:
+
+        if let generator = self as? any Generator {
             return generator.generate(indentation: indentation, level: level)
-        default:
-            fatalError("Unsupported value \(self)")
         }
+
+        return body.generate(indentation: indentation, level: level)
     }
 }
 
