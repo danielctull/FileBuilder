@@ -1,23 +1,22 @@
 
-public struct FileGenerator {
+public struct FileGenerator<C: Content> {
     public let indentation: Indentation
-    public let contents: [Content]
+    public let content: C
 }
-
 
 extension FileGenerator {
 
     public init(
         indentation: Indentation,
-        @ContentBuilder build: () -> [Content]
+        @ContentBuilder build: () -> C
     ) {
-        self.init(indentation: indentation, contents: build())
+        self.init(indentation: indentation, content: build())
     }
 }
 
 extension FileGenerator {
 
     public func callAsFunction() -> String {
-        contents.generate(indentation: indentation, level: .zero)
+        content.generate(indentation: indentation, level: .zero)
     }
 }

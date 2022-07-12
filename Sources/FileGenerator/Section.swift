@@ -1,7 +1,7 @@
 
-public struct Section: Equatable {
+public struct Section<C: Content> {
     let header: Line?
-    let content: [Content]
+    let content: C
     let footer: Line?
 }
 
@@ -10,7 +10,7 @@ extension Section {
     public init(
         header: Line? = nil,
         footer: Line? = nil,
-        @ContentBuilder build: () -> [Content]
+        @ContentBuilder build: () -> C
     ) {
         self.init(
             header: header,
@@ -19,9 +19,15 @@ extension Section {
     }
 }
 
-// MARK: - Generate
+// MARK: - Content
 
-extension Section {
+extension Section: Content {
+    public typealias Body = Never
+}
+
+// MARK: - Generator
+
+extension Section: Generator {
 
     func generate(indentation: Indentation, level: Indentation.Level) -> String {
         let generated = [

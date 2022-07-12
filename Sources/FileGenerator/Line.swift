@@ -15,9 +15,15 @@ extension Line: ExpressibleByStringLiteral {
     }
 }
 
-// MARK: - Generate
+// MARK: - Content {
 
-extension Line {
+extension Line: Content {
+    public typealias Body = Never
+}
+
+// MARK: - Generator
+
+extension Line: Generator {
 
     func generate(indentation: Indentation, level: Indentation.Level) -> String {
         level.prefix(for: indentation) + rawValue

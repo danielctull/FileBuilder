@@ -1,38 +1,30 @@
 
-import Foundation
-
-public struct Content: Equatable {
-
-    private enum Kind: Equatable {
-        case line(Line)
-        case section(Section)
-    }
-
-    private let kind: Kind
+public protocol Content {
+    associatedtype Body: Content
+    var body: Body { get }
 }
 
-extension Content {
-    public static func line(_ line: Line) -> Self { Self(kind: .line(line)) }
-    public static func section(_ section: Section) -> Self { Self(kind: .section(section)) }
+// MARK: - Builtin Content
+
+extension Content where Body == Never {
+    public var body: Never { fatalError("This should never be called.") }
 }
 
-// MARK: - Generation
+extension Never: Content {
+    public var body: Never { fatalError() }
+}
+
+// MARK: - Generator
 
 extension Content {
 
     func generate(indentation: Indentation, level: Indentation.Level) -> String {
-        switch kind {
-        case let .line(line): return line.generate(indentation: indentation, level: level)
-        case let .section(section): return section.generate(indentation: indentation, level: level)
+        switch self {
+        case let generator as any Generator:
+            return generator.generate(indentation: indentation, level: level)
+        default:
+            fatalError("Unsupported value \(self)")
         }
-    }
-}
-
-extension Array where Element == Content {
-
-    func generate(indentation: Indentation, level: Indentation.Level) -> String {
-        self.map { $0.generate(indentation: indentation, level: level) }
-            .joined(separator: "\n")
     }
 }
 
@@ -41,18 +33,15 @@ extension Array where Element == Content {
 @resultBuilder
 public enum ContentBuilder {
 
-    public static func buildExpression(_ line: Line) -> Content { .line(line) }
-    public static func buildExpression(_ section: Section) -> Content { .section(section) }
-
-    public static func buildPartialBlock(first: Content) -> [Content] {
-        [first]
+    public static func buildPartialBlock(first: some Content) -> some Content {
+        first
     }
 
-    public static func buildPartialBlock(accumulated: [Content], next: Content) -> [Content] {
-        accumulated + [next]
+    public static func buildPartialBlock(accumulated: some Content, next: some Content) -> some Content {
+        AccumulatedContent(a: accumulated, b: next)
     }
 
-    public static func buildFinalResult(_ component: [Content]) -> [Content] {
+    public static func buildFinalResult(_ component: some Content) -> some Content {
         component
     }
 }
