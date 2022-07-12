@@ -4,31 +4,34 @@ public enum Indentation: Equatable {
     case spaces(Int)
 }
 
-// MARK: - Indentation Level
+// MARK: - Content Modifier
 
-extension Indentation {
+extension Content {
 
-    struct Level {
-        fileprivate let value: Int
+    public func indented() -> some Content {
+        Indented(content: self)
     }
+}
 
-    var string: String {
-        switch self {
-        case .tab: return "\t"
-        case .spaces(let amount): return String(repeating: " ", count: amount)
+struct Indented<C: Content>: Content {
+
+    let content: C
+
+    var body: some Content {
+        Builtin { indentation in
+            content
+                .generate(indentation: indentation)
+                .map { Line(String(indentation) + $0.rawValue) }
         }
     }
 }
 
-extension Indentation.Level {
+extension String {
 
-    static let zero = Self(value: 0)
-
-    var next: Self {
-        Self(value: value + 1)
-    }
-
-    func prefix(for indentation: Indentation) -> String {
-        String(repeating: indentation.string, count: value)
+    fileprivate init(_ indentation: Indentation) {
+        switch indentation {
+        case .tab: self = "\t"
+        case .spaces(let amount): self = String(repeating: " ", count: amount)
+        }
     }
 }

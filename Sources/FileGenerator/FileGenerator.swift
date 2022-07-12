@@ -17,6 +17,9 @@ extension FileGenerator {
 extension FileGenerator {
 
     public func callAsFunction() -> String {
-        content.generate(indentation: indentation, level: .zero)
+        content
+            .generate(indentation: indentation)
+            .map(\.rawValue)
+            .joined(separator: "\n")
     }
 }

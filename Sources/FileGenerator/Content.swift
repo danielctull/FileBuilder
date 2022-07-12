@@ -8,13 +8,13 @@ public protocol Content {
 
 extension Content {
 
-    func generate(indentation: Indentation, level: Indentation.Level) -> String {
+    func generate(indentation: Indentation) -> [Line] {
 
         if let builtin = self as? Builtin {
-            return builtin.generate(indentation: indentation, level: level)
+            return builtin.generate(indentation: indentation)
         }
 
-        return body.generate(indentation: indentation, level: level)
+        return body.generate(indentation: indentation)
     }
 }
 

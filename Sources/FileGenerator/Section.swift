@@ -25,15 +25,14 @@ extension Section: Content {
 
     public var body: some Content {
 
-        Builtin { indentation, level in
-            let generated = [
-                header?.generate(indentation: indentation, level: level),
-                content.generate(indentation: indentation, level: level.next),
-                footer?.generate(indentation: indentation, level: level)
+        Builtin { indentation in
+            [
+                header?.generate(indentation: indentation),
+                content.indented().generate(indentation: indentation),
+                footer?.generate(indentation: indentation)
             ]
-            return generated
-                .compactMap { $0 }
-                .joined(separator: "\n")
+            .compactMap { $0 }
+            .flatMap { $0 }
         }
     }
 }

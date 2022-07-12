@@ -1,6 +1,6 @@
 
 struct Builtin: Content {
-    let _generate: (Indentation, Indentation.Level) -> String
+    let _generate: (Indentation) -> [Line]
     var body: Never { fatalError("\(self) is builtin content, so this should not be called.") }
 }
 
@@ -10,7 +10,7 @@ extension Never: Content {
 
 extension Builtin {
 
-    func generate(indentation: Indentation, level: Indentation.Level) -> String {
-        _generate(indentation, level)
+    func generate(indentation: Indentation) -> [Line] {
+        _generate(indentation)
     }
 }

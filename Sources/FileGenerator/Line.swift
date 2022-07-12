@@ -20,9 +20,6 @@ extension Line: ExpressibleByStringLiteral {
 extension Line: Content {
 
     public var body: some Content {
-
-        Builtin { indentation, level in
-            level.prefix(for: indentation) + rawValue
-        }
+        Builtin { _ in [self] }
     }
 }

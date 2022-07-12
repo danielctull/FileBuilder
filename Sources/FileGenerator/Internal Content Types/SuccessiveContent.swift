@@ -10,11 +10,11 @@ extension SuccessiveContent: Content {
 
     var body: some Content {
 
-        Builtin { indentation, level in
+        Builtin { indentation in
             [
-                first.generate(indentation: indentation, level: level),
-                second.generate(indentation: indentation, level: level)
-            ].joined(separator: "\n")
+                first.generate(indentation: indentation),
+                second.generate(indentation: indentation)
+            ].flatMap { $0 }
         }
     }
 }
