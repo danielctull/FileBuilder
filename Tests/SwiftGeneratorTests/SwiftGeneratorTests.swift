@@ -8,16 +8,16 @@ final class FileGeneratorTests: XCTestCase {
     func testGeneration() {
         let file = File(indentation: .spaces(2)) {
             Function(name: "function")
-            Line("Hello")
+            "Hello"
             Section(header: "Header", footer: "Footer") {
-                Line("Line 1.1")
+                "Line 1.1"
                 Section(header: "Header 2") {
-                    Line("Line 2.1")
-                    Line("Line 2.2")
+                    "Line 2.1"
+                    "Line 2.2"
                 }
-                Line("Line 1.2")
+                "Line 1.2"
             }
-            Line("World")
+            "World"
         }
         XCTAssertEqual(file.content, """
         func function() {
