@@ -6,7 +6,7 @@ import XCTest
 final class FileGeneratorTests: XCTestCase {
 
     func testGeneration() {
-        let generator = File(indentation: .spaces(2)) {
+        let file = File(indentation: .spaces(2)) {
             Function(name: "function")
             Line("Hello")
             Section(header: "Header", footer: "Footer") {
@@ -19,7 +19,7 @@ final class FileGeneratorTests: XCTestCase {
             }
             Line("World")
         }
-        XCTAssertEqual(generator(), """
+        XCTAssertEqual(file.content, """
         func function() {
         Hello
         Header

@@ -1,7 +1,7 @@
 
 public struct File<C: Content> {
-    public let indentation: Indentation
-    public let content: C
+    private let indentation: Indentation
+    private let _content: C
 }
 
 extension File {
@@ -10,14 +10,14 @@ extension File {
         indentation: Indentation,
         @ContentBuilder build: () -> C
     ) {
-        self.init(indentation: indentation, content: build())
+        self.init(indentation: indentation, _content: build())
     }
 }
 
 extension File {
 
-    public func callAsFunction() -> String {
-        content
+    public var content: String {
+        _content
             .generate(indentation: indentation)
             .map(\.rawValue)
             .joined(separator: "\n")
