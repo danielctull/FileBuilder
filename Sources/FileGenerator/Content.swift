@@ -31,6 +31,10 @@ public enum ContentBuilder {
         SuccessiveContent(first: accumulated, second: next)
     }
 
+    public static func buildArray(_ array: [some Content]) -> some Content {
+        ForContent(content: array)
+    }
+
     public static func buildFinalResult(_ component: some Content) -> some Content {
         component
     }
