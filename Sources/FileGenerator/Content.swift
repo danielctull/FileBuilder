@@ -39,7 +39,7 @@ public enum ContentBuilder {
         AccumulatedContent(first: accumulated, second: next)
     }
 
-    public static func buildArray(_ array: some Content) -> some Content {
+    public static func buildArray<C: Content>(_ array: [C]) -> [C] {
         array
     }
 
@@ -51,7 +51,7 @@ public enum ContentBuilder {
         second
     }
 
-    public static func buildOptional(_ optional: some Content) -> some Content {
+    public static func buildOptional<C: Content>(_ optional: C?) -> C? {
         optional
     }
 
