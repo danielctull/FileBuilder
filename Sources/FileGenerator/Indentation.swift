@@ -13,7 +13,7 @@ extension Content {
     }
 }
 
-struct Indented<C: Content>: Content {
+private struct Indented<C: Content>: Content {
 
     let content: C
 
