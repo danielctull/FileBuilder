@@ -1,7 +1,7 @@
 
 struct Builtin: Content {
     let _generate: (Indentation) -> [Line]
-    var body: Never { fatalError("\(self) is builtin content, so this should not be called.") }
+    var body: Never { fatalError("Builtin body should not be called.") }
 }
 
 extension Never: Content {
