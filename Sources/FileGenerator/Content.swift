@@ -39,8 +39,8 @@ public enum ContentBuilder {
         SuccessiveContent(first: accumulated, second: next)
     }
 
-    public static func buildArray(_ array: [some Content]) -> some Content {
-        ForContent(content: array)
+    public static func buildArray(_ array: some Content) -> some Content {
+        array
     }
 
     public static func buildOptional(_ optional: some Content) -> some Content {
