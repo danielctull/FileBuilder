@@ -43,6 +43,10 @@ public enum ContentBuilder {
         ForContent(content: array)
     }
 
+    public static func buildOptional(_ optional: some Content) -> some Content {
+        optional
+    }
+
     public static func buildFinalResult(_ component: some Content) -> some Content {
         component
     }

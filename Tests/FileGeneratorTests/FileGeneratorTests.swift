@@ -14,6 +14,9 @@ final class FileGeneratorTests: XCTestCase {
                     for i in 1...5 {
                         "Line 2.\(i)"
                     }
+                    if true {
+                        "Optional"
+                    }
                 }
                 "Line 1.2"
             }
@@ -30,6 +33,7 @@ final class FileGeneratorTests: XCTestCase {
             Line 2.3
             Line 2.4
             Line 2.5
+            Optional
           Line 1.2
         Footer
         World
