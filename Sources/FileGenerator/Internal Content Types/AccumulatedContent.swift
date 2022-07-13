@@ -1,12 +1,12 @@
 
-struct SuccessiveContent<First: Content, Second: Content> {
+struct AccumulatedContent<First: Content, Second: Content> {
     let first: First
     let second: Second
 }
 
 // MARK: - Content
 
-extension SuccessiveContent: Content {
+extension AccumulatedContent: Content {
 
     var body: some Content {
 
