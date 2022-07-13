@@ -10,6 +10,11 @@ final class FileGeneratorTests: XCTestCase {
             "Hello"
             Section(header: "Header", footer: "Footer") {
                 "Line 1.1"
+                Group {
+                    "Indented"
+                    "Together"
+                }
+                .indented()
                 Section(header: "Header 2") {
                     for i in 1...5 {
                         "Line 2.\(i)"
@@ -32,6 +37,8 @@ final class FileGeneratorTests: XCTestCase {
         Hello
         Header
           Line 1.1
+            Indented
+            Together
           Header 2
             Line 2.1
             Line 2.2
