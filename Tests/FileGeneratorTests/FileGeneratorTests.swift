@@ -5,7 +5,7 @@ import XCTest
 final class FileGeneratorTests: XCTestCase {
 
     func testGeneration() {
-
+        let value = 1
         let file = File(indentation: .spaces(2)) {
             "Hello"
             Section(header: "Header", footer: "Footer") {
@@ -16,6 +16,11 @@ final class FileGeneratorTests: XCTestCase {
                     }
                     if true {
                         "Optional"
+                    }
+                    if value == 0 {
+                        "True"
+                    } else {
+                        "False"
                     }
                 }
                 "Line 1.2"
@@ -34,6 +39,7 @@ final class FileGeneratorTests: XCTestCase {
             Line 2.4
             Line 2.5
             Optional
+            False
           Line 1.2
         Footer
         World
