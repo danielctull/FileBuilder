@@ -43,6 +43,14 @@ public enum ContentBuilder {
         array
     }
 
+    public static func buildEither<C: Content>(first: C) -> C {
+        first
+    }
+
+    public static func buildEither<C: Content>(second: C) -> C {
+        second
+    }
+
     public static func buildOptional(_ optional: some Content) -> some Content {
         optional
     }
