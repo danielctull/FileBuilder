@@ -19,7 +19,7 @@ extension File {
     public var content: String {
         _content
             .generate(indentation: indentation)
-            .map(\.rawValue)
+            .map(String.init)
             .joined(separator: "\n")
     }
 }

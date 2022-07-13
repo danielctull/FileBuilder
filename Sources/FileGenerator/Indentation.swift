@@ -21,7 +21,7 @@ private struct Indented<C: Content>: Content {
         Builtin { indentation in
             content
                 .generate(indentation: indentation)
-                .map { Line(String(indentation) + $0.rawValue) }
+                .map { $0.prefix(String(indentation)) }
         }
     }
 }
