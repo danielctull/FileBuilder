@@ -1,8 +1,8 @@
 
-import FileGenerator
+import FileBuilder
 import XCTest
 
-final class FileGeneratorTests: XCTestCase {
+final class FileBuilderTests: XCTestCase {
 
     func testAmbiguous() {
 
