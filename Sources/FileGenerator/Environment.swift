@@ -76,13 +76,13 @@ extension Environment: SetEnvironmentValues {
     }
 }
 
-extension Content {
+extension EnvironmentValues {
 
-    func install(_ environment: EnvironmentValues) {
-        let mirror = Mirror(reflecting: self)
+    func install<Target>(on target: Target) {
+        let mirror = Mirror(reflecting: target)
         for child in mirror.children {
             if let property = child.value as? SetEnvironmentValues {
-                property.setEnvironmentValues(environment)
+                property.setEnvironmentValues(self)
             }
         }
     }
