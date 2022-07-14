@@ -7,15 +7,6 @@ extension Line {
     public static let empty = Line(rawValue: "")
 }
 
-// MARK: - String
-
-extension String: Content {
-
-    public var body: some Content {
-        Line(rawValue: self)
-    }
-}
-
 // MARK: - Modification
 
 extension Line {
