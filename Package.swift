@@ -12,13 +12,14 @@ let package = Package(
     ],
     products: [
         .library(name: "FileGenerator", targets: ["FileGenerator"]),
-        .library(name: "SwiftGenerator", targets: ["SwiftGenerator"]),
     ],
     targets: [
-        .target(name: "FileGenerator"),
-        .testTarget(name: "FileGeneratorTests", dependencies: ["FileGenerator"]),
 
-        .target(name: "SwiftGenerator", dependencies: ["FileGenerator"]),
-        .testTarget(name: "SwiftGeneratorTests", dependencies: ["SwiftGenerator"]),
+        .target(
+            name: "FileGenerator"),
+
+        .testTarget(
+            name: "FileGeneratorTests",
+            dependencies: ["FileGenerator"]),
     ]
 )
