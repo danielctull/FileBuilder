@@ -12,7 +12,7 @@ final class FileGeneratorTests: XCTestCase {
             }
         }
 
-        let ambiguous = File(indentation: .tab) {
+        let ambiguous = File {
             if 1 == 1 {
                 NoContent()
             } else {
@@ -36,7 +36,7 @@ final class FileGeneratorTests: XCTestCase {
 
     func testGeneration() {
         let value = 1
-        let file = File(indentation: .spaces(2)) {
+        let file = File {
             "Hello"
             Section(header: "Header", footer: "Footer") {
                 NoContent()
@@ -64,6 +64,7 @@ final class FileGeneratorTests: XCTestCase {
             }
             "World"
         }
+        .indentation(.spaces(2))
 
         XCTAssertEqual(file.content, """
         Hello

@@ -6,6 +6,15 @@ public protocol Content {
     var body: Body { get }
 }
 
+extension Content {
+
+    public var content: String {
+        generate(environment: EnvironmentValues())
+            .map(\.rawValue)
+            .joined(separator: "\n")
+    }
+}
+
 // MARK: - Generator
 
 extension Content {
