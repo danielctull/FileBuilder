@@ -1,21 +1,34 @@
 
-public struct Section<C: Content> {
-    let header: Line?
+public struct Section<Header: Content, Footer: Content, C: Content> {
+    let header: Header
     let content: C
-    let footer: Line?
+    let footer: Footer
 }
 
 extension Section {
 
     public init(
-        header: Line? = nil,
-        footer: Line? = nil,
+        header: Header,
+        footer: Footer,
         @ContentBuilder build: () -> C
     ) {
         self.init(
             header: header,
             content: build(),
             footer: footer)
+    }
+}
+
+extension Section where Footer == NoContent {
+
+    public init(
+        header: Header,
+        @ContentBuilder build: () -> C
+    ) {
+        self.init(
+            header: header,
+            content: build(),
+            footer: NoContent())
     }
 }
 

@@ -6,6 +6,6 @@ struct Let: Content {
 
 
     var body: some Content {
-        Line("let \(name)")
+        "let \(name)"
     }
 }
