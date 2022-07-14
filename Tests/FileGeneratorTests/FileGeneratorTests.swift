@@ -12,14 +12,14 @@ final class FileGeneratorTests: XCTestCase {
             }
         }
 
-//        let ambiguous = File(indentation: .tab) {
-//            if 1 == 1 {
-//                NoContent()
-//            } else {
-//                Zilch()
-//            }
-//        }
-//        XCTAssertEqual(ambiguous.content, "")
+        let ambiguous = File(indentation: .tab) {
+            if 1 == 1 {
+                NoContent()
+            } else {
+                Zilch()
+            }
+        }
+        XCTAssertEqual(ambiguous.content, "")
 
         let ok = File {
             switch ["", ""].count {

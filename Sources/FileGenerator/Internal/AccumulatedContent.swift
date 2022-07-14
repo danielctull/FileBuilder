@@ -1,5 +1,5 @@
 
-struct AccumulatedContent<First: Content, Second: Content> {
+public struct AccumulatedContent<First: Content, Second: Content> {
     let first: First
     let second: Second
 }
@@ -8,8 +8,7 @@ struct AccumulatedContent<First: Content, Second: Content> {
 
 extension AccumulatedContent: Content {
 
-    var body: some Content {
-
+    public var body: some Content {
         Builtin { indentation in
             let a = first.generate(indentation: indentation)
             let b = second.generate(indentation: indentation)
