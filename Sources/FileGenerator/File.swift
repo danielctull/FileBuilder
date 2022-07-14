@@ -7,7 +7,7 @@ public struct File<C: Content> {
 extension File {
 
     public init(
-        indentation: Indentation,
+        indentation: Indentation = .spaces(4),
         @ContentBuilder build: () -> C
     ) {
         self.init(indentation: indentation, _content: build())

@@ -21,7 +21,7 @@ final class FileGeneratorTests: XCTestCase {
 //        }
 //        XCTAssertEqual(ambiguous.content, "")
 
-        let ok = File(indentation: .tab) {
+        let ok = File {
             switch ["", ""].count {
             case 0:
                 NoContent()
