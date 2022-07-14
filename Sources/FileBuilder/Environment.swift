@@ -32,7 +32,7 @@ private struct EnvironmentModifier<C: Content>: Content {
     let modify: (inout EnvironmentValues) -> ()
 
     var body: some Content {
-        Builtin { environment in
+        BuiltinContent { environment in
             var environment = environment
             modify(&environment)
             return content.generate(environment: environment)

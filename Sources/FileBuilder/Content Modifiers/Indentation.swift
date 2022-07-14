@@ -39,7 +39,7 @@ private struct Indented<C: Content>: ContentModifier {
     @Environment(\.indentation) var indentation
 
     func body(content: C) -> some Content {
-        Builtin { environment in
+        BuiltinContent { environment in
             content
                 .generate(environment: environment)
                 .map { $0.prefix(String(indentation)) }

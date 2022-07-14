@@ -25,6 +25,6 @@ extension Line {
 extension Line: Content {
 
     public var body: some Content {
-        Builtin { _ in [self] }
+        BuiltinContent { _ in [self] }
     }
 }

@@ -24,7 +24,7 @@ public struct ModifiedContent<C, Modifier> {
 extension ModifiedContent: Content where C: Content, Modifier: ContentModifier, C == Modifier.C {
 
     public var body: some Content {
-        Builtin { environment in
+        BuiltinContent { environment in
             environment.install(on: modifier)
             return modifier
                 .body(content: content)
