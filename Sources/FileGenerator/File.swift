@@ -10,7 +10,8 @@ extension File {
         indentation: Indentation = .spaces(4),
         @ContentBuilder build: () -> C
     ) {
-        let environment = EnvironmentValues(indentation: indentation)
+        var environment = EnvironmentValues()
+        environment.indentation = indentation
         self.init(environment: environment, _content: build())
     }
 }

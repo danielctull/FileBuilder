@@ -4,6 +4,20 @@ public enum Indentation: Equatable {
     case spaces(Int)
 }
 
+// MARK: - Environment
+
+enum IndentationKey: EnvironmentKey {
+    static let defaultValue = Indentation.spaces(4)
+}
+
+extension EnvironmentValues {
+
+    var indentation: Indentation {
+        get { self[IndentationKey.self] }
+        set { self[IndentationKey.self] = newValue }
+    }
+}
+
 // MARK: - Content Modifier
 
 extension Content {
