@@ -1,11 +1,11 @@
 
 struct Builtin: Content {
     let _generate: (Indentation) -> [Line]
-    var body: Never { fatalError("Builtin body should not be called.") }
+    var body: some Content { fatalError("Builtin body should not be called.") }
 }
 
 extension Never: Content {
-    public var body: Never { fatalError() }
+    public var body: some Content { fatalError() }
 }
 
 extension Builtin {
