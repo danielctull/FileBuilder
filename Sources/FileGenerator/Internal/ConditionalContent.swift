@@ -1,7 +1,7 @@
 
 public struct ConditionalContent<True: Content, False: Content> {
 
-    private let generate: (Indentation) -> [Line]
+    private let generate: (EnvironmentValues) -> [Line]
 
     init(_ content: True) {
         generate = content.generate

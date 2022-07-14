@@ -18,10 +18,10 @@ private struct Indented<C: Content>: Content {
     let content: C
 
     var body: some Content {
-        Builtin { indentation in
+        Builtin { environment in
             content
-                .generate(indentation: indentation)
-                .map { $0.prefix(String(indentation)) }
+                .generate(environment: environment)
+                .map { $0.prefix(String(environment.indentation)) }
         }
     }
 }

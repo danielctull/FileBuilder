@@ -10,12 +10,12 @@ public protocol Content {
 
 extension Content {
 
-    func generate(indentation: Indentation) -> [Line] {
+    func generate(environment: EnvironmentValues) -> [Line] {
 
         if let builtin = self as? Builtin {
-            return builtin.generate(indentation: indentation)
+            return builtin.generate(environment: environment)
         }
 
-        return body.generate(indentation: indentation)
+        return body.generate(environment: environment)
     }
 }

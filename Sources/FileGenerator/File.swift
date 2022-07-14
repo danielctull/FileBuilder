@@ -1,6 +1,6 @@
 
 public struct File<C: Content> {
-    private let indentation: Indentation
+    private let environment: EnvironmentValues
     private let _content: C
 }
 
@@ -10,7 +10,8 @@ extension File {
         indentation: Indentation = .spaces(4),
         @ContentBuilder build: () -> C
     ) {
-        self.init(indentation: indentation, _content: build())
+        let environment = EnvironmentValues(indentation: indentation)
+        self.init(environment: environment, _content: build())
     }
 }
 
@@ -18,7 +19,7 @@ extension File {
 
     public var content: String {
         _content
-            .generate(indentation: indentation)
+            .generate(environment: environment)
             .map(\.rawValue)
             .joined(separator: "\n")
     }

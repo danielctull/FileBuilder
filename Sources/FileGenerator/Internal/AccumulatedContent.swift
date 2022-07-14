@@ -9,9 +9,9 @@ public struct AccumulatedContent<First: Content, Second: Content> {
 extension AccumulatedContent: Content {
 
     public var body: some Content {
-        Builtin { indentation in
-            let a = first.generate(indentation: indentation)
-            let b = second.generate(indentation: indentation)
+        Builtin { environment in
+            let a = first.generate(environment: environment)
+            let b = second.generate(environment: environment)
             return a + b
         }
     }
