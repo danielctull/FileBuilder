@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "FileGenerator",
+    name: "FileBuilder",
     platforms: [
         .iOS(.v14),
         .macOS(.v11),
@@ -11,15 +11,15 @@ let package = Package(
         .watchOS(.v7),
     ],
     products: [
-        .library(name: "FileGenerator", targets: ["FileGenerator"]),
+        .library(name: "FileBuilder", targets: ["FileBuilder"]),
     ],
     targets: [
 
         .target(
-            name: "FileGenerator"),
+            name: "FileBuilder"),
 
         .testTarget(
-            name: "FileGeneratorTests",
-            dependencies: ["FileGenerator"]),
+            name: "FileBuilderTests",
+            dependencies: ["FileBuilder"]),
     ]
 )

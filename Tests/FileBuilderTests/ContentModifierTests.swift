@@ -1,5 +1,5 @@
 
-import FileGenerator
+import FileBuilder
 import XCTest
 
 final class ContentModifierTests: XCTestCase {
