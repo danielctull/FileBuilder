@@ -23,14 +23,6 @@ extension Content {
 @resultBuilder
 public enum ContentBuilder {
 
-    public static func buildExpression(_ expression: some Content) -> some Content {
-        expression
-    }
-
-    public static func buildExpression<S: StringProtocol>(_ expression: S) -> some Content {
-        Line(String(expression))
-    }
-
     public static func buildPartialBlock(first: some Content) -> some Content {
         first
     }

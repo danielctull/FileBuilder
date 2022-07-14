@@ -1,24 +1,18 @@
 
 public struct Line: Equatable {
-
-    fileprivate let rawValue: String
-
-    public init(_ rawValue: String) {
-        self.rawValue = rawValue
-    }
+    let rawValue: String
 }
 
-extension Line: ExpressibleByStringLiteral {
-
-    public init(stringLiteral value: String) {
-        self.init(value)
-    }
+extension Line {
+    public static let empty = Line(rawValue: "")
 }
 
-extension String {
+// MARK: - String
 
-    init(_ line: Line) {
-        self = line.rawValue
+extension String: Content {
+
+    public var body: some Content {
+        Line(rawValue: self)
     }
 }
 
@@ -27,11 +21,11 @@ extension String {
 extension Line {
 
     func prefix(_ prefix: String) -> Line {
-        Line(prefix + rawValue)
+        Line(rawValue: prefix + rawValue)
     }
 
     func suffix(_ suffix: String) -> Line {
-        Line(rawValue + suffix)
+        Line(rawValue: rawValue + suffix)
     }
 }
 
