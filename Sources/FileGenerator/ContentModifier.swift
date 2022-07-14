@@ -3,6 +3,7 @@ public protocol ContentModifier {
     associatedtype C
     associatedtype Body: Content
 
+    @ContentBuilder
     func body(content: C) -> Body
 }
 
