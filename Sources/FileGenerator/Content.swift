@@ -1,6 +1,8 @@
 
 public protocol Content {
     associatedtype Body: Content
+
+    @ContentBuilder
     var body: Body { get }
 }
 

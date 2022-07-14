@@ -17,7 +17,6 @@ public struct Func<C: Content>: Content {
         self.content = content()
     }
 
-    @ContentBuilder
     public var body: some Content {
         "\(access)func \(name)() {"
         content.indented()
