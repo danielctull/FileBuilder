@@ -6,7 +6,7 @@ import XCTest
 final class FileGeneratorTests: XCTestCase {
 
     func testGeneration() {
-        let file = File(indentation: .spaces(2)) {
+        let file = FileContent(indentation: .spaces(2)) {
             Func(.public, name: "function") {
                 "let this and var that"
             }

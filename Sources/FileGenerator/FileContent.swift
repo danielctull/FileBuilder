@@ -1,10 +1,10 @@
 
-public struct File<C: Content> {
+public struct FileContent<C: Content> {
     private let indentation: Indentation
     private let _content: C
 }
 
-extension File {
+extension FileContent {
 
     public init(
         indentation: Indentation,
@@ -14,7 +14,7 @@ extension File {
     }
 }
 
-extension File {
+extension FileContent {
 
     public var content: String {
         _content
