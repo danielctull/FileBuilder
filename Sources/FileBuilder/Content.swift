@@ -23,7 +23,7 @@ extension Content {
 
         environment.install(on: self)
 
-        if let builtin = self as? Builtin {
+        if let builtin = self as? BuiltinContent {
             return builtin.generate(environment: environment)
         }
 
