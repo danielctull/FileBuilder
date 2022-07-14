@@ -21,7 +21,7 @@ extension Content {
 
     func generate(environment: EnvironmentValues) -> [Line] {
 
-        install(environment)
+        environment.install(on: self)
 
         if let builtin = self as? Builtin {
             return builtin.generate(environment: environment)
