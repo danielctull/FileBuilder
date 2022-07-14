@@ -11,10 +11,9 @@ extension AccumulatedContent: Content {
     var body: some Content {
 
         Builtin { indentation in
-            [
-                first.generate(indentation: indentation),
-                second.generate(indentation: indentation)
-            ].flatMap { $0 }
+            let a = first.generate(indentation: indentation)
+            let b = second.generate(indentation: indentation)
+            return a + b
         }
     }
 }
