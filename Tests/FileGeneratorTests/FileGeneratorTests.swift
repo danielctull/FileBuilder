@@ -4,6 +4,36 @@ import XCTest
 
 final class FileGeneratorTests: XCTestCase {
 
+    func testAmbiguous() {
+
+        struct Zilch: Content {
+            var body: some Content {
+                NoContent()
+            }
+        }
+
+//        let ambiguous = File(indentation: .tab) {
+//            if 1 == 1 {
+//                NoContent()
+//            } else {
+//                Zilch()
+//            }
+//        }
+//        XCTAssertEqual(ambiguous.content, "")
+
+        let ok = File(indentation: .tab) {
+            switch ["", ""].count {
+            case 0:
+                NoContent()
+            case 1:
+                NoContent()
+            default:
+                NoContent()
+            }
+        }
+        XCTAssertEqual(ok.content, "")
+    }
+
     func testGeneration() {
         let value = 1
         let file = File(indentation: .spaces(2)) {
