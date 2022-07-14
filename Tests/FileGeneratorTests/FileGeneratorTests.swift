@@ -46,6 +46,7 @@ final class FileGeneratorTests: XCTestCase {
                     "Together"
                 }
                 .indented()
+                .indentation(.spaces(5))
                 Section(header: "Header 2") {
                     for i in 1...5 {
                         "Line 2.\(i)"
@@ -68,8 +69,8 @@ final class FileGeneratorTests: XCTestCase {
         Hello
         Header
           Line 1.1
-            Indented
-            Together
+               Indented
+               Together
           Header 2
             Line 2.1
             Line 2.2

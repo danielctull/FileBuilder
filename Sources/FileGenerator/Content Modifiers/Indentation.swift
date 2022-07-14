@@ -6,6 +6,13 @@ public enum Indentation: Equatable {
 
 // MARK: - Environment
 
+extension Content {
+
+    public func indentation(_ indentation: Indentation) -> some Content {
+        environment(\.indentation, indentation)
+    }
+}
+
 enum IndentationKey: EnvironmentKey {
     static let defaultValue = Indentation.spaces(4)
 }
