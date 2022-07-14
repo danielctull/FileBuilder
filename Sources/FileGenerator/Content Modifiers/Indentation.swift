@@ -29,13 +29,14 @@ extension Content {
 
 private struct Indented<C: Content>: Content {
 
+    @Environment(\.indentation) var indentation
     let content: C
 
     var body: some Content {
         Builtin { environment in
             content
                 .generate(environment: environment)
-                .map { $0.prefix(String(environment.indentation)) }
+                .map { $0.prefix(String(indentation)) }
         }
     }
 }
