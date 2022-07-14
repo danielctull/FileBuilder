@@ -9,7 +9,7 @@ final class FileGeneratorTests: XCTestCase {
         let file = File(indentation: .spaces(2)) {
             "Hello"
             Section(header: "Header", footer: "Footer") {
-                EmptyContent()
+                NoContent()
                 "Line 1.1"
                 Group {
                     "Indented"
