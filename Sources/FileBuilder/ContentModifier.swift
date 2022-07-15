@@ -11,7 +11,7 @@ extension Content {
 
     public func modifier<Modifier: ContentModifier>(
         _ modifier: Modifier
-    ) -> ModifiedContent<Self, Modifier> {
+    ) -> ModifiedContent<Self, Modifier> where Modifier.C == Self {
         ModifiedContent(content: self, modifier: modifier)
     }
 }
