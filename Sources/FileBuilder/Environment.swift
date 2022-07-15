@@ -65,6 +65,8 @@ private final class Box<A> {
     }
 }
 
+// MARK: - Installation 
+
 private protocol SetEnvironmentValues {
     func setEnvironmentValues(_ environment: EnvironmentValues)
 }

@@ -30,20 +30,15 @@ extension EnvironmentValues {
 extension Content {
 
     public func indented() -> some Content {
-        modifier(Indented())
+        modify(Line.prefix, "   ")
     }
 }
 
-private struct Indented<C: Content>: ContentModifier {
+private struct Indented<C: Content>: LineModifier {
 
     @Environment(\.indentation) var indentation
-
-    func body(content: C) -> some Content {
-        BuiltinContent { environment in
-            content
-                .generate(environment: environment)
-                .map { $0.prefix(String(indentation)) }
-        }
+    var modify: (Line) -> Line {
+        { $0.prefix(String(indentation)) }
     }
 }
 
