@@ -9,10 +9,11 @@ public func AssertContent<C: Content>(
     file: StaticString = #filePath,
     line: UInt = #line
 ) {
-    XCTAssertEqual(
-        content().content,
-        output(),
-        message(),
+    let content = content().content
+    let output = output()
+    XCTAssert(
+        content == output,
+        "\n\n\(content)\n\nis not equal to\n\n\(output)",
         file: file,
         line: line)
 }
