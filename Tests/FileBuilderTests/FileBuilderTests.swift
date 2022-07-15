@@ -4,85 +4,103 @@ import XCTest
 
 final class FileBuilderTests: XCTestCase {
 
-    func testAmbiguous() {
+    func test() {
 
-        struct Zilch: Content {
-            var body: some Content {
-                NoContent()
+        AssertContent {
+            File {
+                Func("foo") {
+                    If("value == 4") {
+                        Print("It's 4!")
+                    }
+                    If("value == 2") {
+                        Print("It's 2!")
+                    } else: {
+                        Print("It's not 2!")
+                    }
+                }
             }
+            .indentation(.spaces(2))
+        } is: {
+            """
+            func foo() {
+              if value == 4 {
+                print("It's 4!")
+              }
+              if value == 2 {
+                print("It's 2!")
+              } else {
+                print("It's not 2!")
+              }
+            }
+            """
         }
+    }
+}
 
-        let ambiguous = File {
-            if 1 == 1 {
-                NoContent()
-            } else {
-                Zilch()
-            }
-        }
-        XCTAssertEqual(ambiguous.content, "")
-
-        let ok = File {
-            switch ["", ""].count {
-            case 0:
-                NoContent()
-            case 1:
-                NoContent()
-            default:
-                NoContent()
-            }
-        }
-        XCTAssertEqual(ok.content, "")
+struct Print: Content {
+    let string: String
+    init(_ string: String) {
+        self.string = string
     }
 
-    func testGeneration() {
-        let value = 1
-        let file = File {
-            "Hello"
-            Section(header: "Header", footer: "Footer") {
-                NoContent()
-                "Line 1.1"
-                Group {
-                    "Indented"
-                    "Together"
-                }
-                .indented()
-                .indentation(.spaces(5))
-                Section(header: "Header 2") {
-                    for i in 1...5 {
-                        "Line 2.\(i)"
-                    }
-                    if true {
-                        "Optional"
-                    }
-                    if value == 0 {
-                        "True"
-                    } else {
-                        "False"
-                    }
-                }
-                "Line 1.2"
-            }
-            "World"
-        }
-        .indentation(.spaces(2))
+    var body: some Content {
+        #"print("\#(string)")"#
+    }
+}
 
-        XCTAssertEqual(file.content, """
-        Hello
-        Header
-          Line 1.1
-               Indented
-               Together
-          Header 2
-            Line 2.1
-            Line 2.2
-            Line 2.3
-            Line 2.4
-            Line 2.5
-            Optional
-            False
-          Line 1.2
-        Footer
-        World
-        """)
+struct Func<C: Content>: Content {
+
+    let name: String
+    let content: C
+    init(_ name: String, @ContentBuilder content: () -> C) {
+        self.name = name
+        self.content = content()
+    }
+
+    var body: some Content {
+        "func \(name)() {"
+        content.indented()
+        "}"
+    }
+}
+
+struct If<True: Content, False: Content>: Content {
+
+    let condition: String
+    let trueContent: True
+    let falseContent: False
+
+    init(
+        _ condition: String,
+        @ContentBuilder trueContent: () -> True,
+        @ContentBuilder else falseContent: () -> False
+    ) {
+        self.condition = condition
+        self.trueContent = trueContent()
+        self.falseContent = falseContent()
+    }
+
+    var body: some Content {
+        "if \(condition) {"
+        trueContent.indented()
+        if False.self == NoContent.self {
+            "}"
+        } else {
+            "} else {"
+            falseContent.indented()
+            "}"
+        }
+    }
+}
+
+extension If where False == NoContent {
+
+    init(
+        _ condition: String,
+        @ContentBuilder trueContent: () -> True
+    ) {
+        self.condition = condition
+        self.trueContent = trueContent()
+        self.falseContent = NoContent()
     }
 }
