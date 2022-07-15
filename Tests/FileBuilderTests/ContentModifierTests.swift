@@ -14,11 +14,13 @@ final class ContentModifierTests: XCTestCase {
             }
         }
 
-        AssertOutput(
-            "Hello".modifier(Append(line: "World!")),
+        AssertContent {
+            "Hello".modifier(Append(line: "World!"))
+        } is: {
             """
             Hello
             World!
-            """)
+            """
+        }
     }
 }
