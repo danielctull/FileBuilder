@@ -29,6 +29,12 @@ public enum ContentBuilder {
         ConditionalContent(second)
     }
 
+    public static func buildLimitedAvailability<C: Content>(
+        _ content: C
+    ) -> AnyContent {
+        AnyContent(content)
+    }
+
     public static func buildOptional<C: Content>(_ optional: C?) -> C? {
         optional
     }

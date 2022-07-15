@@ -8,6 +8,14 @@ final class ContentTests: XCTestCase {
         AssertContent { "Hello" } is: { "Hello" }
     }
 
+    func testAnyContent() {
+        AssertContent {
+            AnyContent("Anything!")
+        } is: {
+            "Anything!"
+        }
+    }
+
     func testArray() {
         AssertContent {
             ["Hello", "World"]
