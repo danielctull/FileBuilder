@@ -11,9 +11,11 @@ final class EnvironmentTests: XCTestCase {
             var body: some Content { value }
         }
 
-        AssertOutput(
-            Test().environment(\.value, "Hello!"),
-            "Hello!")
+        AssertContent {
+            Test().environment(\.value, "Hello!")
+        } is: {
+            "Hello!"
+        }
     }
 
     func testContentModifierInstallation() {
@@ -23,9 +25,11 @@ final class EnvironmentTests: XCTestCase {
             func body(content: C) -> some Content { value }
         }
 
-        AssertOutput(
-            Line.empty.modifier(Test()).environment(\.value, "Hello!"),
-            "Hello!")
+        AssertContent {
+            Line.empty.modifier(Test()).environment(\.value, "Hello!")
+        } is: {
+            "Hello!"
+        }
     }
 }
 
