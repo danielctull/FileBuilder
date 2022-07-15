@@ -5,50 +5,66 @@ import XCTest
 final class ContentTests: XCTestCase {
 
     func testString() {
-        AssertOutput("Hello", "Hello")
+        AssertContent { "Hello" } is: { "Hello" }
     }
 
     func testArray() {
-        AssertOutput(
-            ["Hello", "World"],
+        AssertContent {
+            ["Hello", "World"]
+        } is: {
             """
             Hello
             World
-            """)
+            """
+        }
     }
 
     func testFile() {
-        AssertOutput(
+        AssertContent {
             File {
                 "Hello"
                 "There"
-            },
+            }
+        } is: {
             """
             Hello
             There
-            """)
+            """
+        }
     }
 
     func testGroup() {
-        AssertOutput(
+        AssertContent {
             Group {
                 "One"
                 "Two"
-            },
+            }
+        } is: {
             """
             One
             Two
-            """)
+            """
+        }
+    }
+
+    func testNoContent() {
+        AssertContent {
+            NoContent()
+        } is: {
+            ""
+        }
     }
 
     func testOptional() {
-        AssertOutput(
+        AssertContent {
             Group {
                 String?.none
                 String?.some("Just me")
-            },
+            }
+        } is: {
             """
             Just me
-            """)
+            """
+        }
     }
 }
