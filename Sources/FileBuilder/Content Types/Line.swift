@@ -14,10 +14,6 @@ extension Line {
     func prefix(_ prefix: String) -> Line {
         Line(rawValue: prefix + rawValue)
     }
-
-    func suffix(_ suffix: String) -> Line {
-        Line(rawValue: rawValue + suffix)
-    }
 }
 
 // MARK: - Content {
