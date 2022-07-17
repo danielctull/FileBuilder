@@ -13,14 +13,3 @@ public struct File<C: Content>: Content {
         content
     }
 }
-
-extension File {
-
-    public func write(
-        to url: URL,
-        atomically: Bool,
-        encoding: String.Encoding
-    ) throws {
-        try content.write(to: url, atomically: atomically, encoding: encoding)
-    }
-}

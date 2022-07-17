@@ -4,16 +4,16 @@ import XCTest
 
 final class ContentBuilderTests: XCTestCase {
 
-    func testFirst() {
-        AssertContent {
+    func testFirst() throws {
+        try AssertContent {
             "Hi"
         } is: {
             "Hi"
         }
     }
 
-    func testAccumulation() {
-        AssertContent {
+    func testAccumulation() throws {
+        try AssertContent {
             "Hi"
             Line.empty
             "There"
@@ -26,9 +26,9 @@ final class ContentBuilderTests: XCTestCase {
         }
     }
 
-    func testArray() {
+    func testArray() throws {
         
-        AssertContent {
+        try AssertContent {
             for i in 1...3 {
                 "Value \(i)"
             }
@@ -41,7 +41,7 @@ final class ContentBuilderTests: XCTestCase {
         }
     }
 
-    func testEither() {
+    func testEither() throws {
 
         @ContentBuilder
         func content(_ bool: Bool) -> some Content {
@@ -52,22 +52,22 @@ final class ContentBuilderTests: XCTestCase {
             }
         }
 
-        AssertContent {
+        try AssertContent {
             content(true)
         } is: {
             "True"
         }
 
-        AssertContent {
+        try AssertContent {
             content(false)
         } is: {
             "False"
         }
     }
 
-    func testLimitedAvailability() {
+    func testLimitedAvailability() throws {
 
-        AssertContent {
+        try AssertContent {
             if #available(macOS 9999, *) {
                 "Future Content"
             } else if #available(*) { // <-- This causes the builder to hit
@@ -78,7 +78,7 @@ final class ContentBuilderTests: XCTestCase {
         }
     }
 
-    func testOptional() {
+    func testOptional() throws {
 
         @ContentBuilder
         func content(_ bool: Bool) -> some Content {
@@ -87,13 +87,13 @@ final class ContentBuilderTests: XCTestCase {
             }
         }
 
-        AssertContent {
+        try AssertContent {
             content(true)
         } is: {
             "True"
         }
 
-        AssertContent {
+        try AssertContent {
             content(false)
         } is: {
             ""

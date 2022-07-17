@@ -4,7 +4,7 @@ import XCTest
 
 final class ContentModifierTests: XCTestCase {
 
-    func testContentModifier() {
+    func testContentModifier() throws {
 
         struct Append<C: Content, Line: Content>: ContentModifier {
             let line: Line
@@ -14,7 +14,7 @@ final class ContentModifierTests: XCTestCase {
             }
         }
 
-        AssertContent {
+        try AssertContent {
             "Hello".modifier(Append(line: "World!"))
         } is: {
             """

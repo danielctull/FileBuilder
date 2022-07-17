@@ -4,20 +4,20 @@ import XCTest
 
 final class ContentTests: XCTestCase {
 
-    func testString() {
-        AssertContent { "Hello" } is: { "Hello" }
+    func testString() throws {
+        try AssertContent { "Hello" } is: { "Hello" }
     }
 
-    func testAnyContent() {
-        AssertContent {
+    func testAnyContent() throws {
+        try AssertContent {
             AnyContent("Anything!")
         } is: {
             "Anything!"
         }
     }
 
-    func testArray() {
-        AssertContent {
+    func testArray() throws {
+        try AssertContent {
             ["Hello", "World"]
         } is: {
             """
@@ -27,8 +27,8 @@ final class ContentTests: XCTestCase {
         }
     }
 
-    func testFile() {
-        AssertContent {
+    func testFile() throws {
+        try AssertContent {
             File {
                 "Hello"
                 "There"
@@ -41,8 +41,8 @@ final class ContentTests: XCTestCase {
         }
     }
 
-    func testGroup() {
-        AssertContent {
+    func testGroup() throws {
+        try AssertContent {
             Group {
                 "One"
                 "Two"
@@ -55,16 +55,16 @@ final class ContentTests: XCTestCase {
         }
     }
 
-    func testNoContent() {
-        AssertContent {
+    func testNoContent() throws {
+        try AssertContent {
             NoContent()
         } is: {
             ""
         }
     }
 
-    func testOptional() {
-        AssertContent {
+    func testOptional() throws {
+        try AssertContent {
             Group {
                 String?.none
                 String?.some("Just me")

@@ -4,9 +4,9 @@ import XCTest
 
 final class FileBuilderTests: XCTestCase {
 
-    func test() {
+    func test() throws {
 
-        AssertContent {
+        try AssertContent {
             File {
                 Func("foo") {
                     If("value == 4") {
