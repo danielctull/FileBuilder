@@ -8,6 +8,6 @@ public struct AnyContent: Content {
     }
 
     public var body: some Content {
-        BuiltinContent(_generate: generate)
+        BuiltinContent(generate: generate)
     }
 }

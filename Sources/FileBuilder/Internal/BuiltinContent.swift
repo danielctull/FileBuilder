@@ -1,12 +1,20 @@
 
-struct BuiltinContent: Content {
-    let _generate: (EnvironmentValues) -> [Line]
-    var body: Never { fatalError("Builtin body should not be called.") }
-}
+struct BuiltinContent {
 
-extension BuiltinContent {
+    private let _generate: (EnvironmentValues) -> [Line]
+
+    init(generate: @escaping (EnvironmentValues) -> [Line]) {
+        _generate = generate
+    }
 
     func generate(environment: EnvironmentValues) -> [Line] {
         _generate(environment)
     }
+}
+
+// MARK: - Content
+
+extension BuiltinContent: Content {
+
+    var body: Never { fatalError("Builtin body should not be called.") }
 }

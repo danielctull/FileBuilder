@@ -17,6 +17,6 @@ public struct ConditionalContent<True: Content, False: Content> {
 extension ConditionalContent: Content {
 
     public var body: some Content {
-        BuiltinContent(_generate: generate)
+        BuiltinContent(generate: generate)
     }
 }
