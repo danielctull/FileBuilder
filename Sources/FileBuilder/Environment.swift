@@ -29,7 +29,7 @@ extension Content {
 private struct EnvironmentModifier<C: Content>: Content {
 
     let content: C
-    let modify: (inout EnvironmentValues) -> ()
+    let modify: (inout EnvironmentValues) -> Void
 
     var body: some Content {
         BuiltinContent { environment in
@@ -45,7 +45,7 @@ private struct EnvironmentModifier<C: Content>: Content {
 @propertyWrapper
 public struct Environment<Value> {
     private let keyPath: KeyPath<EnvironmentValues, Value>
-    @Box private var environment: EnvironmentValues? = nil
+    @Box private var environment: EnvironmentValues?
 
     public init(_ keyPath: KeyPath<EnvironmentValues, Value>) {
         self.keyPath = keyPath

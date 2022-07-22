@@ -27,7 +27,7 @@ final class ContentBuilderTests: XCTestCase {
     }
 
     func testArray() throws {
-        
+
         try AssertContent {
             for i in 1...3 {
                 "Value \(i)"
