@@ -8,6 +8,17 @@ final class ContentTests: XCTestCase {
         try AssertContent { "Hello" } is: { "Hello" }
     }
 
+    func testStringMultipleLines() throws {
+        try AssertContent {
+            "Hello\nThere"
+        } is: {
+            """
+            Hello
+            There
+            """
+        }
+    }
+
     func testAnyContent() throws {
         try AssertContent {
             AnyContent("Anything!")
