@@ -65,6 +65,8 @@ final class ContentBuilderTests: XCTestCase {
         }
     }
 
+#if !os(Linux)
+    // I can't find an #available flag that exists for linux machines.
     func testLimitedAvailability() throws {
 
         try AssertContent {
@@ -77,6 +79,7 @@ final class ContentBuilderTests: XCTestCase {
             "Current Content"
         }
     }
+#endif
 
     func testOptional() throws {
 
