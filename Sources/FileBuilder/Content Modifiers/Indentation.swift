@@ -34,16 +34,12 @@ extension Content {
     }
 }
 
-private struct Indented<C: Content>: ContentModifier {
+private struct Indented<C: Content>: LineModifier {
 
     @Environment(\.indentation) var indentation
 
-    func body(content: C) -> some Content {
-        BuiltinContent { environment in
-            content
-                .generate(environment: environment)
-                .map { $0.prefix(String(indentation)) }
-        }
+    func modifyLines(_ lines: [Line]) -> [Line] {
+        lines.map { $0.prefix(String(indentation)) }
     }
 }
 
