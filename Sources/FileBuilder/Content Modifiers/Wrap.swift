@@ -16,19 +16,22 @@ private struct Wrap<C: Content>: LineModifier {
         lines.flatMap { line in
             line.rawValue
                 .split(maximumLineLength: length)
+                .map(String.init)
                 .map(Line.init)
         }
     }
 }
 
-extension String {
+extension StringProtocol {
 
-    fileprivate func split(maximumLineLength: Int) -> [String] {
+    fileprivate func split(maximumLineLength: Int) -> [SubSequence] {
 
-        guard count > maximumLineLength else { return [self] }
+        guard count > maximumLineLength else {
+            return [self[startIndex..<endIndex]]
+        }
 
-        let head: Substring
-        let tail: Substring
+        let head: SubSequence
+        let tail: SubSequence
         if let space = dropLast(count - maximumLineLength).lastIndex(of: " ") {
             head = self[..<space]
             tail = self[index(after: space)...]
@@ -38,8 +41,6 @@ extension String {
             tail = self[end...]
         }
 
-        return [String(head)]
-            +
-            String(tail).split(maximumLineLength: maximumLineLength)
+        return [head] + tail.split(maximumLineLength: maximumLineLength)
     }
 }
