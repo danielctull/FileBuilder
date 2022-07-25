@@ -27,7 +27,7 @@ final class LineModifierTests: XCTestCase {
         }
     }
 
-    func testLineClosureModifier() throws {
+    func testLinesClosureModifier() throws {
         try AssertContent {
             Group {
                 "Hello"
@@ -36,6 +36,14 @@ final class LineModifierTests: XCTestCase {
             .modifier { $0.filter { $0.content.hasPrefix("H") } }
         } is: {
             "Hello"
+        }
+    }
+
+    func testLineClosureModifier() throws {
+        try AssertContent {
+            "Hello".modifier { _ in Line.empty }
+        } is: {
+            ""
         }
     }
 }

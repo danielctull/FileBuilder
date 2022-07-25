@@ -20,6 +20,10 @@ extension Content {
     public func modifier(_ lineModifier: @escaping ([Line]) -> [Line]) -> some Content {
         modifier(AnyLineModifier(lineModifier: lineModifier))
     }
+
+    public func modifier(_ lineModifier: @escaping (Line) -> Line) -> some Content {
+        modifier(AnyLineModifier { $0.map(lineModifier) })
+    }
 }
 
 private struct AnyLineModifier<C: Content>: LineModifier {

@@ -6,7 +6,7 @@ final class LineTests: XCTestCase {
 
     func testPrefix() throws {
         try AssertContent {
-            "Hello".modifier { $0.map { $0.prefix("!") } }
+            "Hello".modifier { $0.prefix("!") }
         } is: {
             "!Hello"
         }
@@ -14,7 +14,7 @@ final class LineTests: XCTestCase {
 
     func testSuffix() throws {
         try AssertContent {
-            "Hello".modifier { $0.map { $0.suffix("!") } }
+            "Hello".modifier { $0.suffix("!") }
         } is: {
             "Hello!"
         }
