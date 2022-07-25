@@ -11,7 +11,7 @@ extension Line {
 
 extension Line {
 
-    func prefix(_ prefix: String) -> Line {
+    public func prefix(_ prefix: String) -> Line {
         Line(rawValue: prefix + rawValue)
     }
 
