@@ -14,3 +14,17 @@ extension LineModifier {
         }
     }
 }
+
+extension Content {
+
+    public func modifier(_ lineModifier: @escaping ([Line]) -> [Line]) -> some Content {
+        modifier(AnyLineModifier(lineModifier: lineModifier))
+    }
+}
+
+private struct AnyLineModifier<C: Content>: LineModifier {
+    let lineModifier: ([Line]) -> [Line]
+    func modifyLines(_ lines: [Line]) -> [Line] {
+        lineModifier(lines)
+    }
+}
