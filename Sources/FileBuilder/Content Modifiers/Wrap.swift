@@ -16,7 +16,6 @@ private struct Wrap<C: Content>: LineModifier {
         lines.flatMap { line in
             line.rawValue
                 .lines(ofLength: lineLength)
-                .map(String.init)
                 .map(Line.init)
         }
     }
