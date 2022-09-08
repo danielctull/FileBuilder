@@ -4,31 +4,56 @@ import XCTest
 
 final class EnvironmentTests: XCTestCase {
 
+    // MARK: Content
+
+    private struct TestContent: Content {
+        @Environment(\.value) var value
+        var body: some Content { value }
+    }
+
     func testContentInstallation() throws {
-
-        struct Test: Content {
-            @Environment(\.value) var value
-            var body: some Content { value }
-        }
-
         try AssertContent {
-            Test().environment(\.value, "Hello!")
+            TestContent().environment(\.value, "Hello!")
         } is: {
             "Hello!"
         }
     }
 
-    func testContentModifierInstallation() throws {
-
-        struct Test<C: Content>: ContentModifier {
-            @Environment(\.value) var value
-            func body(content: C) -> some Content { value }
-        }
-
+    func testContentNearestEnvironmentValueWins() throws {
         try AssertContent {
-            Line.empty.modifier(Test()).environment(\.value, "Hello!")
+            TestContent()
+                .environment(\.value, "One")
+                .environment(\.value, "Two")
+                .environment(\.value, "Three")
+        } is: {
+            "One"
+        }
+    }
+
+    // MARK: ContentModifier
+
+    private struct TestModifier<C: Content>: ContentModifier {
+        @Environment(\.value) var value
+        func body(content: C) -> some Content { value }
+    }
+
+    func testContentModifierInstallation() throws {
+        try AssertContent {
+            Line.empty.modifier(TestModifier())
+                .environment(\.value, "Hello!")
         } is: {
             "Hello!"
+        }
+    }
+
+    func testContentModifierNearestEnvironmentValueWins() throws {
+        try AssertContent {
+            Line.empty.modifier(TestModifier())
+                .environment(\.value, "One")
+                .environment(\.value, "Two")
+                .environment(\.value, "Three")
+        } is: {
+            "One"
         }
     }
 }
