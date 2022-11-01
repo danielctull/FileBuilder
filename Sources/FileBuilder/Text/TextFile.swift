@@ -8,7 +8,7 @@ public struct TextFile<Content: Text>: Text {
     private let content: Content
 
     public init(
-        name: String,
+        _ name: String,
         encoding: String.Encoding = .utf8,
         @TextBuilder content: () -> Content
     ) {
