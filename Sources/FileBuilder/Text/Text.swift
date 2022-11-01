@@ -29,7 +29,7 @@ extension Text {
 
         environment.install(on: self)
 
-        if let builtin = self as? BuiltinContent {
+        if let builtin = self as? BuiltinText {
             return builtin.generate(environment: environment)
         }
 

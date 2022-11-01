@@ -8,6 +8,6 @@ public struct AnyText: Text {
     }
 
     public var body: some Text {
-        BuiltinContent(generate: generate)
+        BuiltinText(generate: generate)
     }
 }

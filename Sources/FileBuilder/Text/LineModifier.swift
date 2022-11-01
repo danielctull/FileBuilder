@@ -7,7 +7,7 @@ extension LineModifier {
 
     @TextBuilder
     public func body(content: Content) -> some Text {
-        BuiltinContent { environment in
+        BuiltinText { environment in
             modifyLines(
                 content.generate(environment: environment)
             )

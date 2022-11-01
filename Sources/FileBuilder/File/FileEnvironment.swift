@@ -1,21 +1,21 @@
 
-extension Text {
+extension File {
 
     public func environment<Value>(
         _ keyPath: WritableKeyPath<EnvironmentValues, Value>,
         _ value: Value
-    ) -> some Text {
+    ) -> some File {
         EnvironmentModifier(content: self) { $0[keyPath: keyPath] = value }
     }
 }
 
-extension EnvironmentModifier: Text where Content: Text {
+extension EnvironmentModifier: File where Content: File {
 
-    var body: some Text {
-        BuiltinText { environment in
+    var body: some File {
+        BuiltinFile { directory, environment in
             var environment = environment
             modify(&environment)
-            return content.generate(environment: environment)
+            try content.write(in: directory, environment: environment)
         }
     }
 }
