@@ -3,7 +3,7 @@ import Foundation
 
 public struct TextFile<Content: Text>: Text {
 
-    public let name: String
+    private let name: String
     private let encoding: String.Encoding
     private let content: Content
 

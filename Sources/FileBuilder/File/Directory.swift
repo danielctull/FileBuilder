@@ -2,7 +2,7 @@
 import Foundation
 
 public struct Directory<Content: File> {
-    public let name: String
+    private let name: String
     private let content: Content
 }
 
