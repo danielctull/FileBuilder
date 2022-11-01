@@ -21,7 +21,7 @@ final class ContentTests: XCTestCase {
 
     func testAnyContent() throws {
         try AssertContent {
-            AnyTextContent("Anything!")
+            AnyText("Anything!")
         } is: {
             "Anything!"
         }
