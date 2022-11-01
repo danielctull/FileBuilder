@@ -19,9 +19,11 @@ public struct Directory<Content: File> {
 
 extension Directory: File {
 
-    public func write(in directory: URL) throws {
-        let url = directory.appendingPathComponent(name)
-        try FileManager().createDirectory(at: url, withIntermediateDirectories: false)
-        try content.write(in: url)
+    public var body: some File {
+        BuiltinFile { directory, environment in
+            let url = directory.appendingPathComponent(name)
+            try FileManager().createDirectory(at: url, withIntermediateDirectories: false)
+            try content.write(in: url, environment: environment)
+        }
     }
 }

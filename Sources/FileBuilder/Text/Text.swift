@@ -11,7 +11,11 @@ public protocol Text {
 extension Text {
 
     public var content: String {
-        generate(environment: EnvironmentValues())
+        content(environment: EnvironmentValues())
+    }
+
+    func content(environment: EnvironmentValues) -> String {
+        generate(environment: environment)
             .map(\.rawValue)
             .joined(separator: "\n")
     }

@@ -26,11 +26,14 @@ struct TextFileFailure: Error {
 
 extension TextFile: File {
 
-    public func write(in directory: URL) throws {
-        guard let data = content.content.data(using: encoding) else {
-            throw TextFileFailure(name: name)
+    public var body: some File {
+        BuiltinFile { directory, environment in
+            let string = content.content(environment: environment)
+            guard let data = string.data(using: encoding) else {
+                throw TextFileFailure(name: name)
+            }
+            let url = directory.appendingPathComponent(name)
+            try data.write(to: url)
         }
-        let url = directory.appendingPathComponent(name)
-        try data.write(to: url)
     }
 }

@@ -3,9 +3,11 @@ import Foundation
 
 extension Array: File where Element: File {
 
-    public func write(in directory: URL) throws {
-        for file in self {
-            try file.write(in: directory)
+    public var body: some File {
+        BuiltinFile { directory, environment in
+            for file in self {
+                try file.write(in: directory, environment: environment)
+            }
         }
     }
 }

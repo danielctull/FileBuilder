@@ -1,0 +1,2 @@
+
+extension Never: File {}
