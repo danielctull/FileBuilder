@@ -1,5 +1,5 @@
 
-public protocol LineModifier: ContentModifier where Content: Text {
+public protocol LineModifier: TextModifier where Content: Text {
     func modifyLines(_ lines: [Line]) -> [Line]
 }
 

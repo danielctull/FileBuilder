@@ -32,7 +32,7 @@ final class EnvironmentTests: XCTestCase {
 
     // MARK: ContentModifier
 
-    private struct TestModifier<Content: Text>: ContentModifier {
+    private struct TestModifier<Content: Text>: TextModifier {
         @Environment(\.value) var value
         func body(content: Content) -> some Text { value }
     }

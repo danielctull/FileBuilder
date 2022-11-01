@@ -1,5 +1,5 @@
 
-public protocol ContentModifier {
+public protocol TextModifier {
     associatedtype Content
     associatedtype Body: Text
 
@@ -9,14 +9,14 @@ public protocol ContentModifier {
 
 extension Text {
 
-    public func modifier<Modifier: ContentModifier>(
+    public func modifier<Modifier: TextModifier>(
         _ modifier: Modifier
     ) -> ModifiedContent<Self, Modifier> where Modifier.Content == Self {
         ModifiedContent(content: self, modifier: modifier)
     }
 }
 
-extension ModifiedContent: Text where Content: Text, Modifier: ContentModifier, Content == Modifier.Content {
+extension ModifiedContent: Text where Content: Text, Modifier: TextModifier, Content == Modifier.Content {
 
     public var body: some Text {
         BuiltinContent { environment in
