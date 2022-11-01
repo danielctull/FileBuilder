@@ -30,12 +30,11 @@ struct TextFileFailure: Error {
 
 extension TextFile: File {
 
-    public var data: Data {
-        get throws {
-            guard let data = content.data(using: encoding) else {
-                throw TextFileFailure(name: name)
-            }
-            return data
+    public func write(in directory: URL) throws {
+        guard let data = content.data(using: encoding) else {
+            throw TextFileFailure(name: name)
         }
+        let url = directory.appendingPathComponent(name)
+        try data.write(to: url)
     }
 }
