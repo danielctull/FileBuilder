@@ -1,9 +1,9 @@
 
-public struct NoContent: TextContent {
+public struct NoContent: Text {
 
     public init() {}
 
-    public var body: some TextContent {
+    public var body: some Text {
         BuiltinContent { _ in [] }
     }
 }

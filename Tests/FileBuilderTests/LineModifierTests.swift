@@ -6,7 +6,7 @@ final class LineModifierTests: XCTestCase {
 
     func testLineModifier() throws {
 
-        struct Suffix<Content: TextContent>: LineModifier {
+        struct Suffix<Content: Text>: LineModifier {
             let text: String
             func modifyLines(_ lines: [Line]) -> [Line] {
                 lines.map { $0.suffix(text) }

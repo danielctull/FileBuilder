@@ -6,9 +6,9 @@ public enum Indentation: Equatable {
 
 // MARK: - Environment
 
-extension TextContent {
+extension Text {
 
-    public func indentation(_ indentation: Indentation) -> some TextContent {
+    public func indentation(_ indentation: Indentation) -> some Text {
         environment(\.indentation, indentation)
     }
 }
@@ -27,14 +27,14 @@ extension EnvironmentValues {
 
 // MARK: - Content Modifier
 
-extension TextContent {
+extension Text {
 
-    public func indented() -> some TextContent {
+    public func indented() -> some Text {
         modifier(Indented())
     }
 }
 
-private struct Indented<Content: TextContent>: LineModifier {
+private struct Indented<Content: Text>: LineModifier {
 
     @Environment(\.indentation) var indentation
 

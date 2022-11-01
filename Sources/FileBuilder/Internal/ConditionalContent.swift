@@ -1,5 +1,5 @@
 
-public struct ConditionalContent<True: TextContent, False: TextContent> {
+public struct ConditionalContent<True: Text, False: Text> {
 
     private let generate: (EnvironmentValues) -> [Line]
 
@@ -14,9 +14,9 @@ public struct ConditionalContent<True: TextContent, False: TextContent> {
 
 // MARK: - Content
 
-extension ConditionalContent: TextContent {
+extension ConditionalContent: Text {
 
-    public var body: some TextContent {
+    public var body: some Text {
         BuiltinContent(generate: generate)
     }
 }

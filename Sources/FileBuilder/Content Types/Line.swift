@@ -26,9 +26,9 @@ extension Line {
 
 // MARK: - Content {
 
-extension Line: TextContent {
+extension Line: Text {
 
-    public var body: some TextContent {
+    public var body: some Text {
         BuiltinContent { _ in [self] }
     }
 }

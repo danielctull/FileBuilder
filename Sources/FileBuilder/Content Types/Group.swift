@@ -1,5 +1,5 @@
 
-public struct Group<Content: TextContent>: TextContent {
+public struct Group<Content: Text>: Text {
 
     private let content: Content
 
@@ -7,7 +7,7 @@ public struct Group<Content: TextContent>: TextContent {
         self.content = content()
     }
 
-    public var body: some TextContent {
+    public var body: some Text {
         content
     }
 }

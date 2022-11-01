@@ -2,49 +2,49 @@
 @resultBuilder
 public enum TextContentBuilder {
 
-    public static func buildPartialBlock<Content: TextContent>(
+    public static func buildPartialBlock<Content: Text>(
         first: Content
     ) -> Content {
         first
     }
 
-    public static func buildPartialBlock<Accumulated: TextContent, Next: TextContent>(
+    public static func buildPartialBlock<Accumulated: Text, Next: Text>(
         accumulated: Accumulated,
         next: Next
     ) -> AccumulatedContent<Accumulated, Next> {
         AccumulatedContent(first: accumulated, second: next)
     }
 
-    public static func buildArray<Content: TextContent>(
+    public static func buildArray<Content: Text>(
         _ array: [Content]
     ) -> [Content] {
         array
     }
 
-    public static func buildEither<True: TextContent, False: TextContent>(
+    public static func buildEither<True: Text, False: Text>(
         first: True
     ) -> ConditionalContent<True, False> {
         ConditionalContent(first)
     }
 
-    public static func buildEither<True: TextContent, False: TextContent>(
+    public static func buildEither<True: Text, False: Text>(
         second: False
     ) -> ConditionalContent<True, False> {
         ConditionalContent(second)
     }
 
-    public static func buildLimitedAvailability<Content: TextContent>(
+    public static func buildLimitedAvailability<Content: Text>(
         _ content: Content
     ) -> AnyTextContent {
         AnyTextContent(content)
     }
 
-    public static func buildOptional<Content: TextContent>(
+    public static func buildOptional<Content: Text>(
         _ optional: Content?
     ) -> Content? {
         optional
     }
-    public static func buildFinalResult<Content: TextContent>(
+    public static func buildFinalResult<Content: Text>(
         _ component: Content
     ) -> Content {
         component

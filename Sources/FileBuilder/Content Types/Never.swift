@@ -1,4 +1,4 @@
 
-extension Never: TextContent {
+extension Never: Text {
     public var body: Never { fatalError("Never body should not be called.") }
 }

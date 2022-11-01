@@ -1,14 +1,14 @@
 
 import Foundation
 
-public protocol TextContent {
-    associatedtype Body: TextContent
+public protocol Text {
+    associatedtype Body: Text
 
     @TextContentBuilder
     var body: Body { get }
 }
 
-extension TextContent {
+extension Text {
 
     public var content: String {
         generate(environment: EnvironmentValues())
@@ -32,7 +32,7 @@ extension TextContent {
 
 // MARK: - Generator
 
-extension TextContent {
+extension Text {
 
     func generate(environment: EnvironmentValues) -> [Line] {
 

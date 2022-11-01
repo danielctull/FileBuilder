@@ -1,7 +1,7 @@
 
-extension Optional: TextContent where Wrapped: TextContent {
+extension Optional: Text where Wrapped: Text {
 
-    public var body: some TextContent {
+    public var body: some Text {
         BuiltinContent { environment in
             map { $0.generate(environment: environment) } ?? []
         }

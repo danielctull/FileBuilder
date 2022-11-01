@@ -6,9 +6,9 @@ final class ContentModifierTests: XCTestCase {
 
     func testContentModifier() throws {
 
-        struct Append<Content: TextContent, Line: TextContent>: ContentModifier {
+        struct Append<Content: Text, Line: Text>: ContentModifier {
             let line: Line
-            func body(content: Content) -> some TextContent {
+            func body(content: Content) -> some Text {
                 content
                 line
             }

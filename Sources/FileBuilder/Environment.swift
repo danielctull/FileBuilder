@@ -16,22 +16,22 @@ public struct EnvironmentValues {
 
 // MARK: - Modifier
 
-extension TextContent {
+extension Text {
 
     public func environment<Value>(
         _ keyPath: WritableKeyPath<EnvironmentValues, Value>,
         _ value: Value
-    ) -> some TextContent {
+    ) -> some Text {
         EnvironmentModifier(content: self) { $0[keyPath: keyPath] = value }
     }
 }
 
-private struct EnvironmentModifier<Content: TextContent>: TextContent {
+private struct EnvironmentModifier<Content: Text>: Text {
 
     let content: Content
     let modify: (inout EnvironmentValues) -> Void
 
-    var body: some TextContent {
+    var body: some Text {
         BuiltinContent { environment in
             var environment = environment
             modify(&environment)

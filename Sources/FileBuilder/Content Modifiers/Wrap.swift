@@ -1,14 +1,14 @@
 
 // MARK: - Content Modifier
 
-extension TextContent {
+extension Text {
 
-    public func wrap(lineLength: Int) -> some TextContent {
+    public func wrap(lineLength: Int) -> some Text {
         modifier(Wrap(lineLength: lineLength))
     }
 }
 
-private struct Wrap<Content: TextContent>: LineModifier {
+private struct Wrap<Content: Text>: LineModifier {
 
     let lineLength: Int
 
