@@ -34,7 +34,7 @@ extension TextContent {
     }
 }
 
-private struct Indented<C: TextContent>: LineModifier {
+private struct Indented<Content: TextContent>: LineModifier {
 
     @Environment(\.indentation) var indentation
 

@@ -1,9 +1,9 @@
 
-public struct Group<C: TextContent>: TextContent {
+public struct Group<Content: TextContent>: TextContent {
 
-    private let content: C
+    private let content: Content
 
-    public init(@ContentBuilder content: () -> C) {
+    public init(@ContentBuilder content: () -> Content) {
         self.content = content()
     }
 

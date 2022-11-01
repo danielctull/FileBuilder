@@ -8,7 +8,7 @@ extension TextContent {
     }
 }
 
-private struct Wrap<C: TextContent>: LineModifier {
+private struct Wrap<Content: TextContent>: LineModifier {
 
     let lineLength: Int
 

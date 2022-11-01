@@ -48,11 +48,11 @@ struct Print: TextContent {
     }
 }
 
-struct Func<C: TextContent>: TextContent {
+struct Func<Content: TextContent>: TextContent {
 
     let name: String
-    let content: C
-    init(_ name: String, @ContentBuilder content: () -> C) {
+    let content: Content
+    init(_ name: String, @ContentBuilder content: () -> Content) {
         self.name = name
         self.content = content()
     }

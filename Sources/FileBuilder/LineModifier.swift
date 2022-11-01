@@ -1,12 +1,12 @@
 
-public protocol LineModifier: ContentModifier where C: TextContent {
+public protocol LineModifier: ContentModifier where Content: TextContent {
     func modifyLines(_ lines: [Line]) -> [Line]
 }
 
 extension LineModifier {
 
     @ContentBuilder
-    public func body(content: C) -> some TextContent {
+    public func body(content: Content) -> some TextContent {
         BuiltinContent { environment in
             modifyLines(
                 content.generate(environment: environment)
@@ -26,7 +26,7 @@ extension TextContent {
     }
 }
 
-private struct AnyLineModifier<C: TextContent>: LineModifier {
+private struct AnyLineModifier<Content: TextContent>: LineModifier {
     let lineModifier: ([Line]) -> [Line]
     func modifyLines(_ lines: [Line]) -> [Line] {
         lineModifier(lines)

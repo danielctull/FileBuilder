@@ -26,9 +26,9 @@ extension TextContent {
     }
 }
 
-private struct EnvironmentModifier<C: TextContent>: TextContent {
+private struct EnvironmentModifier<Content: TextContent>: TextContent {
 
-    let content: C
+    let content: Content
     let modify: (inout EnvironmentValues) -> Void
 
     var body: some TextContent {

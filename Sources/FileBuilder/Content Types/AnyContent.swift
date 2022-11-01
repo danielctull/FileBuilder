@@ -3,7 +3,7 @@ public struct AnyContent: TextContent {
 
     let generate: (EnvironmentValues) -> [Line]
 
-    public init<C: TextContent>(_ content: C) {
+    public init<Content: TextContent>(_ content: Content) {
         generate = content.generate
     }
 

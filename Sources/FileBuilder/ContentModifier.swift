@@ -1,27 +1,27 @@
 
 public protocol ContentModifier {
-    associatedtype C
+    associatedtype Content
     associatedtype Body: TextContent
 
     @ContentBuilder
-    func body(content: C) -> Body
+    func body(content: Content) -> Body
 }
 
 extension TextContent {
 
     public func modifier<Modifier: ContentModifier>(
         _ modifier: Modifier
-    ) -> ModifiedContent<Self, Modifier> where Modifier.C == Self {
+    ) -> ModifiedContent<Self, Modifier> where Modifier.Content == Self {
         ModifiedContent(content: self, modifier: modifier)
     }
 }
 
-public struct ModifiedContent<C, Modifier> {
-    fileprivate let content: C
+public struct ModifiedContent<Content, Modifier> {
+    fileprivate let content: Content
     fileprivate let modifier: Modifier
 }
 
-extension ModifiedContent: TextContent where C: TextContent, Modifier: ContentModifier, C == Modifier.C {
+extension ModifiedContent: TextContent where Content: TextContent, Modifier: ContentModifier, Content == Modifier.Content {
 
     public var body: some TextContent {
         BuiltinContent { environment in

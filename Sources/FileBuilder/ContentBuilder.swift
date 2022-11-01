@@ -2,7 +2,9 @@
 @resultBuilder
 public enum ContentBuilder {
 
-    public static func buildPartialBlock<C: TextContent>(first: C) -> C {
+    public static func buildPartialBlock<Content: TextContent>(
+        first: Content
+    ) -> Content {
         first
     }
 
@@ -13,7 +15,9 @@ public enum ContentBuilder {
         AccumulatedContent(first: accumulated, second: next)
     }
 
-    public static func buildArray<C: TextContent>(_ array: [C]) -> [C] {
+    public static func buildArray<Content: TextContent>(
+        _ array: [Content]
+    ) -> [Content] {
         array
     }
 
@@ -29,16 +33,20 @@ public enum ContentBuilder {
         ConditionalContent(second)
     }
 
-    public static func buildLimitedAvailability<C: TextContent>(
-        _ content: C
+    public static func buildLimitedAvailability<Content: TextContent>(
+        _ content: Content
     ) -> AnyContent {
         AnyContent(content)
     }
 
-    public static func buildOptional<C: TextContent>(_ optional: C?) -> C? {
+    public static func buildOptional<Content: TextContent>(
+        _ optional: Content?
+    ) -> Content? {
         optional
     }
-    public static func buildFinalResult<C: TextContent>(_ component: C) -> C {
+    public static func buildFinalResult<Content: TextContent>(
+        _ component: Content
+    ) -> Content {
         component
     }
 }
