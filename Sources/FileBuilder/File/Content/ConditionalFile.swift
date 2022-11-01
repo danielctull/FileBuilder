@@ -1,7 +1,7 @@
 
 import Foundation
 
-extension ConditionalContent: File where True: File, False: File {
+extension Conditional: File where True: File, False: File {
 
     public var body: some File {
         BuiltinFile { directory, environment in

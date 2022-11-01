@@ -23,14 +23,14 @@ public enum FileBuilder {
 
     public static func buildEither<True: File, False: File>(
         first: True
-    ) -> ConditionalContent<True, False> {
-        ConditionalContent(first)
+    ) -> Conditional<True, False> {
+        Conditional(first)
     }
 
     public static func buildEither<True: File, False: File>(
         second: False
-    ) -> ConditionalContent<True, False> {
-        ConditionalContent(second)
+    ) -> Conditional<True, False> {
+        Conditional(second)
     }
 
     public static func buildOptional<Content: File>(

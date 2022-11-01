@@ -1,5 +1,5 @@
 
-public struct ConditionalContent<True, False> {
+public struct Conditional<True, False> {
 
     enum Value {
         case `true`(True)

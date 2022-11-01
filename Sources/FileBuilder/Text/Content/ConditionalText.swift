@@ -1,5 +1,5 @@
 
-extension ConditionalContent: Text where True: Text, False: Text {
+extension Conditional: Text where True: Text, False: Text {
 
     public var body: some Text {
         BuiltinText { values in
