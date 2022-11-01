@@ -3,7 +3,7 @@ public struct Group<Content: Text>: Text {
 
     private let content: Content
 
-    public init(@TextContentBuilder content: () -> Content) {
+    public init(@TextBuilder content: () -> Content) {
         self.content = content()
     }
 

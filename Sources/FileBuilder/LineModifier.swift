@@ -5,7 +5,7 @@ public protocol LineModifier: ContentModifier where Content: Text {
 
 extension LineModifier {
 
-    @TextContentBuilder
+    @TextBuilder
     public func body(content: Content) -> some Text {
         BuiltinContent { environment in
             modifyLines(
