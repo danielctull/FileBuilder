@@ -1,13 +1,18 @@
 
-public struct ConditionalContent<True: Text, False: Text> {
+public struct ConditionalContent<True, False> {
 
-    private let generate: (EnvironmentValues) -> [Line]
+    enum Value {
+        case `true`(True)
+        case `false`(False)
+    }
+
+    let value: Value
 
     init(_ content: True) {
-        generate = content.generate
+        value = .true(content)
     }
 
     init(_ content: False) {
-        generate = content.generate
+        value = .false(content)
     }
 }
