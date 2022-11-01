@@ -1,5 +1,5 @@
 
-public struct AnyContent: TextContent {
+public struct AnyTextContent: TextContent {
 
     let generate: (EnvironmentValues) -> [Line]
 

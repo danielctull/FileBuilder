@@ -35,8 +35,8 @@ public enum ContentBuilder {
 
     public static func buildLimitedAvailability<Content: TextContent>(
         _ content: Content
-    ) -> AnyContent {
-        AnyContent(content)
+    ) -> AnyTextContent {
+        AnyTextContent(content)
     }
 
     public static func buildOptional<Content: TextContent>(
