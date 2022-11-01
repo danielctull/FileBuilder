@@ -8,11 +8,11 @@ public enum TextBuilder {
         first
     }
 
-    public static func buildPartialBlock<Accumulated: Text, Next: Text>(
-        accumulated: Accumulated,
-        next: Next
-    ) -> AccumulatedContent<Accumulated, Next> {
-        AccumulatedContent(first: accumulated, second: next)
+    public static func buildPartialBlock<First: Text, Second: Text>(
+        accumulated: First,
+        next: Second
+    ) -> Accumulated<First, Second> {
+        Accumulated(first: accumulated, second: next)
     }
 
     public static func buildArray<Content: Text>(

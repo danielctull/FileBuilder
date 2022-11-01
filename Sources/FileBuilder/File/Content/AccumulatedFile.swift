@@ -1,7 +1,7 @@
 
 import Foundation
 
-extension AccumulatedContent: File where First: File, Second: File {
+extension Accumulated: File where First: File, Second: File {
 
     public var body: some File {
         BuiltinFile { directory, environment in

@@ -8,11 +8,11 @@ public enum FileBuilder {
         first
     }
 
-    public static func buildPartialBlock<Accumulated: File, Next: File>(
-        accumulated: Accumulated,
-        next: Next
-    ) -> AccumulatedContent<Accumulated, Next> {
-        AccumulatedContent(first: accumulated, second: next)
+    public static func buildPartialBlock<First: File, Second: File>(
+        accumulated: First,
+        next: Second
+    ) -> Accumulated<First, Second> {
+        Accumulated(first: accumulated, second: next)
     }
 
     public static func buildArray<Content: File>(
