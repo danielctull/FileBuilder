@@ -38,20 +38,6 @@ final class ContentTests: XCTestCase {
         }
     }
 
-    func testFile() throws {
-        try AssertText {
-            TextFile("Test") {
-                "Hello"
-                "There"
-            }
-        } is: {
-            """
-            Hello
-            There
-            """
-        }
-    }
-
     func testGroup() throws {
         try AssertText {
             Group {

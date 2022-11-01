@@ -1,7 +1,7 @@
 
 import Foundation
 
-public struct TextFile<Content: Text>: Text {
+public struct TextFile<Content: Text> {
 
     private let name: String
     private let encoding: String.Encoding
@@ -16,10 +16,6 @@ public struct TextFile<Content: Text>: Text {
         self.encoding = encoding
         self.content = content()
     }
-
-    public var body: some Text {
-        content
-    }
 }
 
 // MARK: - File
@@ -31,7 +27,7 @@ struct TextFileFailure: Error {
 extension TextFile: File {
 
     public func write(in directory: URL) throws {
-        guard let data = content.data(using: encoding) else {
+        guard let data = content.content.data(using: encoding) else {
             throw TextFileFailure(name: name)
         }
         let url = directory.appendingPathComponent(name)
