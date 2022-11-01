@@ -5,7 +5,7 @@ import XCTest
 final class ContentBuilderTests: XCTestCase {
 
     func testFirst() throws {
-        try AssertContent {
+        try AssertText {
             "Hi"
         } is: {
             "Hi"
@@ -13,7 +13,7 @@ final class ContentBuilderTests: XCTestCase {
     }
 
     func testAccumulation() throws {
-        try AssertContent {
+        try AssertText {
             "Hi"
             Line.empty
             "There"
@@ -28,7 +28,7 @@ final class ContentBuilderTests: XCTestCase {
 
     func testArray() throws {
 
-        try AssertContent {
+        try AssertText {
             for i in 1...3 {
                 "Value \(i)"
             }
@@ -52,13 +52,13 @@ final class ContentBuilderTests: XCTestCase {
             }
         }
 
-        try AssertContent {
+        try AssertText {
             content(true)
         } is: {
             "True"
         }
 
-        try AssertContent {
+        try AssertText {
             content(false)
         } is: {
             "False"
@@ -69,7 +69,7 @@ final class ContentBuilderTests: XCTestCase {
     // I can't find an #available flag that exists for linux machines.
     func testLimitedAvailability() throws {
 
-        try AssertContent {
+        try AssertText {
             if #available(macOS 9999, *) {
                 "Future Content"
             } else if #available(*) { // <-- This causes the builder to hit
@@ -90,13 +90,13 @@ final class ContentBuilderTests: XCTestCase {
             }
         }
 
-        try AssertContent {
+        try AssertText {
             content(true)
         } is: {
             "True"
         }
 
-        try AssertContent {
+        try AssertText {
             content(false)
         } is: {
             ""

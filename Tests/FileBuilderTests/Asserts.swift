@@ -3,7 +3,7 @@ import FileBuilder
 import Foundation
 import XCTest
 
-public func AssertContent<Content: Text>(
+public func AssertText<Content: Text>(
     @TextBuilder content: () -> Content,
     is expected: () -> String,
     _ message: @autoclosure () -> String = "",

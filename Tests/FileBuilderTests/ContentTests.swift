@@ -5,11 +5,11 @@ import XCTest
 final class ContentTests: XCTestCase {
 
     func testString() throws {
-        try AssertContent { "Hello" } is: { "Hello" }
+        try AssertText { "Hello" } is: { "Hello" }
     }
 
     func testStringMultipleLines() throws {
-        try AssertContent {
+        try AssertText {
             "Hello\nThere"
         } is: {
             """
@@ -20,7 +20,7 @@ final class ContentTests: XCTestCase {
     }
 
     func testAnyContent() throws {
-        try AssertContent {
+        try AssertText {
             AnyText("Anything!")
         } is: {
             "Anything!"
@@ -28,7 +28,7 @@ final class ContentTests: XCTestCase {
     }
 
     func testArray() throws {
-        try AssertContent {
+        try AssertText {
             ["Hello", "World"]
         } is: {
             """
@@ -39,7 +39,7 @@ final class ContentTests: XCTestCase {
     }
 
     func testFile() throws {
-        try AssertContent {
+        try AssertText {
             TextFile("Test") {
                 "Hello"
                 "There"
@@ -53,7 +53,7 @@ final class ContentTests: XCTestCase {
     }
 
     func testGroup() throws {
-        try AssertContent {
+        try AssertText {
             Group {
                 "One"
                 "Two"
@@ -67,7 +67,7 @@ final class ContentTests: XCTestCase {
     }
 
     func testNoContent() throws {
-        try AssertContent {
+        try AssertText {
             EmptyText()
         } is: {
             ""
@@ -75,7 +75,7 @@ final class ContentTests: XCTestCase {
     }
 
     func testOptional() throws {
-        try AssertContent {
+        try AssertText {
             Group {
                 String?.none
                 String?.some("Just me")

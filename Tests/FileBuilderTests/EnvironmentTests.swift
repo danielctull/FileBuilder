@@ -12,7 +12,7 @@ final class EnvironmentTests: XCTestCase {
     }
 
     func testContentInstallation() throws {
-        try AssertContent {
+        try AssertText {
             TestContent().environment(\.value, "Hello!")
         } is: {
             "Hello!"
@@ -20,7 +20,7 @@ final class EnvironmentTests: XCTestCase {
     }
 
     func testContentNearestEnvironmentValueWins() throws {
-        try AssertContent {
+        try AssertText {
             TestContent()
                 .environment(\.value, "One")
                 .environment(\.value, "Two")
@@ -38,7 +38,7 @@ final class EnvironmentTests: XCTestCase {
     }
 
     func testContentModifierInstallation() throws {
-        try AssertContent {
+        try AssertText {
             Line.empty.modifier(TestModifier())
                 .environment(\.value, "Hello!")
         } is: {
@@ -47,7 +47,7 @@ final class EnvironmentTests: XCTestCase {
     }
 
     func testContentModifierNearestEnvironmentValueWins() throws {
-        try AssertContent {
+        try AssertText {
             Line.empty.modifier(TestModifier())
                 .environment(\.value, "One")
                 .environment(\.value, "Two")

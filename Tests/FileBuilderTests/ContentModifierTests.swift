@@ -14,7 +14,7 @@ final class ContentModifierTests: XCTestCase {
             }
         }
 
-        try AssertContent {
+        try AssertText {
             "Hello".modifier(Append(line: "World!"))
         } is: {
             """

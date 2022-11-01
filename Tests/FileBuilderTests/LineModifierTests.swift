@@ -13,7 +13,7 @@ final class LineModifierTests: XCTestCase {
             }
         }
 
-        try AssertContent {
+        try AssertText {
             Group {
                 "Hello"
                 "World"
@@ -28,7 +28,7 @@ final class LineModifierTests: XCTestCase {
     }
 
     func testLinesClosureModifier() throws {
-        try AssertContent {
+        try AssertText {
             Group {
                 "Hello"
                 "World"
@@ -40,7 +40,7 @@ final class LineModifierTests: XCTestCase {
     }
 
     func testLineClosureModifier() throws {
-        try AssertContent {
+        try AssertText {
             "Hello".modifier { _ in Line.empty }
         } is: {
             ""

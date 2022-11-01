@@ -5,7 +5,7 @@ import XCTest
 final class WrapTests: XCTestCase {
 
     func testNoWrapping() throws {
-        try AssertContent {
+        try AssertText {
             "One Two Three"
                 .wrap(lineLength: 13)
         } is: {
@@ -14,7 +14,7 @@ final class WrapTests: XCTestCase {
     }
 
     func testWrapping() throws {
-        try AssertContent {
+        try AssertText {
             Group {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
             }
@@ -33,7 +33,7 @@ final class WrapTests: XCTestCase {
     }
 
     func testWrappingNoSpaces() throws {
-        try AssertContent {
+        try AssertText {
             Group {
                 "Loremipsumdolorsitamet,consecteturadipiscingelit,seddoeiusmodtemporincididuntutlaboreetdoloremagnaaliqua.Utenimadminimveniam,quisnostrudexercitationullamcolaborisnisiutaliquipexeacommodoconsequat.Duisauteiruredolorinreprehenderitinvoluptatevelitessecillumdoloreeufugiatnullapariatur.Excepteursintoccaecatcupidatatnonproident,suntinculpaquiofficiadeseruntmollitanimidestlaborum."
             }

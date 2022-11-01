@@ -5,7 +5,7 @@ import XCTest
 final class LineTests: XCTestCase {
 
     func testPrefix() throws {
-        try AssertContent {
+        try AssertText {
             "Hello".modifier { $0.prefix("!") }
         } is: {
             "!Hello"
@@ -13,7 +13,7 @@ final class LineTests: XCTestCase {
     }
 
     func testSuffix() throws {
-        try AssertContent {
+        try AssertText {
             "Hello".modifier { $0.suffix("!") }
         } is: {
             "Hello!"
