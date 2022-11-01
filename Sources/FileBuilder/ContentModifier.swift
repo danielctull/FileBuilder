@@ -16,11 +16,6 @@ extension Text {
     }
 }
 
-public struct ModifiedContent<Content, Modifier> {
-    fileprivate let content: Content
-    fileprivate let modifier: Modifier
-}
-
 extension ModifiedContent: Text where Content: Text, Modifier: ContentModifier, Content == Modifier.Content {
 
     public var body: some Text {
