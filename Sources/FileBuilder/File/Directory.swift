@@ -2,9 +2,20 @@
 import Foundation
 
 public struct Directory<Content: File> {
+
     private let name: String
     private let content: Content
+
+    public init(
+        _ name: String,
+        @FileBuilder content: () -> Content
+    ) {
+        self.name = name
+        self.content = content()
+    }
 }
+
+// MARK: - File
 
 extension Directory: File {
 
