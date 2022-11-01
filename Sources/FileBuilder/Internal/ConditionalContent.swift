@@ -11,12 +11,3 @@ public struct ConditionalContent<True: Text, False: Text> {
         generate = content.generate
     }
 }
-
-// MARK: - Content
-
-extension ConditionalContent: Text {
-
-    public var body: some Text {
-        BuiltinContent(generate: generate)
-    }
-}

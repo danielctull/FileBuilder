@@ -11,10 +11,3 @@ struct BuiltinContent {
         _generate(environment)
     }
 }
-
-// MARK: - Content
-
-extension BuiltinContent: Text {
-
-    var body: Never { fatalError("Builtin body should not be called.") }
-}
