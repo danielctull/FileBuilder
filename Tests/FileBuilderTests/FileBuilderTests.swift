@@ -7,7 +7,7 @@ final class FileBuilderTests: XCTestCase {
     func test() throws {
 
         try AssertContent {
-            File {
+            TextFile {
                 Func("foo") {
                     If("value == 4") {
                         Print("It's 4!")

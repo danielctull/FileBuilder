@@ -1,7 +1,7 @@
 
 import Foundation
 
-public struct File<C: Content>: Content {
+public struct TextFile<C: Content>: Content {
 
     private let content: C
 

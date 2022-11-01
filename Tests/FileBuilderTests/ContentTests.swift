@@ -40,7 +40,7 @@ final class ContentTests: XCTestCase {
 
     func testFile() throws {
         try AssertContent {
-            File {
+            TextFile {
                 "Hello"
                 "There"
             }
