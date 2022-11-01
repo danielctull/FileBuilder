@@ -5,7 +5,7 @@ public struct TextFile<Content: TextContent>: TextContent {
 
     private let content: Content
 
-    public init(@ContentBuilder content: () -> Content) {
+    public init(@TextContentBuilder content: () -> Content) {
         self.content = content()
     }
 

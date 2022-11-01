@@ -4,7 +4,7 @@ import Foundation
 public protocol TextContent {
     associatedtype Body: TextContent
 
-    @ContentBuilder
+    @TextContentBuilder
     var body: Body { get }
 }
 

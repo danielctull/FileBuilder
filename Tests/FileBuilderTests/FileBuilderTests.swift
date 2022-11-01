@@ -52,7 +52,7 @@ struct Func<Content: TextContent>: TextContent {
 
     let name: String
     let content: Content
-    init(_ name: String, @ContentBuilder content: () -> Content) {
+    init(_ name: String, @TextContentBuilder content: () -> Content) {
         self.name = name
         self.content = content()
     }
@@ -72,8 +72,8 @@ struct If<True: TextContent, False: TextContent>: TextContent {
 
     init(
         _ condition: String,
-        @ContentBuilder trueContent: () -> True,
-        @ContentBuilder else falseContent: () -> False
+        @TextContentBuilder trueContent: () -> True,
+        @TextContentBuilder else falseContent: () -> False
     ) {
         self.condition = condition
         self.trueContent = trueContent()
@@ -97,7 +97,7 @@ extension If where False == NoContent {
 
     init(
         _ condition: String,
-        @ContentBuilder trueContent: () -> True
+        @TextContentBuilder trueContent: () -> True
     ) {
         self.condition = condition
         self.trueContent = trueContent()

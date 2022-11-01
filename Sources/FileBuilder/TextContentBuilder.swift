@@ -1,6 +1,6 @@
 
 @resultBuilder
-public enum ContentBuilder {
+public enum TextContentBuilder {
 
     public static func buildPartialBlock<Content: TextContent>(
         first: Content

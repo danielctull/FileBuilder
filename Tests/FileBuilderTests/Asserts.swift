@@ -4,7 +4,7 @@ import Foundation
 import XCTest
 
 public func AssertContent<Content: TextContent>(
-    @ContentBuilder content: () -> Content,
+    @TextContentBuilder content: () -> Content,
     is expected: () -> String,
     _ message: @autoclosure () -> String = "",
     file: StaticString = #filePath,

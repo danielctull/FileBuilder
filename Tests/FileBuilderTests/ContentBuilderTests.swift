@@ -43,7 +43,7 @@ final class ContentBuilderTests: XCTestCase {
 
     func testEither() throws {
 
-        @ContentBuilder
+        @TextContentBuilder
         func content(_ bool: Bool) -> some TextContent {
             if bool {
                 "True"
@@ -83,7 +83,7 @@ final class ContentBuilderTests: XCTestCase {
 
     func testOptional() throws {
 
-        @ContentBuilder
+        @TextContentBuilder
         func content(_ bool: Bool) -> some TextContent {
             if bool {
                 "True"
