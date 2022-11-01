@@ -16,28 +16,9 @@ public struct EnvironmentValues {
 
 // MARK: - Modifier
 
-extension Text {
-
-    public func environment<Value>(
-        _ keyPath: WritableKeyPath<EnvironmentValues, Value>,
-        _ value: Value
-    ) -> some Text {
-        EnvironmentModifier(content: self) { $0[keyPath: keyPath] = value }
-    }
-}
-
-private struct EnvironmentModifier<Content: Text>: Text {
-
+struct EnvironmentModifier<Content> {
     let content: Content
     let modify: (inout EnvironmentValues) -> Void
-
-    var body: some Text {
-        BuiltinContent { environment in
-            var environment = environment
-            modify(&environment)
-            return content.generate(environment: environment)
-        }
-    }
 }
 
 // MARK: - Property Wrapper
