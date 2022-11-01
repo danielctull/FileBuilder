@@ -1,5 +1,5 @@
 
-public struct NoContent: Text {
+public struct EmptyText: Text {
 
     public init() {}
 

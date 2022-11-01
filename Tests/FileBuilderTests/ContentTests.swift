@@ -68,7 +68,7 @@ final class ContentTests: XCTestCase {
 
     func testNoContent() throws {
         try AssertContent {
-            NoContent()
+            EmptyText()
         } is: {
             ""
         }
