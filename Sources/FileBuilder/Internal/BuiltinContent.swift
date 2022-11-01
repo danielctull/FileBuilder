@@ -14,7 +14,7 @@ struct BuiltinContent {
 
 // MARK: - Content
 
-extension BuiltinContent: Content {
+extension BuiltinContent: TextContent {
 
     var body: Never { fatalError("Builtin body should not be called.") }
 }

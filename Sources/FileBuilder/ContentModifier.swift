@@ -1,13 +1,13 @@
 
 public protocol ContentModifier {
     associatedtype C
-    associatedtype Body: Content
+    associatedtype Body: TextContent
 
     @ContentBuilder
     func body(content: C) -> Body
 }
 
-extension Content {
+extension TextContent {
 
     public func modifier<Modifier: ContentModifier>(
         _ modifier: Modifier
@@ -21,9 +21,9 @@ public struct ModifiedContent<C, Modifier> {
     fileprivate let modifier: Modifier
 }
 
-extension ModifiedContent: Content where C: Content, Modifier: ContentModifier, C == Modifier.C {
+extension ModifiedContent: TextContent where C: TextContent, Modifier: ContentModifier, C == Modifier.C {
 
-    public var body: some Content {
+    public var body: some TextContent {
         BuiltinContent { environment in
             environment.install(on: modifier)
             return modifier

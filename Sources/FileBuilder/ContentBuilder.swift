@@ -2,43 +2,43 @@
 @resultBuilder
 public enum ContentBuilder {
 
-    public static func buildPartialBlock<C: Content>(first: C) -> C {
+    public static func buildPartialBlock<C: TextContent>(first: C) -> C {
         first
     }
 
-    public static func buildPartialBlock<Accumulated: Content, Next: Content>(
+    public static func buildPartialBlock<Accumulated: TextContent, Next: TextContent>(
         accumulated: Accumulated,
         next: Next
     ) -> AccumulatedContent<Accumulated, Next> {
         AccumulatedContent(first: accumulated, second: next)
     }
 
-    public static func buildArray<C: Content>(_ array: [C]) -> [C] {
+    public static func buildArray<C: TextContent>(_ array: [C]) -> [C] {
         array
     }
 
-    public static func buildEither<True: Content, False: Content>(
+    public static func buildEither<True: TextContent, False: TextContent>(
         first: True
     ) -> ConditionalContent<True, False> {
         ConditionalContent(first)
     }
 
-    public static func buildEither<True: Content, False: Content>(
+    public static func buildEither<True: TextContent, False: TextContent>(
         second: False
     ) -> ConditionalContent<True, False> {
         ConditionalContent(second)
     }
 
-    public static func buildLimitedAvailability<C: Content>(
+    public static func buildLimitedAvailability<C: TextContent>(
         _ content: C
     ) -> AnyContent {
         AnyContent(content)
     }
 
-    public static func buildOptional<C: Content>(_ optional: C?) -> C? {
+    public static func buildOptional<C: TextContent>(_ optional: C?) -> C? {
         optional
     }
-    public static func buildFinalResult<C: Content>(_ component: C) -> C {
+    public static func buildFinalResult<C: TextContent>(_ component: C) -> C {
         component
     }
 }

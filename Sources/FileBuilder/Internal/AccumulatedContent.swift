@@ -1,14 +1,14 @@
 
-public struct AccumulatedContent<First: Content, Second: Content> {
+public struct AccumulatedContent<First: TextContent, Second: TextContent> {
     let first: First
     let second: Second
 }
 
 // MARK: - Content
 
-extension AccumulatedContent: Content {
+extension AccumulatedContent: TextContent {
 
-    public var body: some Content {
+    public var body: some TextContent {
         BuiltinContent { environment in
             let a = first.generate(environment: environment)
             let b = second.generate(environment: environment)

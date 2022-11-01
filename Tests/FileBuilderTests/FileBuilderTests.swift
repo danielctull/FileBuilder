@@ -37,18 +37,18 @@ final class FileBuilderTests: XCTestCase {
     }
 }
 
-struct Print: Content {
+struct Print: TextContent {
     let string: String
     init(_ string: String) {
         self.string = string
     }
 
-    var body: some Content {
+    var body: some TextContent {
         #"print("\#(string)")"#
     }
 }
 
-struct Func<C: Content>: Content {
+struct Func<C: TextContent>: TextContent {
 
     let name: String
     let content: C
@@ -57,14 +57,14 @@ struct Func<C: Content>: Content {
         self.content = content()
     }
 
-    var body: some Content {
+    var body: some TextContent {
         "func \(name)() {"
         content.indented()
         "}"
     }
 }
 
-struct If<True: Content, False: Content>: Content {
+struct If<True: TextContent, False: TextContent>: TextContent {
 
     let condition: String
     let trueContent: True
@@ -80,7 +80,7 @@ struct If<True: Content, False: Content>: Content {
         self.falseContent = falseContent()
     }
 
-    var body: some Content {
+    var body: some TextContent {
         "if \(condition) {"
         trueContent.indented()
         if False.self == NoContent.self {

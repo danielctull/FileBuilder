@@ -1,7 +1,7 @@
 
 import Foundation
 
-public struct TextFile<C: Content>: Content {
+public struct TextFile<C: TextContent>: TextContent {
 
     private let content: C
 
@@ -9,7 +9,7 @@ public struct TextFile<C: Content>: Content {
         self.content = content()
     }
 
-    public var body: some Content {
+    public var body: some TextContent {
         content
     }
 }
