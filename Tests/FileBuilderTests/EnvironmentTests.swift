@@ -4,24 +4,24 @@ import XCTest
 
 final class EnvironmentTests: XCTestCase {
 
-    // MARK: Content
+    // MARK: Text
 
-    private struct TestContent: Text {
+    private struct TestText: Text {
         @Environment(\.value) var value
         var body: some Text { value }
     }
 
-    func testContentInstallation() throws {
+    func testText_installation() throws {
         try AssertText {
-            TestContent().environment(\.value, "Hello!")
+            TestText().environment(\.value, "Hello!")
         } is: {
             "Hello!"
         }
     }
 
-    func testContentNearestEnvironmentValueWins() throws {
+    func testText_nearestEnvironmentValueWins() throws {
         try AssertText {
-            TestContent()
+            TestText()
                 .environment(\.value, "One")
                 .environment(\.value, "Two")
                 .environment(\.value, "Three")
@@ -30,14 +30,14 @@ final class EnvironmentTests: XCTestCase {
         }
     }
 
-    // MARK: ContentModifier
+    // MARK: TextModifier
 
     private struct TestModifier<Content: Text>: TextModifier {
         @Environment(\.value) var value
         func body(content: Content) -> some Text { value }
     }
 
-    func testContentModifierInstallation() throws {
+    func testTextModifier_installation() throws {
         try AssertText {
             Line.empty.modifier(TestModifier())
                 .environment(\.value, "Hello!")
@@ -46,7 +46,7 @@ final class EnvironmentTests: XCTestCase {
         }
     }
 
-    func testContentModifierNearestEnvironmentValueWins() throws {
+    func testTextModifier_nearestEnvironmentValueWins() throws {
         try AssertText {
             Line.empty.modifier(TestModifier())
                 .environment(\.value, "One")
@@ -54,6 +54,52 @@ final class EnvironmentTests: XCTestCase {
                 .environment(\.value, "Three")
         } is: {
             "One"
+        }
+    }
+
+    // MARK: File
+
+    private struct TestFile: File {
+        @Environment(\.value) var value
+        var body: some File {
+            TextFile("TestFile") {
+                value
+            }
+        }
+    }
+
+    func testFile_installation() throws {
+        try AssertFile {
+            TestFile().environment(\.value, "Hello!")
+        } outputs: {
+            .file(name: "TestFile", text: "Hello!")
+        }
+    }
+
+    func testFile_nearestEnvironmentValueWins() throws {
+        try AssertFile {
+            TestFile()
+                .environment(\.value, "One")
+                .environment(\.value, "Two")
+                .environment(\.value, "Three")
+        } outputs: {
+            .file(name: "TestFile", text: "One")
+        }
+    }
+
+    func testFile_textEnvironmentValueWins() throws {
+        try AssertFile {
+            TextFile("TestFile") {
+                TestText()
+                    .environment(\.value, "A")
+                    .environment(\.value, "B")
+                    .environment(\.value, "C")
+            }
+            .environment(\.value, "One")
+            .environment(\.value, "Two")
+            .environment(\.value, "Three")
+        } outputs: {
+            .file(name: "TestFile", text: "A")
         }
     }
 }
