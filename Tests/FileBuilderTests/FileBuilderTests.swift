@@ -4,6 +4,92 @@ import XCTest
 
 final class FileBuilderTests: XCTestCase {
 
+    func testFirst() throws {
+        try AssertFile {
+            TextFile("Test") {
+                "Hi"
+            }
+        } outputs: {
+            .file(name: "Test", text: "Hi")
+        }
+    }
+
+    func testAccumulation() throws {
+        try AssertFile {
+            Directory("Directory") {
+                TextFile("File 1") { "One" }
+                TextFile("File 2") { "Two" }
+            }
+        } outputs: {
+            .directory(name: "Directory", items: [
+                .file(name: "File 1", text: "One"),
+                .file(name: "File 2", text: "Two"),
+            ])
+        }
+    }
+
+    func testArray() throws {
+        try AssertFile {
+            Directory("Directory") {
+                for i in 1...3 {
+                    TextFile("File \(i)") { "Value \(i)" }
+                }
+            }
+        } outputs: {
+            .directory(name: "Directory", items: [
+                .file(name: "File 1", text: "Value 1"),
+                .file(name: "File 2", text: "Value 2"),
+                .file(name: "File 3", text: "Value 3"),
+            ])
+        }
+    }
+
+    func testEither() throws {
+
+        @FileBuilder
+        func content(_ bool: Bool) -> some File {
+            if bool {
+                TextFile("True") { "True Content" }
+            } else {
+                TextFile("False") { "False Content" }
+            }
+        }
+
+        try AssertFile {
+            content(true)
+        } outputs: {
+            .file(name: "True", text: "True Content")
+        }
+
+        try AssertFile {
+            content(false)
+        } outputs: {
+            .file(name: "False", text: "False Content")
+        }
+    }
+
+    func testOptional() throws {
+
+        @FileBuilder
+        func content(_ bool: Bool) -> some File {
+            if bool {
+                TextFile("True") { "True Content" }
+            }
+        }
+
+        try AssertFile {
+            content(true)
+        } outputs: {
+            .file(name: "True", text: "True Content")
+        }
+
+        try AssertFile {
+            content(false)
+        } outputs: {
+            []
+        }
+    }
+
     func test() throws {
 
         try AssertFile {

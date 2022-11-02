@@ -66,6 +66,20 @@ public func AssertFile<Content: File>(
     }
 
     func checkDirectory(at url: URL, items: [Item]) throws {
+        XCTAssert(
+            fileManager.fileExists(atPath: url.path),
+            "Directory doesn't exist at \(url)",
+            file: file,
+            line: line)
+
+        let contents = try fileManager.contentsOfDirectory(atPath: url.path)
+        XCTAssertEqual(
+            contents.count,
+            items.count,
+            "Directory at \(url) doesn't contain the correct number of items",
+            file: file,
+            line: line)
+
         for item in items {
             try checkItem(item, in: url)
         }
