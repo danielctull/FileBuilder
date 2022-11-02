@@ -2,7 +2,7 @@
 import FileBuilder
 import XCTest
 
-final class ContentBuilderTests: XCTestCase {
+final class TextBuilderTests: XCTestCase {
 
     func testFirst() throws {
         try AssertText {
