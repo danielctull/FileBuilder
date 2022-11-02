@@ -3,17 +3,15 @@ import Foundation
 
 public struct TextFile<Content: Text>: File {
 
+    @Environment(\.stringEncoding) private var encoding: String.Encoding
     private let name: String
-    private let encoding: String.Encoding
     private let text: Content
 
     public init(
         _ name: String,
-        encoding: String.Encoding = .utf8,
         @TextBuilder text: () -> Content
     ) {
         self.name = name
-        self.encoding = encoding
         self.text = text()
     }
 

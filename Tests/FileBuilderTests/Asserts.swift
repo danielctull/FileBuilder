@@ -31,8 +31,8 @@ public enum Item {
 
 extension Item {
 
-    public static func file(name: String, text: String) -> Self {
-        .file(name: name, data: Data(text.utf8))
+    public static func file(name: String, text: String, encoding: String.Encoding = .utf8) -> Self {
+        .file(name: name, data: text.data(using: encoding)!)
     }
 }
 
