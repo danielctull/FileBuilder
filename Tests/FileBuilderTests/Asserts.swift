@@ -3,6 +3,8 @@ import FileBuilder
 import Foundation
 import XCTest
 
+// MARK: - Text
+
 public func AssertText<Content: Text>(
     @TextBuilder content: () -> Content,
     is expected: () -> String,
@@ -18,4 +20,85 @@ public func AssertText<Content: Text>(
         "\n\n\(output)\n\nis not equal to\n\n\(expected)",
         file: file,
         line: line)
+}
+
+// MARK: - File
+
+public enum Item {
+    case directory(name: String, items: [Item])
+    case file(name: String, data: Data)
+}
+
+extension Item {
+
+    public static func file(name: String, text: String) -> Self {
+        .file(name: name, data: Data(text.utf8))
+    }
+}
+
+public func AssertFile<Content: File>(
+    content: () -> Content,
+    outputs expected: () -> Item,
+    _ message: @autoclosure () -> String = "",
+    file: StaticString = #filePath,
+    line: UInt = #line
+) throws {
+    try AssertFile(content: content, outputs: { [expected()] }, message(), file: file, line: line)
+}
+
+public func AssertFile<Content: File>(
+    content: () -> Content,
+    outputs expected: () -> [Item],
+    _ message: @autoclosure () -> String = "",
+    file: StaticString = #filePath,
+    line: UInt = #line
+) throws {
+
+    let fileManager = FileManager()
+
+    func checkItem(_ item: Item, in directory: URL) throws {
+        switch item {
+        case .directory(let name, let items):
+            try checkDirectory(at: directory.appendingPathComponent(name), items: items)
+        case .file(let name, let data):
+            try checkFile(at: directory.appendingPathComponent(name), data: data)
+        }
+    }
+
+    func checkDirectory(at url: URL, items: [Item]) throws {
+        for item in items {
+            try checkItem(item, in: url)
+        }
+    }
+
+    func string(_ data: Data) -> String {
+        String(decoding: data, as: UTF8.self)
+    }
+
+    func checkFile(at url: URL, data expected: Data) throws {
+        let data = try Data(contentsOf: url)
+        XCTAssertEqual(
+            data,
+            expected,
+            "\n\n\(string(data))\n\nis not equal to\n\n\(string(expected))",
+            file: file,
+            line: line)
+    }
+
+    try fileManager.withTemporaryDirectory { url in
+        try content().write(in: url)
+        try checkDirectory(at: url, items: expected())
+    }
+}
+
+extension FileManager {
+
+    fileprivate func withTemporaryDirectory(_ perform: (URL) throws -> Void) throws {
+        let url = temporaryDirectory
+            .appendingPathComponent("FileBuilderTests")
+            .appendingPathComponent(UUID().uuidString)
+        try createDirectory(at: url, withIntermediateDirectories: true, attributes: [:])
+        try perform(url)
+        try removeItem(at: url)
+    }
 }

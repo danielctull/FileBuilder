@@ -13,6 +13,13 @@ extension Text {
     }
 }
 
+extension File {
+
+    public func indentation(_ indentation: Indentation) -> some File {
+        environment(\.indentation, indentation)
+    }
+}
+
 enum IndentationKey: EnvironmentKey {
     static let defaultValue = Indentation.spaces(4)
 }
