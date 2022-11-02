@@ -2,9 +2,9 @@
 import FileBuilder
 import XCTest
 
-final class ContentModifierTests: XCTestCase {
+final class TextModifierTests: XCTestCase {
 
-    func testContentModifier() throws {
+    func testTextModifier() throws {
 
         struct Append<Content: Text, Line: Text>: TextModifier {
             let line: Line
