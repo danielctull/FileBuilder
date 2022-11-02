@@ -49,4 +49,15 @@ final class IndentationTests: XCTestCase {
             "        One"
         }
     }
+
+    func testFile() throws {
+        try AssertFile {
+            TextFile("Test") {
+                "One".indented()
+            }
+            .indentation(.spaces(6))
+        } outputs: {
+            .file(name: "Test", text: "      One")
+        }
+    }
 }
