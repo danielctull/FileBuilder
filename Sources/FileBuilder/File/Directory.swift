@@ -1,7 +1,7 @@
 
 import Foundation
 
-public struct Directory<Content: File> {
+public struct Directory<Content: File>: File {
 
     private let name: String
     private let content: Content
@@ -13,11 +13,6 @@ public struct Directory<Content: File> {
         self.name = name
         self.content = content()
     }
-}
-
-// MARK: - File
-
-extension Directory: File {
 
     public var body: some File {
         BuiltinFile { directory, environment in

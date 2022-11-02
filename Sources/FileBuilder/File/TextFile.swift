@@ -1,7 +1,7 @@
 
 import Foundation
 
-public struct TextFile<Content: Text> {
+public struct TextFile<Content: Text>: File {
 
     private let name: String
     private let encoding: String.Encoding
@@ -16,15 +16,6 @@ public struct TextFile<Content: Text> {
         self.encoding = encoding
         self.text = text()
     }
-}
-
-// MARK: - File
-
-struct TextFileFailure: Error {
-    let name: String
-}
-
-extension TextFile: File {
 
     public var body: some File {
         BuiltinFile { directory, environment in
@@ -36,4 +27,8 @@ extension TextFile: File {
             try data.write(to: url)
         }
     }
+}
+
+struct TextFileFailure: Error {
+    let name: String
 }
