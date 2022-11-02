@@ -1,5 +1,5 @@
 
-extension ModifiedContent: Text where Content: Text, Modifier: TextModifier, Content == Modifier.Content {
+extension Modified: Text where Content: Text, Modifier: TextModifier, Content == Modifier.Content {
 
     public var body: some Text {
         BuiltinText { environment in

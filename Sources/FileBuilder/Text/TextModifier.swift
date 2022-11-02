@@ -11,7 +11,7 @@ extension Text {
 
     public func modifier<Modifier: TextModifier>(
         _ modifier: Modifier
-    ) -> ModifiedContent<Self, Modifier> where Modifier.Content == Self {
-        ModifiedContent(content: self, modifier: modifier)
+    ) -> Modified<Self, Modifier> where Modifier.Content == Self {
+        Modified(content: self, modifier: modifier)
     }
 }
