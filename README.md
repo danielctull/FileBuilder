@@ -26,6 +26,7 @@ func generate(in url: URL) throws {
 
     try Directory("Generated Files") {
         for i in (1...10) {
+
             TextFile("Number \(i).txt") {
                 if i.isMultiple(of: 2) {
                     "This file is even-numbered."
