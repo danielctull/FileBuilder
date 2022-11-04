@@ -11,7 +11,7 @@ A file builder takes a list of `File` values to build up. Three primary kinds ar
 * `DataFile`: Creates a new file with data.
 * `TextFile`: Creates a new text file, with contents generated with a `TextBuilder`.
 
-#### TextBuilder
+### TextBuilder
 
 `TextBuilder` is used for building up a string inside of a `TextFile`.
 
