@@ -16,8 +16,8 @@ public enum FileBuilder {
     }
 
     public static func buildArray<Content: File>(
-        _ array: [Content]
-    ) -> [Content] {
+        _ array: Array<Content>
+    ) -> Array<Content> {
         array
     }
 
@@ -34,10 +34,11 @@ public enum FileBuilder {
     }
 
     public static func buildOptional<Content: File>(
-        _ optional: Content?
-    ) -> Content? {
+        _ optional: Optional<Content>
+    ) -> Optional<Content> {
         optional
     }
+
     public static func buildFinalResult<Content: File>(
         _ component: Content
     ) -> Content {

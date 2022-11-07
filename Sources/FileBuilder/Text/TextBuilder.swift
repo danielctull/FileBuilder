@@ -16,8 +16,8 @@ public enum TextBuilder {
     }
 
     public static func buildArray<Content: Text>(
-        _ array: [Content]
-    ) -> [Content] {
+        _ array: Array<Content>
+    ) -> Array<Content> {
         array
     }
 
@@ -40,10 +40,11 @@ public enum TextBuilder {
     }
 
     public static func buildOptional<Content: Text>(
-        _ optional: Content?
-    ) -> Content? {
+        _ optional: Optional<Content>
+    ) -> Optional<Content> {
         optional
     }
+
     public static func buildFinalResult<Content: Text>(
         _ component: Content
     ) -> Content {
