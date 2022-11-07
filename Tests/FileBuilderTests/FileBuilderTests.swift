@@ -68,6 +68,26 @@ final class FileBuilderTests: XCTestCase {
         }
     }
 
+#if !os(Linux)
+    // I can't find an #available flag that exists for linux machines.
+    func testLimitedAvailability() throws {
+
+        try AssertFile {
+            if #available(macOS 9999, *) {
+                TextFile("Future") {
+                    "Future Content"
+                }
+            } else if #available(*) { // <-- This causes the builder to hit
+                TextFile("Current") { //     buildLimitedAvailability.
+                    "Current Content"
+                }
+            }
+        } outputs: {
+            .file(name: "Current", text: "Current Content")
+        }
+    }
+#endif
+
     func testOptional() throws {
 
         @FileBuilder

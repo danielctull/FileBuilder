@@ -33,6 +33,12 @@ public enum FileBuilder {
         Conditional(second)
     }
 
+    public static func buildLimitedAvailability<Content: File>(
+        _ content: Content
+    ) -> AnyFile {
+        AnyFile(content)
+    }
+
     public static func buildOptional<Content: File>(
         _ optional: Optional<Content>
     ) -> Optional<Content> {

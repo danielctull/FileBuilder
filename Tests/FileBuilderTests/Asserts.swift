@@ -37,7 +37,7 @@ extension Item {
 }
 
 public func AssertFile<Content: File>(
-    content: () -> Content,
+    @FileBuilder content: () -> Content,
     outputs expected: () -> Item,
     _ message: @autoclosure () -> String = "",
     file: StaticString = #filePath,
@@ -47,7 +47,7 @@ public func AssertFile<Content: File>(
 }
 
 public func AssertFile<Content: File>(
-    content: () -> Content,
+    @FileBuilder content: () -> Content,
     outputs expected: () -> [Item],
     _ message: @autoclosure () -> String = "",
     file: StaticString = #filePath,
