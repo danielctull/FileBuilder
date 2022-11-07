@@ -111,8 +111,8 @@ extension FileManager {
         let url = temporaryDirectory
             .appendingPathComponent("FileBuilderTests")
             .appendingPathComponent(UUID().uuidString)
+        defer { try? removeItem(at: url) }
         try createDirectory(at: url, withIntermediateDirectories: true, attributes: [:])
         try perform(url)
-        try removeItem(at: url)
     }
 }
