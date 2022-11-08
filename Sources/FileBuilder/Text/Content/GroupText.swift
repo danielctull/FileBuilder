@@ -1,7 +1,5 @@
 
-public struct Group<Content: Text>: Text {
-
-    private let content: Content
+extension Group: Text where Content: Text {
 
     public init(@TextBuilder content: () -> Content) {
         self.content = content()
