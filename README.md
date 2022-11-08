@@ -90,3 +90,18 @@ func generate(in url: URL) throws {
     .write(in: url)
 }
 ```
+
+## Installation
+
+You can add FileBuilder as a package dependency to an Xcode project.
+
+> https://github.com/danielctull-playground/FileBuilder
+
+To use FileBuilder in a Swift Package, add it to the dependencies clause in 
+your Package.swift:
+
+```swift
+dependencies: [
+  .package(url: "https://github.com/danielctull-playground/FileBuilder", branch: "main")
+]
+```
