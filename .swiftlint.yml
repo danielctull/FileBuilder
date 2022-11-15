@@ -9,6 +9,7 @@ disabled_rules:
   - leading_whitespace
   - line_length
   - nesting
+  - syntactic_sugar
   - trailing_comma
   - type_name
 opt_in_rules:
