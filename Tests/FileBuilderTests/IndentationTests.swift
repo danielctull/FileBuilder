@@ -57,7 +57,7 @@ final class IndentationTests: XCTestCase {
             }
             .indentation(.spaces(6))
         } outputs: {
-            .file(name: "Test", text: "      One")
+            try .file(name: "Test", text: "      One")
         }
     }
 }

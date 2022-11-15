@@ -10,7 +10,7 @@ final class FileBuilderTests: XCTestCase {
                 "Hi"
             }
         } outputs: {
-            .file(name: "Test", text: "Hi")
+            try .file(name: "Test", text: "Hi")
         }
     }
 
@@ -21,7 +21,7 @@ final class FileBuilderTests: XCTestCase {
                 TextFile("File 2") { "Two" }
             }
         } outputs: {
-            .directory(name: "Directory", items: [
+            try .directory(name: "Directory", items: [
                 .file(name: "File 1", text: "One"),
                 .file(name: "File 2", text: "Two"),
             ])
@@ -36,7 +36,7 @@ final class FileBuilderTests: XCTestCase {
                 }
             }
         } outputs: {
-            .directory(name: "Directory", items: [
+            try .directory(name: "Directory", items: [
                 .file(name: "File 1", text: "Value 1"),
                 .file(name: "File 2", text: "Value 2"),
                 .file(name: "File 3", text: "Value 3"),
@@ -58,13 +58,13 @@ final class FileBuilderTests: XCTestCase {
         try AssertFile {
             content(true)
         } outputs: {
-            .file(name: "True", text: "True Content")
+            try .file(name: "True", text: "True Content")
         }
 
         try AssertFile {
             content(false)
         } outputs: {
-            .file(name: "False", text: "False Content")
+            try .file(name: "False", text: "False Content")
         }
     }
 
@@ -83,7 +83,7 @@ final class FileBuilderTests: XCTestCase {
                 }
             }
         } outputs: {
-            .file(name: "Current", text: "Current Content")
+            try .file(name: "Current", text: "Current Content")
         }
     }
 #endif
@@ -100,7 +100,7 @@ final class FileBuilderTests: XCTestCase {
         try AssertFile {
             content(true)
         } outputs: {
-            .file(name: "True", text: "True Content")
+            try .file(name: "True", text: "True Content")
         }
 
         try AssertFile {
@@ -127,7 +127,7 @@ final class FileBuilderTests: XCTestCase {
             }
             .indentation(.spaces(2))
         } outputs: {
-            .file(name: "Test", text:
+            try .file(name: "Test", text:
                 """
                 func foo() {
                   if value == 4 {

@@ -8,7 +8,7 @@ final class FileTests: XCTestCase {
         try AssertFile {
             AnyFile(TextFile("File 1") { "One" })
         } outputs: {
-            .file(name: "File 1", text: "One")
+            try .file(name: "File 1", text: "One")
         }
     }
 
@@ -20,7 +20,7 @@ final class FileTests: XCTestCase {
                 TextFile("File 3") { "Three" },
             ]
         } outputs: {
-            [
+            try [
                 .file(name: "File 1", text: "One"),
                 .file(name: "File 2", text: "Two"),
                 .file(name: "File 3", text: "Three"),
@@ -35,7 +35,7 @@ final class FileTests: XCTestCase {
                 TextFile("File 2") { "Two" }
             }
         } outputs: {
-            [
+            try [
                 .file(name: "File 1", text: "One"),
                 .file(name: "File 2", text: "Two"),
             ]
@@ -47,7 +47,7 @@ final class FileTests: XCTestCase {
             TextFile<String>?.none
             TextFile<String>?.some(TextFile("File 1") { "One" })
         } outputs: {
-            .file(name: "File 1", text: "One")
+            try .file(name: "File 1", text: "One")
         }
     }
 }

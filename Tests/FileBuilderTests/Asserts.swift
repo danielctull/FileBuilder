@@ -31,24 +31,28 @@ public enum Item {
 
 extension Item {
 
-    public static func file(name: String, text: String, encoding: String.Encoding = .utf8) -> Self {
-        .file(name: name, data: text.data(using: encoding)!)
+    public static func file(name: String, text: String, encoding: String.Encoding = .utf8) throws -> Self {
+        struct DataConversionError: Error {
+            let value: String
+        }
+        guard let data = text.data(using: encoding) else { throw DataConversionError(value: text) }
+        return .file(name: name, data: data)
     }
 }
 
 public func AssertFile<Content: File>(
     @FileBuilder content: () -> Content,
-    outputs expected: () -> Item,
+    outputs expected: () throws -> Item,
     _ message: @autoclosure () -> String = "",
     file: StaticString = #filePath,
     line: UInt = #line
 ) throws {
-    try AssertFile(content: content, outputs: { [expected()] }, message(), file: file, line: line)
+    try AssertFile(content: content, outputs: { [try expected()] }, message(), file: file, line: line)
 }
 
 public func AssertFile<Content: File>(
     @FileBuilder content: () -> Content,
-    outputs expected: () -> [Item],
+    outputs expected: () throws -> [Item],
     _ message: @autoclosure () -> String = "",
     file: StaticString = #filePath,
     line: UInt = #line

@@ -72,7 +72,7 @@ final class EnvironmentTests: XCTestCase {
         try AssertFile {
             TestFile().environment(\.value, "Hello!")
         } outputs: {
-            .file(name: "TestFile", text: "Hello!")
+            try .file(name: "TestFile", text: "Hello!")
         }
     }
 
@@ -83,7 +83,7 @@ final class EnvironmentTests: XCTestCase {
                 .environment(\.value, "Two")
                 .environment(\.value, "Three")
         } outputs: {
-            .file(name: "TestFile", text: "One")
+            try .file(name: "TestFile", text: "One")
         }
     }
 
@@ -99,7 +99,7 @@ final class EnvironmentTests: XCTestCase {
             .environment(\.value, "Two")
             .environment(\.value, "Three")
         } outputs: {
-            .file(name: "TestFile", text: "A")
+            try .file(name: "TestFile", text: "A")
         }
     }
 }
