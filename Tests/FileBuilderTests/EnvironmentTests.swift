@@ -32,14 +32,14 @@ final class EnvironmentTests: XCTestCase {
 
     // MARK: TextModifier
 
-    private struct TestModifier<Content: Text>: TextModifier {
+    private struct TestTextModifier<Content: Text>: TextModifier {
         @Environment(\.value) var value
         func body(content: Content) -> some Text { value }
     }
 
     func testTextModifier_installation() throws {
         try AssertText {
-            Line.empty.modifier(TestModifier())
+            Line.empty.modifier(TestTextModifier())
                 .environment(\.value, "Hello!")
         } is: {
             "Hello!"
@@ -48,7 +48,7 @@ final class EnvironmentTests: XCTestCase {
 
     func testTextModifier_nearestEnvironmentValueWins() throws {
         try AssertText {
-            Line.empty.modifier(TestModifier())
+            Line.empty.modifier(TestTextModifier())
                 .environment(\.value, "One")
                 .environment(\.value, "Two")
                 .environment(\.value, "Three")
@@ -100,6 +100,37 @@ final class EnvironmentTests: XCTestCase {
             .environment(\.value, "Three")
         } outputs: {
             try .file(name: "TestFile", text: "A")
+        }
+    }
+
+    // MARK: FileModifier
+
+    private struct TestFileModifier<Content: File>: FileModifier {
+        @Environment(\.value) var value
+        func body(content: Content) -> some File {
+            TextFile("Replaced") { value }
+        }
+    }
+
+    func testFileModifier_installation() throws {
+        try AssertFile {
+            TestFile()
+                .modifier(TestFileModifier())
+                .environment(\.value, "Foo")
+        } outputs: {
+            try .file(name: "Replaced", text: "Foo")
+        }
+    }
+
+    func testFileModifier_nearestEnvironmentValueWins() throws {
+        try AssertFile {
+            TestFile()
+                .modifier(TestFileModifier())
+                .environment(\.value, "One")
+                .environment(\.value, "Two")
+                .environment(\.value, "Three")
+        } outputs: {
+            try .file(name: "Replaced", text: "One")
         }
     }
 }
