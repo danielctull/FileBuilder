@@ -3,6 +3,7 @@ import Foundation
 
 public struct Directory<Content: File>: File {
 
+    @Environment(\.createDirectory) var createDirectory
     private let name: String
     private let content: Content
 
@@ -17,7 +18,7 @@ public struct Directory<Content: File>: File {
     public var body: some File {
         BuiltinFile { directory, environment in
             let url = directory.appendingPathComponent(name)
-            try FileManager().createDirectory(at: url, withIntermediateDirectories: false)
+            try createDirectory(at: url)
             try content.write(in: url, environment: environment)
         }
     }

@@ -42,16 +42,18 @@ extension Item {
 
 public func AssertFile<Content: File>(
     @FileBuilder content: () -> Content,
+    modifyWorkingDirectory: (URL) throws -> Void = { _ in },
     outputs expected: () throws -> Item,
     _ message: @autoclosure () -> String = "",
     file: StaticString = #filePath,
     line: UInt = #line
 ) throws {
-    try AssertFile(content: content, outputs: { [try expected()] }, message(), file: file, line: line)
+    try AssertFile(content: content, modifyWorkingDirectory: modifyWorkingDirectory, outputs: { [try expected()] }, message(), file: file, line: line)
 }
 
 public func AssertFile<Content: File>(
     @FileBuilder content: () -> Content,
+    modifyWorkingDirectory: (URL) throws -> Void = { _ in },
     outputs expected: () throws -> [Item],
     _ message: @autoclosure () -> String = "",
     file: StaticString = #filePath,
@@ -104,6 +106,7 @@ public func AssertFile<Content: File>(
     }
 
     try fileManager.withTemporaryDirectory { url in
+        try modifyWorkingDirectory(url)
         try content().write(in: url)
         try checkDirectory(at: url, items: expected())
     }
