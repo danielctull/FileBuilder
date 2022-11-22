@@ -11,17 +11,21 @@ public protocol File {
 extension File {
 
     public func write(in directory: URL) throws {
-        try write(in: directory, environment: EnvironmentValues())
+        let fileWrappers = try fileWrappers(environment: EnvironmentValues())
+        for (name, fileWrapper) in fileWrappers {
+            let url = directory.appendingPathComponent(name)
+            try fileWrapper.write(to: url, originalContentsURL: nil)
+        }
     }
 
-    func write(in directory: URL, environment: EnvironmentValues) throws {
+    func fileWrappers(environment: EnvironmentValues) throws -> [String: FileWrapper] {
 
         environment.install(on: self)
 
         if let builtin = self as? BuiltinFile {
-            try builtin.write(in: directory, environment: environment)
+            return try builtin.fileWrappers(environment: environment)
         } else {
-            try file.write(in: directory, environment: environment)
+            return try file.fileWrappers(environment: environment)
         }
     }
 }

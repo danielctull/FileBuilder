@@ -12,9 +12,8 @@ public struct DataFile: File {
     }
 
     public var file: some File {
-        BuiltinFile { directory, _ in
-            let url = directory.appendingPathComponent(name)
-            try data.write(to: url)
+        BuiltinFile { _ in
+            [name: FileWrapper(regularFileWithContents: data)]
         }
     }
 }

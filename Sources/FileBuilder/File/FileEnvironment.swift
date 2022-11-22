@@ -12,10 +12,10 @@ extension File {
 extension EnvironmentModifier: File where Content: File {
 
     var file: some File {
-        BuiltinFile { directory, environment in
+        BuiltinFile { environment in
             var environment = environment
             modify(&environment)
-            try content.write(in: directory, environment: environment)
+            return try content.fileWrappers(environment: environment)
         }
     }
 }

@@ -3,14 +3,14 @@ import Foundation
 
 struct BuiltinFile {
 
-    private let _write: (URL, EnvironmentValues) throws -> Void
+    private let _fileWrappers: (EnvironmentValues) throws -> [String: FileWrapper]
 
-    init(write: @escaping (URL, EnvironmentValues) throws -> Void) {
-        _write = write
+    init(fileWrappers: @escaping (EnvironmentValues) throws -> [String: FileWrapper]) {
+        _fileWrappers = fileWrappers
     }
 
-    func write(in directory: URL, environment: EnvironmentValues) throws {
-        try _write(directory, environment)
+    func fileWrappers(environment: EnvironmentValues) throws -> [String: FileWrapper] {
+        try _fileWrappers(environment)
     }
 }
 

@@ -15,10 +15,8 @@ public struct Directory<Content: File>: File {
     }
 
     public var file: some File {
-        BuiltinFile { directory, environment in
-            let url = directory.appendingPathComponent(name)
-            try FileManager().createDirectory(at: url, withIntermediateDirectories: true)
-            try content.write(in: url, environment: environment)
+        BuiltinFile { environment in
+            try [name: FileWrapper(directoryWithFileWrappers: content.fileWrappers(environment: environment))]
         }
     }
 }

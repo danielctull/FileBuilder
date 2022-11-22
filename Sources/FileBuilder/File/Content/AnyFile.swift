@@ -8,6 +8,6 @@ public struct AnyFile: File {
     }
 
     public var file: some File {
-        BuiltinFile(write: content.write)
+        BuiltinFile(fileWrappers: content.fileWrappers)
     }
 }

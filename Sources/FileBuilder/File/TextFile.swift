@@ -16,13 +16,12 @@ public struct TextFile<Content: Text>: File {
     }
 
     public var file: some File {
-        BuiltinFile { directory, environment in
+        BuiltinFile { environment in
             let string = String(text, environment: environment)
             guard let data = string.data(using: encoding) else {
                 throw TextFileFailure(name: name)
             }
-            let url = directory.appendingPathComponent(name)
-            try data.write(to: url)
+            return [name: FileWrapper(regularFileWithContents: data)]
         }
     }
 }
