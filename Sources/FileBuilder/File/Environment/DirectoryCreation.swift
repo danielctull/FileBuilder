@@ -15,24 +15,13 @@ public struct DirectoryCreation {
     }
 
     public static let useExisting = DirectoryCreation { url in
-        let fm = FileManager()
-        guard !fm.directoryExists(at: url) else { return }
-        try fm.createDirectory(at: url, withIntermediateDirectories: false)
+        try FileManager().createDirectory(at: url, withIntermediateDirectories: true)
     }
 
     private let createDirectory: (URL) throws -> Void
 
     func callAsFunction(at url: URL) throws {
         try createDirectory(url)
-    }
-}
-
-extension FileManager {
-
-    func directoryExists(at url: URL) -> Bool {
-        var isDirectory = ObjCBool(true)
-        let exists = fileExists(atPath: url.path, isDirectory: &isDirectory)
-        return exists && isDirectory.boolValue
     }
 }
 

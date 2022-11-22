@@ -13,7 +13,7 @@ final class DirectoryCreationTests: XCTestCase {
                     }
                 }
             }
-            .directoryCreation(.default)
+            .directoryCreation(.failIfExists)
 
         } modifyWorkingDirectory: { url in
             try FileManager().createDirectory(
@@ -31,7 +31,7 @@ final class DirectoryCreationTests: XCTestCase {
                     }
                 }
             }
-            .directoryCreation(.default)
+            .directoryCreation(.failIfExists)
 
         } outputs: {
             .directory(name: "Level 1", items: [
