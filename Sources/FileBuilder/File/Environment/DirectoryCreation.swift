@@ -10,7 +10,7 @@ extension File {
 
 public struct DirectoryCreation {
 
-    public static let `default` = DirectoryCreation { url in
+    public static let failIfExists = DirectoryCreation { url in
         try FileManager().createDirectory(at: url, withIntermediateDirectories: false)
     }
 
@@ -26,7 +26,7 @@ public struct DirectoryCreation {
 }
 
 fileprivate enum CreateDirectoryKey: EnvironmentKey {
-    static let defaultValue = DirectoryCreation.default
+    static let defaultValue = DirectoryCreation.failIfExists
 }
 
 extension EnvironmentValues {
