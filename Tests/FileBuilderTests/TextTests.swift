@@ -19,6 +19,18 @@ final class TextTests: XCTestCase {
         }
     }
 
+    func testStringEmptyLine() throws {
+        try AssertText {
+            "Hello\n\nThere"
+        } is: {
+            """
+            Hello
+
+            There
+            """
+        }
+    }
+
     func testAnyContent() throws {
         try AssertText {
             AnyText("Anything!")
