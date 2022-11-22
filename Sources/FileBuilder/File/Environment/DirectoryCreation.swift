@@ -26,7 +26,7 @@ public struct DirectoryCreation {
 }
 
 fileprivate enum CreateDirectoryKey: EnvironmentKey {
-    static let defaultValue = DirectoryCreation.failIfExists
+    static let defaultValue = DirectoryCreation.useExisting
 }
 
 extension EnvironmentValues {
