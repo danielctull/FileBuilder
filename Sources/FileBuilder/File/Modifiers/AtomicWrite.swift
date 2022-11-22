@@ -22,13 +22,23 @@ private struct AtomicWrite<Content: File>: FileModifier {
                 let temporary = temporary.appendingPathComponent(directory.lastPathComponent)
                 try fileManager.createDirectory(at: temporary, withIntermediateDirectories: false)
                 try content.write(in: temporary, environment: environment)
-                _ = try fileManager.replaceItemAt(directory, withItemAt: temporary)
+                try fileManager._replaceItemAt(directory, withItemAt: temporary)
             }
         }
     }
 }
 
 extension FileManager {
+
+    fileprivate func _replaceItemAt(_ original: URL, withItemAt replacement: URL) throws {
+        // replaceItemAt(:withItemAt:) fails on linux.
+#if os(Linux)
+        try removeItem(at: original)
+        try moveItem(at: replacement, to: original)
+#else
+        _ = try replaceItemAt(original, withItemAt: replacement)
+#endif
+    }
 
     fileprivate func withTemporaryDirectory(_ perform: (URL) throws -> Void) throws {
         let url = temporaryDirectory
