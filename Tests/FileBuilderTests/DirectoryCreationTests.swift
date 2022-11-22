@@ -4,7 +4,25 @@ import XCTest
 
 final class DirectoryCreationTests: XCTestCase {
 
-    func testDefault() throws {
+    func testFailIfExists() throws {
+        try AssertThrows {
+            Directory("Level 1") {
+                Directory("Level 2") {
+                    Directory("Level 3") {
+                        TextFile("Test") { "Hi" }
+                    }
+                }
+            }
+            .directoryCreation(.default)
+
+        } modifyWorkingDirectory: { url in
+            try FileManager().createDirectory(
+                at: url.appendingPathComponent("Level 1").appendingPathComponent("Level 2"),
+                withIntermediateDirectories: true)
+        }
+    }
+
+    func testFailIfExists_nothingExists() throws {
         try AssertFile {
             Directory("Level 1") {
                 Directory("Level 2") {
@@ -13,7 +31,8 @@ final class DirectoryCreationTests: XCTestCase {
                     }
                 }
             }
-            .directoryCreation(.useExisting)
+            .directoryCreation(.default)
+
         } outputs: {
             .directory(name: "Level 1", items: [
                 .directory(name: "Level 2", items: [
@@ -62,6 +81,7 @@ final class DirectoryCreationTests: XCTestCase {
                 }
             }
             .directoryCreation(.useExisting)
+
         } outputs: {
             .directory(name: "Level 1", items: [
                 .directory(name: "Level 2", items: [

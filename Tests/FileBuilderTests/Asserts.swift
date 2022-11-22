@@ -112,6 +112,28 @@ public func AssertFile<Content: File>(
     }
 }
 
+public func AssertThrows<Content: File>(
+    @FileBuilder content: () -> Content,
+    modifyWorkingDirectory: (URL) throws -> Void = { _ in },
+    _ message: @autoclosure () -> String = "",
+    errorHandler: (Error) -> Void = { _ in },
+    file: StaticString = #filePath,
+    line: UInt = #line
+) throws {
+
+    let fileManager = FileManager()
+
+    try fileManager.withTemporaryDirectory { url in
+        try modifyWorkingDirectory(url)
+        XCTAssertThrowsError(
+            try content().write(in: url),
+            message(),
+            file: file,
+            line: line,
+            errorHandler)
+    }
+}
+
 extension FileManager {
 
     fileprivate func withTemporaryDirectory(_ perform: (URL) throws -> Void) throws {
