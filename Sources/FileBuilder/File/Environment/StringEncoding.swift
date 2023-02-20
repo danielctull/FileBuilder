@@ -1,4 +1,6 @@
 
+import Foundation
+
 extension File {
 
     public func stringEncoding(_ encoding: String.Encoding) -> some File {
