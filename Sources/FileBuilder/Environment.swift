@@ -39,9 +39,9 @@ public struct Environment<Value> {
 }
 
 @propertyWrapper
-private final class Box<A> {
-    var wrappedValue: A
-    init(wrappedValue: A) {
+private final class Box<Value> {
+    var wrappedValue: Value
+    init(wrappedValue: Value) {
         self.wrappedValue = wrappedValue
     }
 }
