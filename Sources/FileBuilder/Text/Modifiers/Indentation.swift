@@ -20,13 +20,13 @@ extension File {
     }
 }
 
-enum IndentationKey: EnvironmentKey {
+private enum IndentationKey: EnvironmentKey {
     static let defaultValue = Indentation.spaces(4)
 }
 
 extension EnvironmentValues {
 
-    var indentation: Indentation {
+    fileprivate var indentation: Indentation {
         get { self[IndentationKey.self] }
         set { self[IndentationKey.self] = newValue }
     }
