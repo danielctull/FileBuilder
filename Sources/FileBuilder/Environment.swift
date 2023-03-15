@@ -46,13 +46,13 @@ private final class Box<A> {
     }
 }
 
-private protocol SetEnvironmentValues {
-    func setEnvironmentValues(_ environment: EnvironmentValues)
+private protocol DynamicProperty {
+    func install(_ environment: EnvironmentValues)
 }
 
-extension Environment: SetEnvironmentValues {
+extension Environment: DynamicProperty {
 
-    fileprivate func setEnvironmentValues(_ environment: EnvironmentValues) {
+    fileprivate func install(_ environment: EnvironmentValues) {
         self.environment = environment
     }
 }
@@ -62,8 +62,8 @@ extension EnvironmentValues {
     func install<Target>(on target: Target) {
         let mirror = Mirror(reflecting: target)
         for child in mirror.children {
-            if let property = child.value as? SetEnvironmentValues {
-                property.setEnvironmentValues(self)
+            if let property = child.value as? DynamicProperty {
+                property.install(self)
             }
         }
     }
