@@ -9,7 +9,7 @@ extension LineModifier {
     public func body(content: Content) -> some Text {
         BuiltinText { environment in
             modifyLines(
-                content.generate(environment: environment)
+                content.lines(environment: environment)
             )
         }
     }

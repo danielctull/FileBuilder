@@ -6,7 +6,7 @@ extension Modified: Text where Content: Text, Modifier: TextModifier, Content ==
             environment.install(on: modifier)
             return modifier
                 .body(content: content)
-                .generate(environment: environment)
+                .lines(environment: environment)
         }
     }
 }

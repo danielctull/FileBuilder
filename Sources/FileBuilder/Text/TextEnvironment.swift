@@ -15,7 +15,7 @@ extension EnvironmentModifier: Text where Content: Text {
         BuiltinText { environment in
             var environment = environment
             modify(&environment)
-            return content.generate(environment: environment)
+            return content.lines(environment: environment)
         }
     }
 }

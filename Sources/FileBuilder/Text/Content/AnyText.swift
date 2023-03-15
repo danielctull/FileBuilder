@@ -1,13 +1,13 @@
 
 public struct AnyText: Text {
 
-    let generate: (EnvironmentValues) -> [Line]
+    let lines: (EnvironmentValues) -> [Line]
 
     public init<Content: Text>(_ content: Content) {
-        generate = content.generate
+        lines = content.lines
     }
 
     public var body: some Text {
-        BuiltinText(generate: generate)
+        BuiltinText(lines: lines)
     }
 }
