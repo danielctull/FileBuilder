@@ -16,17 +16,21 @@ Two result builders are provided, `FileBuilder` and `TextBuilder`, and using the
 
 - ``File``
 - ``FileBuilder/FileBuilder``
+- ``FileModifier``
 - ``Directory``
 - ``TextFile``
 - ``DataFile``
+- ``AnyFile``
 
 ### Text
 
 - ``Text``
 - ``TextBuilder``
+- ``TextModifier``
+- ``Line``
+- ``LineModifier``
 - ``EmptyText``
 - ``AnyText``
-- ``Line``
 
 ### Environment
 
