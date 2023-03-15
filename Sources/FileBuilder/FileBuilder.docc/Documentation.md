@@ -36,6 +36,6 @@ Two result builders are provided, `FileBuilder` and `TextBuilder`, and using the
 ### Shared Types
 
 - ``Accumulated``
-- ``Conditional``
+- ``Either``
 - ``Group``
 - ``Modified``

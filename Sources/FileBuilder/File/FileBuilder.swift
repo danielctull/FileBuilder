@@ -21,16 +21,16 @@ public enum FileBuilder {
         array
     }
 
-    public static func buildEither<True: File, False: File>(
-        first: True
-    ) -> Conditional<True, False> {
-        Conditional(first)
+    public static func buildEither<First: File, Second: File>(
+        first: First
+    ) -> Either<First, Second> {
+        Either(first)
     }
 
-    public static func buildEither<True: File, False: File>(
-        second: False
-    ) -> Conditional<True, False> {
-        Conditional(second)
+    public static func buildEither<First: File, Second: File>(
+        second: Second
+    ) -> Either<First, Second> {
+        Either(second)
     }
 
     public static func buildLimitedAvailability<Content: File>(

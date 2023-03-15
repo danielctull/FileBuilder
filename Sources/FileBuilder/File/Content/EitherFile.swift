@@ -1,14 +1,14 @@
 
 import Foundation
 
-extension Conditional: File where True: File, False: File {
+extension Either: File where First: File, Second: File {
 
     public var body: some File {
         BuiltinFile { directory, environment in
             switch value {
-            case let .true(file):
+            case let .first(file):
                 try file.write(in: directory, environment: environment)
-            case let .false(file):
+            case let .second(file):
                 try file.write(in: directory, environment: environment)
             }
         }

@@ -21,16 +21,16 @@ public enum TextBuilder {
         array
     }
 
-    public static func buildEither<True: Text, False: Text>(
-        first: True
-    ) -> Conditional<True, False> {
-        Conditional(first)
+    public static func buildEither<First: Text, Second: Text>(
+        first: First
+    ) -> Either<First, Second> {
+        Either(first)
     }
 
-    public static func buildEither<True: Text, False: Text>(
-        second: False
-    ) -> Conditional<True, False> {
-        Conditional(second)
+    public static func buildEither<First: Text, Second: Text>(
+        second: Second
+    ) -> Either<First, Second> {
+        Either(second)
     }
 
     public static func buildLimitedAvailability<Content: Text>(
