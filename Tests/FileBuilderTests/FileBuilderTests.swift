@@ -73,7 +73,7 @@ final class FileBuilderTests: XCTestCase {
     func testLimitedAvailability() throws {
 
         try AssertFile {
-            if #available(macOS 9999, *) {
+            if #available(iOS 9999, macOS 9999, tvOS 9999, watchOS 9999, *) {
                 TextFile("Future") {
                     "Future Content"
                 }
