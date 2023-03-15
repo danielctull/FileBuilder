@@ -36,12 +36,12 @@ extension EnvironmentValues {
 
 extension Text {
 
-    public func indented() -> some Text {
-        modifier(Indented())
+    public func indent() -> some Text {
+        modifier(Indent())
     }
 }
 
-private struct Indented<Content: Text>: LineModifier {
+private struct Indent<Content: Text>: LineModifier {
 
     @Environment(\.indentation) var indentation
 

@@ -167,7 +167,7 @@ struct Func<Content: Text>: Text {
 
     var body: some Text {
         "func \(name)() {"
-        content.indented()
+        content.indent()
         "}"
     }
 }
@@ -190,12 +190,12 @@ struct If<True: Text, False: Text>: Text {
 
     var body: some Text {
         "if \(condition) {"
-        trueContent.indented()
+        trueContent.indent()
         if False.self == EmptyText.self {
             "}"
         } else {
             "} else {"
-            falseContent.indented()
+            falseContent.indent()
             "}"
         }
     }

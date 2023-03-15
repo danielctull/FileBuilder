@@ -20,7 +20,7 @@ final class IndentationTests: XCTestCase {
 
     func testDefault() throws {
         try AssertText {
-            "One".indented()
+            "One".indent()
         } is: {
             "    One"
         }
@@ -28,7 +28,7 @@ final class IndentationTests: XCTestCase {
 
     func testTab() throws {
         try AssertText {
-            "One".indented().indentation(.tab)
+            "One".indent().indentation(.tab)
         } is: {
             "\tOne"
         }
@@ -36,7 +36,7 @@ final class IndentationTests: XCTestCase {
 
     func testSpaces1() throws {
         try AssertText {
-            "One".indented().indentation(.spaces(1))
+            "One".indent().indentation(.spaces(1))
         } is: {
             " One"
         }
@@ -44,7 +44,7 @@ final class IndentationTests: XCTestCase {
 
     func testSpaces8() throws {
         try AssertText {
-            "One".indented().indentation(.spaces(8))
+            "One".indent().indentation(.spaces(8))
         } is: {
             "        One"
         }
@@ -53,7 +53,7 @@ final class IndentationTests: XCTestCase {
     func testFile() throws {
         try AssertFile {
             TextFile("Test") {
-                "One".indented()
+                "One".indent()
             }
             .indentation(.spaces(6))
         } outputs: {
