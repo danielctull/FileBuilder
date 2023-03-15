@@ -33,7 +33,7 @@ final class LineModifierTests: XCTestCase {
                 "Hello"
                 "World"
             }
-            .modifier { $0.filter { $0.content.hasPrefix("H") } }
+            .modifier { $0.filter { String($0).hasPrefix("H") } }
         } is: {
             "Hello"
         }

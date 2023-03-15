@@ -10,14 +10,17 @@ public protocol Text {
 
 extension Text {
 
-    public var content: String {
-        content(environment: EnvironmentValues())
-    }
-
     func content(environment: EnvironmentValues) -> String {
         lines(environment: environment)
             .map(\.rawValue)
             .joined(separator: "\n")
+    }
+}
+
+extension String {
+
+    public init(_ text: some Text) {
+        self = text.content(environment: EnvironmentValues())
     }
 }
 
