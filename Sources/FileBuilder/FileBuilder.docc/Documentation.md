@@ -15,6 +15,7 @@ Two result builders are provided, `FileBuilder` and `TextBuilder`, and using the
 ### File
 
 - ``File``
+- ``FileBuilder/FileBuilder``
 - ``Directory``
 - ``TextFile``
 - ``DataFile``
