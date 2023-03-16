@@ -8,19 +8,17 @@ public protocol Text {
     var body: Body { get }
 }
 
-extension Text {
-
-    func content(environment: EnvironmentValues) -> String {
-        lines(environment: environment)
-            .map(\.rawValue)
-            .joined(separator: "\n")
-    }
-}
-
 extension String {
 
     public init(_ text: some Text) {
-        self = text.content(environment: EnvironmentValues())
+        self.init(text, environment: EnvironmentValues())
+    }
+
+    init(_ text: some Text, environment: EnvironmentValues) {
+        self = text
+            .lines(environment: environment)
+            .map(\.rawValue)
+            .joined(separator: "\n")
     }
 }
 
