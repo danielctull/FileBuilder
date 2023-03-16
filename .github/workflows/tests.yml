@@ -12,6 +12,7 @@ jobs:
       matrix:
         image:
           - "swift:5.7"
+          - "swift:5.8"
     name: Linux
     runs-on: ubuntu-latest
     container:
