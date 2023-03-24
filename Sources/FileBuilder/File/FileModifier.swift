@@ -1,6 +1,7 @@
 
 public protocol FileModifier {
-    associatedtype Content
+
+    typealias Content = _FileModifier_Content
     associatedtype Body: File
 
     @FileBuilder
@@ -11,7 +12,14 @@ extension File {
 
     public func modifier<Modifier: FileModifier>(
         _ modifier: Modifier
-    ) -> Modified<Self, Modifier> where Modifier.Content == Self {
+    ) -> Modified<Self, Modifier> {
         Modified(content: self, modifier: modifier)
+    }
+}
+
+public struct _FileModifier_Content: File {
+    let content: any File
+    public var body: some File {
+        BuiltinFile(write: content.write)
     }
 }

@@ -6,7 +6,7 @@ final class TextModifierTests: XCTestCase {
 
     func testTextModifier() throws {
 
-        struct Append<Content: Text, Line: Text>: TextModifier {
+        struct Append<Line: Text>: TextModifier {
             let line: Line
             func body(content: Content) -> some Text {
                 content

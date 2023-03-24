@@ -6,7 +6,7 @@ final class FileModifierTests: XCTestCase {
 
     func testFileModifier() throws {
 
-        struct Insert<Content: File, Addition: File>: FileModifier {
+        struct Insert<Addition: File>: FileModifier {
             let addition: Addition
             func body(content: Content) -> some File {
                 content

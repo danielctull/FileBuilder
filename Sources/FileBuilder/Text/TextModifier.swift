@@ -1,6 +1,6 @@
 
 public protocol TextModifier {
-    associatedtype Content
+    typealias Content = _TextModifier_Content
     associatedtype Body: Text
 
     @TextBuilder
@@ -11,7 +11,14 @@ extension Text {
 
     public func modifier<Modifier: TextModifier>(
         _ modifier: Modifier
-    ) -> Modified<Self, Modifier> where Modifier.Content == Self {
+    ) -> Modified<Self, Modifier> {
         Modified(content: self, modifier: modifier)
+    }
+}
+
+public struct _TextModifier_Content: Text {
+    let content: any Text
+    public var body: some Text {
+        BuiltinText(lines: content.lines)
     }
 }

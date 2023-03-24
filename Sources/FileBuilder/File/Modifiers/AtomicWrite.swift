@@ -13,7 +13,7 @@ extension File {
     }
 }
 
-private struct AtomicWrite<Content: File>: FileModifier {
+private struct AtomicWrite: FileModifier {
 
     func body(content: Content) -> some File {
         BuiltinFile { directory, environment in

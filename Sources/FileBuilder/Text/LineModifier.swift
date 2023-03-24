@@ -1,5 +1,5 @@
 
-public protocol LineModifier: TextModifier where Content: Text {
+public protocol LineModifier: TextModifier {
     func modifyLines(_ lines: [Line]) -> [Line]
 }
 
@@ -26,7 +26,7 @@ extension Text {
     }
 }
 
-private struct AnyLineModifier<Content: Text>: LineModifier {
+private struct AnyLineModifier: LineModifier {
     let lineModifier: ([Line]) -> [Line]
     func modifyLines(_ lines: [Line]) -> [Line] {
         lineModifier(lines)

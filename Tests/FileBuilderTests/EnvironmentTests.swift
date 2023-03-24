@@ -32,7 +32,7 @@ final class EnvironmentTests: XCTestCase {
 
     // MARK: TextModifier
 
-    private struct TestTextModifier<Content: Text>: TextModifier {
+    private struct TestTextModifier: TextModifier {
         @Environment(\.value) var value
         func body(content: Content) -> some Text { value }
     }
@@ -105,7 +105,7 @@ final class EnvironmentTests: XCTestCase {
 
     // MARK: FileModifier
 
-    private struct TestFileModifier<Content: File>: FileModifier {
+    private struct TestFileModifier: FileModifier {
         @Environment(\.value) var value
         func body(content: Content) -> some File {
             TextFile("Replaced") { value }
