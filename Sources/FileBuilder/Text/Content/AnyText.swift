@@ -1,7 +1,7 @@
 
 public struct AnyText: Text {
 
-    let lines: (EnvironmentValues) -> [Line]
+    let lines: (EnvironmentValues) throws -> [Line]
 
     public init<Content: Text>(_ content: Content) {
         lines = content.lines

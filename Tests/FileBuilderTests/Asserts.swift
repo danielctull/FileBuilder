@@ -12,7 +12,7 @@ public func AssertText<Content: Text>(
     file: StaticString = #filePath,
     line: UInt = #line
 ) throws {
-    let output = String(content())
+    let output = try String(content())
     let expected = expected()
 
     XCTAssert(

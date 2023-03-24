@@ -17,7 +17,7 @@ public struct TextFile<Content: Text>: File {
 
     public var body: some File {
         BuiltinFile { directory, environment in
-            let string = String(text, environment: environment)
+            let string = try String(text, environment: environment)
             guard let data = string.data(using: encoding) else {
                 throw TextFileFailure(name: name)
             }

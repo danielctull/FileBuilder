@@ -1,6 +1,6 @@
 
 public protocol LineModifier: TextModifier {
-    func modifyLines(_ lines: [Line]) -> [Line]
+    func modifyLines(_ lines: [Line]) throws -> [Line]
 }
 
 extension LineModifier {
@@ -8,7 +8,7 @@ extension LineModifier {
     @TextBuilder
     public func body(content: Content) -> some Text {
         BuiltinText { environment in
-            modifyLines(
+            try modifyLines(
                 content.lines(environment: environment)
             )
         }
@@ -17,18 +17,18 @@ extension LineModifier {
 
 extension Text {
 
-    public func modifier(_ lineModifier: @escaping ([Line]) -> [Line]) -> some Text {
+    public func modifier(_ lineModifier: @escaping ([Line]) throws -> [Line]) -> some Text {
         modifier(AnyLineModifier(lineModifier: lineModifier))
     }
 
-    public func modifier(_ lineModifier: @escaping (Line) -> Line) -> some Text {
-        modifier(AnyLineModifier { $0.map(lineModifier) })
+    public func modifier(_ lineModifier: @escaping (Line) throws -> Line) -> some Text {
+        modifier(AnyLineModifier { try $0.map(lineModifier) })
     }
 }
 
 private struct AnyLineModifier: LineModifier {
-    let lineModifier: ([Line]) -> [Line]
-    func modifyLines(_ lines: [Line]) -> [Line] {
-        lineModifier(lines)
+    let lineModifier: ([Line]) throws -> [Line]
+    func modifyLines(_ lines: [Line]) throws -> [Line] {
+        try lineModifier(lines)
     }
 }

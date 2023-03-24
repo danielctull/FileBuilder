@@ -5,7 +5,7 @@ extension Modified: Text where Content: Text, Modifier: TextModifier {
         BuiltinText { environment in
             let content = Modifier.Content(content: content)
             environment.install(on: modifier)
-            return modifier
+            return try modifier
                 .body(content: content)
                 .lines(environment: environment)
         }

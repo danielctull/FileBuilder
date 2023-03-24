@@ -5,17 +5,17 @@ public protocol Text {
     associatedtype Body: Text
 
     @TextBuilder
-    var body: Body { get }
+    var body: Body { get throws }
 }
 
 extension String {
 
-    public init(_ text: some Text) {
-        self.init(text, environment: EnvironmentValues())
+    public init(_ text: some Text) throws {
+        try self.init(text, environment: EnvironmentValues())
     }
 
-    init(_ text: some Text, environment: EnvironmentValues) {
-        self = text
+    init(_ text: some Text, environment: EnvironmentValues) throws {
+        self = try text
             .lines(environment: environment)
             .map(\.rawValue)
             .joined(separator: "\n")
@@ -26,14 +26,14 @@ extension String {
 
 extension Text {
 
-    func lines(environment: EnvironmentValues) -> [Line] {
+    func lines(environment: EnvironmentValues) throws -> [Line] {
 
         environment.install(on: self)
 
         if let builtin = self as? BuiltinText {
-            return builtin.lines(environment: environment)
+            return try builtin.lines(environment: environment)
         } else {
-            return body.lines(environment: environment)
+            return try body.lines(environment: environment)
         }
     }
 }

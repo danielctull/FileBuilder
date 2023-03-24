@@ -1,14 +1,14 @@
 
 struct BuiltinText {
 
-    private let _lines: (EnvironmentValues) -> [Line]
+    private let _lines: (EnvironmentValues) throws -> [Line]
 
-    init(lines: @escaping (EnvironmentValues) -> [Line]) {
+    init(lines: @escaping (EnvironmentValues) throws -> [Line]) {
         _lines = lines
     }
 
-    func lines(environment: EnvironmentValues) -> [Line] {
-        _lines(environment)
+    func lines(environment: EnvironmentValues) throws -> [Line] {
+        try _lines(environment)
     }
 }
 
