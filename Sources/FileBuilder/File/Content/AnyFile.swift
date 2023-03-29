@@ -1,15 +1,13 @@
 
-import Foundation
-
 public struct AnyFile: File {
 
-    private let write: (URL, EnvironmentValues) throws -> Void
+    private let content: any File
 
-    public init<Content: File>(_ content: Content) {
-        write = content.write(in:environment:)
+    public init(_ content: some File) {
+        self.content = content
     }
 
     public var body: some File {
-        BuiltinFile(write: write)
+        BuiltinFile(write: content.write)
     }
 }
