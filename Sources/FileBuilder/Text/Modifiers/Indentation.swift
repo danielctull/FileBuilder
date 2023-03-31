@@ -41,12 +41,12 @@ extension Text {
     }
 }
 
-private struct Indent: LinesModifier {
+private struct Indent: LineModifier {
 
     @Environment(\.indentation) var indentation
 
-    func modifyLines(_ lines: [Line]) -> [Line] {
-        lines.map { $0.prefix(String(indentation)) }
+    func modifyLine(_ line: Line) -> Line {
+        line.prefix(String(indentation))
     }
 }
 
