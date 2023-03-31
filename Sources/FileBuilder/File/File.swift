@@ -2,10 +2,10 @@
 import Foundation
 
 public protocol File {
-    associatedtype Body: File
+    associatedtype SomeFile: File
 
     @FileBuilder
-    var file: Body { get }
+    var file: SomeFile { get }
 }
 
 extension File {

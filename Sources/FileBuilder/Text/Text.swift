@@ -2,10 +2,10 @@
 import Foundation
 
 public protocol Text {
-    associatedtype Body: Text
+    associatedtype SomeText: Text
 
     @TextBuilder
-    var text: Body { get }
+    var text: SomeText { get }
 }
 
 extension String {
