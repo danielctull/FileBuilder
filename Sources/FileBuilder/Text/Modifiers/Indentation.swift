@@ -45,8 +45,8 @@ private struct Indent: LineModifier {
 
     @Environment(\.indentation) var indentation
 
-    func modifyLine(_ line: Line) -> Line {
-        line.prefix(String(indentation))
+    func line(content: Line) -> Line {
+        content.prefix(String(indentation))
     }
 }
 

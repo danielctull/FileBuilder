@@ -1,6 +1,6 @@
 
 public protocol LineModifier: TextModifier {
-    func modifyLine(_ line: Line) -> Line
+    func line(content: Line) -> Line
 }
 
 extension LineModifier {
@@ -10,7 +10,7 @@ extension LineModifier {
         BuiltinText { environment in
             content
                 .lines(environment: environment)
-                .map(modifyLine)
+                .map(line(content:))
         }
     }
 }

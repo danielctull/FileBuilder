@@ -12,8 +12,8 @@ private struct Wrap: LinesModifier {
 
     let lineLength: Int
 
-    func modifyLines(_ lines: [Line]) -> [Line] {
-        lines.flatMap { line in
+    func lines(content: [Line]) -> [Line] {
+        content.flatMap { line in
             line.rawValue
                 .lines(ofLength: lineLength)
                 .map(Line.init)

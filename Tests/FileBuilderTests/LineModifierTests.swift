@@ -8,8 +8,8 @@ final class LineModifierTests: XCTestCase {
 
         struct Suffix: LineModifier {
             let text: String
-            func modifyLine(_ line: Line) -> Line {
-                line.suffix(text)
+            func line(content: Line) -> Line {
+                content.suffix(text)
             }
         }
 

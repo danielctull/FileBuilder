@@ -1,6 +1,6 @@
 
 public protocol LinesModifier: TextModifier {
-    func modifyLines(_ lines: [Line]) -> [Line]
+    func lines(content: [Line]) -> [Line]
 }
 
 extension LinesModifier {
@@ -8,9 +8,8 @@ extension LinesModifier {
     @TextBuilder
     public func text(content: Content) -> some Text {
         BuiltinText { environment in
-            modifyLines(
-                content.lines(environment: environment)
-            )
+            let content = content.lines(environment: environment)
+            return lines(content: content)
         }
     }
 }
@@ -28,7 +27,7 @@ extension Text {
 
 private struct AnyLinesModifier: LinesModifier {
     let lineModifier: ([Line]) -> [Line]
-    func modifyLines(_ lines: [Line]) -> [Line] {
-        lineModifier(lines)
+    func lines(content: [Line]) -> [Line] {
+        lineModifier(content)
     }
 }
