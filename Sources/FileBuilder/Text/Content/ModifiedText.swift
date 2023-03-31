@@ -6,7 +6,7 @@ extension Modified: Text where Content: Text, Modifier: TextModifier {
             let content = Modifier.Content(content: content)
             environment.install(on: modifier)
             return modifier
-                .body(content: content)
+                .text(content: content)
                 .lines(environment: environment)
         }
     }

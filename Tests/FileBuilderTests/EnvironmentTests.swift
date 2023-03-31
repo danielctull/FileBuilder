@@ -34,7 +34,7 @@ final class EnvironmentTests: XCTestCase {
 
     private struct TestTextModifier: TextModifier {
         @Environment(\.value) var value
-        func body(content: Content) -> some Text { value }
+        func text(content: Content) -> some Text { value }
     }
 
     func testTextModifier_installation() throws {

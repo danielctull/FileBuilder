@@ -1,10 +1,10 @@
 
 public protocol TextModifier {
     typealias Content = _TextModifier_Content
-    associatedtype Body: Text
+    associatedtype SomeText: Text
 
     @TextBuilder
-    func body(content: Content) -> Body
+    func text(content: Content) -> SomeText
 }
 
 extension Text {

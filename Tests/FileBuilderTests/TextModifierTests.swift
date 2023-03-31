@@ -8,7 +8,7 @@ final class TextModifierTests: XCTestCase {
 
         struct Append<Line: Text>: TextModifier {
             let line: Line
-            func body(content: Content) -> some Text {
+            func text(content: Content) -> some Text {
                 content
                 line
             }
