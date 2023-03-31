@@ -1,12 +1,4 @@
 
-public protocol TextModifier {
-    typealias Content = _TextModifier_Content
-    associatedtype SomeText: Text
-
-    @TextBuilder
-    func text(content: Content) -> SomeText
-}
-
 extension Text {
 
     public func modifier<Modifier: TextModifier>(
@@ -14,6 +6,14 @@ extension Text {
     ) -> Modified<Self, Modifier> {
         Modified(content: self, modifier: modifier)
     }
+}
+
+public protocol TextModifier {
+    typealias Content = _TextModifier_Content
+    associatedtype SomeText: Text
+
+    @TextBuilder
+    func text(content: Content) -> SomeText
 }
 
 public struct _TextModifier_Content: Text {

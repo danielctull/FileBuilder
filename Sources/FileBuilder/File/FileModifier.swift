@@ -1,13 +1,4 @@
 
-public protocol FileModifier {
-
-    typealias Content = _FileModifier_Content
-    associatedtype SomeFile: File
-
-    @FileBuilder
-    func file(content: Content) -> SomeFile
-}
-
 extension File {
 
     public func modifier<Modifier: FileModifier>(
@@ -15,6 +6,15 @@ extension File {
     ) -> Modified<Self, Modifier> {
         Modified(content: self, modifier: modifier)
     }
+}
+
+public protocol FileModifier {
+
+    typealias Content = _FileModifier_Content
+    associatedtype SomeFile: File
+
+    @FileBuilder
+    func file(content: Content) -> SomeFile
 }
 
 public struct _FileModifier_Content: File {
