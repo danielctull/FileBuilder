@@ -26,10 +26,11 @@ final class TextModifierTests: XCTestCase {
 
     func testLinesModifier() throws {
 
-        struct Suffix: LinesModifier {
-            let text: String
+        struct LineNumber: LinesModifier {
             func lines(content: [Line]) -> [Line] {
-                content.map { $0.suffix(text) }
+                content.enumerated().map { number, line in
+                    line.prefix("\(number + 1) ")
+                }
             }
         }
 
@@ -38,11 +39,11 @@ final class TextModifierTests: XCTestCase {
                 "Hello"
                 "World"
             }
-            .modifier(Suffix(text: "!"))
+            .modifier(LineNumber())
         } is: {
             """
-            Hello!
-            World!
+            1 Hello
+            2 World
             """
         }
     }
