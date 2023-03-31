@@ -1,16 +1,11 @@
 
-public protocol LineModifier: TextModifier {
+public protocol LineModifier: LinesModifier {
     func line(content: Line) -> Line
 }
 
 extension LineModifier {
 
-    @TextBuilder
-    public func text(content: Content) -> some Text {
-        BuiltinText { environment in
-            content
-                .lines(environment: environment)
-                .map(line(content:))
-        }
+    public func lines(content: [Line]) -> [Line] {
+        content.map(line(content:))
     }
 }
