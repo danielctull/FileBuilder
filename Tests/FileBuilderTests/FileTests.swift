@@ -28,6 +28,15 @@ final class FileTests: XCTestCase {
         }
     }
 
+    func testDataFile() throws {
+        let data = Data.random()
+        try AssertFile {
+            DataFile("File 1", data: data)
+        } outputs: {
+            .file(name: "File 1", data: data)
+        }
+    }
+
     func testGroup() throws {
         try AssertFile {
             Group {
@@ -48,6 +57,14 @@ final class FileTests: XCTestCase {
             TextFile<String>?.some(TextFile("File 1") { "One" })
         } outputs: {
             try .file(name: "File 1", text: "One")
+        }
+    }
+
+    func testTextFile() throws {
+        try AssertFile {
+            TextFile("File 1") { "Contents" }
+        } outputs: {
+            try .file(name: "File 1", text: "Contents")
         }
     }
 }
