@@ -8,7 +8,7 @@ final class FileModifierTests: XCTestCase {
 
         struct Insert<Addition: File>: FileModifier {
             let addition: Addition
-            func body(content: Content) -> some File {
+            func file(content: Content) -> some File {
                 content
                 addition
             }

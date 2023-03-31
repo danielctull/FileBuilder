@@ -2,10 +2,10 @@
 public protocol FileModifier {
 
     typealias Content = _FileModifier_Content
-    associatedtype Body: File
+    associatedtype SomeFile: File
 
     @FileBuilder
-    func body(content: Content) -> Body
+    func file(content: Content) -> SomeFile
 }
 
 extension File {

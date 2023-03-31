@@ -15,7 +15,7 @@ extension File {
 
 private struct AtomicWrite: FileModifier {
 
-    func body(content: Content) -> some File {
+    func file(content: Content) -> some File {
         BuiltinFile { directory, environment in
             let fileManager = FileManager()
             try fileManager.withTemporaryDirectory { temporary in

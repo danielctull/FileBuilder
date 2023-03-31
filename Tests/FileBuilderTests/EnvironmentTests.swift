@@ -107,7 +107,7 @@ final class EnvironmentTests: XCTestCase {
 
     private struct TestFileModifier: FileModifier {
         @Environment(\.value) var value
-        func body(content: Content) -> some File {
+        func file(content: Content) -> some File {
             TextFile("Replaced") { value }
         }
     }

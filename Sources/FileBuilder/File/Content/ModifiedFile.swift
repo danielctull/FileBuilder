@@ -6,7 +6,7 @@ extension Modified: File where Content: File, Modifier: FileModifier {
             let content = Modifier.Content(content: content)
             environment.install(on: modifier)
             try modifier
-                .body(content: content)
+                .file(content: content)
                 .write(in: url, environment: environment)
         }
     }
