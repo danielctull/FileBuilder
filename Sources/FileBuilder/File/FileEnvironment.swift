@@ -11,7 +11,7 @@ extension File {
 
 extension EnvironmentModifier: File where Content: File {
 
-    var body: some File {
+    var file: some File {
         BuiltinFile { directory, environment in
             var environment = environment
             modify(&environment)

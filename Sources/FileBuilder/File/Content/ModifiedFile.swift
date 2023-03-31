@@ -1,7 +1,7 @@
 
 extension Modified: File where Content: File, Modifier: FileModifier {
 
-    public var body: some File {
+    public var file: some File {
         BuiltinFile { url, environment in
             let content = Modifier.Content(content: content)
             environment.install(on: modifier)

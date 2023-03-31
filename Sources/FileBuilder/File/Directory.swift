@@ -14,7 +14,7 @@ public struct Directory<Content: File>: File {
         self.content = content()
     }
 
-    public var body: some File {
+    public var file: some File {
         BuiltinFile { directory, environment in
             let url = directory.appendingPathComponent(name)
             try FileManager().createDirectory(at: url, withIntermediateDirectories: true)

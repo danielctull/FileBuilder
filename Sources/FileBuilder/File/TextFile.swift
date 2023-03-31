@@ -15,7 +15,7 @@ public struct TextFile<Content: Text>: File {
         self.text = text()
     }
 
-    public var body: some File {
+    public var file: some File {
         BuiltinFile { directory, environment in
             let string = String(text, environment: environment)
             guard let data = string.data(using: encoding) else {

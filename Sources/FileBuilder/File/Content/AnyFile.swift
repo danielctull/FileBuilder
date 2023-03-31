@@ -7,7 +7,7 @@ public struct AnyFile: File {
         self.content = content
     }
 
-    public var body: some File {
+    public var file: some File {
         BuiltinFile(write: content.write)
     }
 }

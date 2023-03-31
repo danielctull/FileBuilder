@@ -5,7 +5,7 @@ extension Group: File where Content: File {
         self.content = content()
     }
 
-    public var body: some File {
+    public var file: some File {
         content
     }
 }

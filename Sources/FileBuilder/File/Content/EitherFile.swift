@@ -3,7 +3,7 @@ import Foundation
 
 extension Either: File where First: File, Second: File {
 
-    public var body: some File {
+    public var file: some File {
         BuiltinFile { directory, environment in
             switch value {
             case let .first(file):

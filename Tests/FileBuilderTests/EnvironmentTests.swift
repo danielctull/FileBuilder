@@ -61,7 +61,7 @@ final class EnvironmentTests: XCTestCase {
 
     private struct TestFile: File {
         @Environment(\.value) var value
-        var body: some File {
+        var file: some File {
             TextFile("TestFile") {
                 value
             }

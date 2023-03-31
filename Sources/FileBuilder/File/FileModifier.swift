@@ -19,7 +19,7 @@ extension File {
 
 public struct _FileModifier_Content: File {
     let content: any File
-    public var body: some File {
+    public var file: some File {
         BuiltinFile(write: content.write)
     }
 }

@@ -5,7 +5,7 @@ public protocol File {
     associatedtype Body: File
 
     @FileBuilder
-    var body: Body { get }
+    var file: Body { get }
 }
 
 extension File {
@@ -21,7 +21,7 @@ extension File {
         if let builtin = self as? BuiltinFile {
             try builtin.write(in: directory, environment: environment)
         } else {
-            try body.write(in: directory, environment: environment)
+            try file.write(in: directory, environment: environment)
         }
     }
 }
