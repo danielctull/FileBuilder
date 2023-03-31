@@ -16,5 +16,7 @@ struct BuiltinFile {
 
 extension BuiltinFile: File {
 
-    var file: Never { fatalError("Builtin file should not be called.") }
+    var file: some File {
+        fatalError("Builtin file should not be called.")
+    }
 }

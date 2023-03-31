@@ -14,5 +14,7 @@ struct BuiltinText {
 
 extension BuiltinText: Text {
 
-    var text: Never { fatalError("Builtin text should not be called.") }
+    var text: some Text {
+        fatalError("Builtin text should not be called.")
+    }
 }
