@@ -23,4 +23,50 @@ final class TextModifierTests: XCTestCase {
             """
         }
     }
+
+    func testLinesModifier() throws {
+
+        struct Suffix: LinesModifier {
+            let text: String
+            func lines(content: [Line]) -> [Line] {
+                content.map { $0.suffix(text) }
+            }
+        }
+
+        try AssertText {
+            Group {
+                "Hello"
+                "World"
+            }
+            .modifier(Suffix(text: "!"))
+        } is: {
+            """
+            Hello!
+            World!
+            """
+        }
+    }
+
+    func testLineModifier() throws {
+
+        struct Suffix: LineModifier {
+            let text: String
+            func line(content: Line) -> Line {
+                content.suffix(text)
+            }
+        }
+
+        try AssertText {
+            Group {
+                "Hello"
+                "World"
+            }
+            .modifier(Suffix(text: "!"))
+        } is: {
+            """
+            Hello!
+            World!
+            """
+        }
+    }
 }
