@@ -1,4 +1,7 @@
 
 extension Never: Text {
-    public var text: Never { fatalError("Never text should not be called.") }
+
+    public var text: some Text {
+        fatalError("Never text should not be called.")
+    }
 }

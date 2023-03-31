@@ -1,4 +1,7 @@
 
 extension Never: File {
-    public var file: Never { fatalError("Never file should not be called.") }
+
+    public var file: some File {
+        fatalError("Never file should not be called.")
+    }
 }
