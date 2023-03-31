@@ -5,7 +5,6 @@ public protocol LinesModifier: TextModifier {
 
 extension LinesModifier {
 
-    @TextBuilder
     public func text(content: Content) -> some Text {
         BuiltinText { environment in
             let content = content.lines(environment: environment)
