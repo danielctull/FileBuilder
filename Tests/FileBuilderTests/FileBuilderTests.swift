@@ -151,7 +151,7 @@ struct Print: Text {
         self.string = string
     }
 
-    var body: some Text {
+    var text: some Text {
         #"print("\#(string)")"#
     }
 }
@@ -165,7 +165,7 @@ struct Func<Content: Text>: Text {
         self.content = content()
     }
 
-    var body: some Text {
+    var text: some Text {
         "func \(name)() {"
         content.indent()
         "}"
@@ -188,7 +188,7 @@ struct If<True: Text, False: Text>: Text {
         self.falseContent = falseContent()
     }
 
-    var body: some Text {
+    var text: some Text {
         "if \(condition) {"
         trueContent.indent()
         if False.self == EmptyText.self {

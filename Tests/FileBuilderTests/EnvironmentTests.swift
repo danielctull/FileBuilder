@@ -8,7 +8,7 @@ final class EnvironmentTests: XCTestCase {
 
     private struct TestText: Text {
         @Environment(\.value) var value
-        var body: some Text { value }
+        var text: some Text { value }
     }
 
     func testText_installation() throws {

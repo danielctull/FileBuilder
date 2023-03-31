@@ -18,7 +18,7 @@ extension Text {
 
 public struct _TextModifier_Content: Text {
     let content: any Text
-    public var body: some Text {
+    public var text: some Text {
         BuiltinText(lines: content.lines)
     }
 }

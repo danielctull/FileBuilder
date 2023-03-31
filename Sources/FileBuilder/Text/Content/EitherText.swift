@@ -1,7 +1,7 @@
 
 extension Either: Text where First: Text, Second: Text {
 
-    public var body: some Text {
+    public var text: some Text {
         BuiltinText { values in
             switch value {
             case let .first(content): return content.lines(environment: values)

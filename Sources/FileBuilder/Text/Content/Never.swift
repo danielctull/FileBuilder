@@ -1,4 +1,4 @@
 
 extension Never: Text {
-    public var body: Never { fatalError("Never body should not be called.") }
+    public var text: Never { fatalError("Never text should not be called.") }
 }

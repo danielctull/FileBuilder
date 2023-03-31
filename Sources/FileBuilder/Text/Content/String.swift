@@ -1,7 +1,7 @@
 
 extension String: Text {
 
-    public var body: some Text {
+    public var text: some Text {
         BuiltinText { _ in
             split(omittingEmptySubsequences: false, whereSeparator: \.isNewline)
                 .map(String.init)

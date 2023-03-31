@@ -11,7 +11,7 @@ extension Text {
 
 extension EnvironmentModifier: Text where Content: Text {
 
-    var body: some Text {
+    var text: some Text {
         BuiltinText { environment in
             var environment = environment
             modify(&environment)

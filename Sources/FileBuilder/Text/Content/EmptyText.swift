@@ -3,7 +3,7 @@ public struct EmptyText: Text {
 
     public init() {}
 
-    public var body: some Text {
+    public var text: some Text {
         BuiltinText { _ in [] }
     }
 }

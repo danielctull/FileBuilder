@@ -5,7 +5,7 @@ extension Group: Text where Content: Text {
         self.content = content()
     }
 
-    public var body: some Text {
+    public var text: some Text {
         content
     }
 }

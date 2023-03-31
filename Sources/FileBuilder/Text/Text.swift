@@ -5,7 +5,7 @@ public protocol Text {
     associatedtype Body: Text
 
     @TextBuilder
-    var body: Body { get }
+    var text: Body { get }
 }
 
 extension String {
@@ -33,7 +33,7 @@ extension Text {
         if let builtin = self as? BuiltinText {
             return builtin.lines(environment: environment)
         } else {
-            return body.lines(environment: environment)
+            return text.lines(environment: environment)
         }
     }
 }

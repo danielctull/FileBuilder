@@ -7,7 +7,7 @@ public struct AnyText: Text {
         self.content = content
     }
 
-    public var body: some Text {
+    public var text: some Text {
         BuiltinText(lines: content.lines)
     }
 }
