@@ -2,11 +2,11 @@
 import FileBuilder
 import XCTest
 
-final class LineModifierTests: XCTestCase {
+final class LinesModifierTests: XCTestCase {
 
-    func testLineModifier() throws {
+    func testLinesModifier() throws {
 
-        struct Suffix: LineModifier {
+        struct Suffix: LinesModifier {
             let text: String
             func modifyLines(_ lines: [Line]) -> [Line] {
                 lines.map { $0.suffix(text) }

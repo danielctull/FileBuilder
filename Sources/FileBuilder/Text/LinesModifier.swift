@@ -1,9 +1,9 @@
 
-public protocol LineModifier: TextModifier {
+public protocol LinesModifier: TextModifier {
     func modifyLines(_ lines: [Line]) -> [Line]
 }
 
-extension LineModifier {
+extension LinesModifier {
 
     @TextBuilder
     public func text(content: Content) -> some Text {
@@ -18,15 +18,15 @@ extension LineModifier {
 extension Text {
 
     public func modifier(_ lineModifier: @escaping ([Line]) -> [Line]) -> some Text {
-        modifier(AnyLineModifier(lineModifier: lineModifier))
+        modifier(AnyLinesModifier(lineModifier: lineModifier))
     }
 
     public func modifier(_ lineModifier: @escaping (Line) -> Line) -> some Text {
-        modifier(AnyLineModifier { $0.map(lineModifier) })
+        modifier(AnyLinesModifier { $0.map(lineModifier) })
     }
 }
 
-private struct AnyLineModifier: LineModifier {
+private struct AnyLinesModifier: LinesModifier {
     let lineModifier: ([Line]) -> [Line]
     func modifyLines(_ lines: [Line]) -> [Line] {
         lineModifier(lines)
