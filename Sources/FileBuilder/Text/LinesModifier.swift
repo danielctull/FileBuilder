@@ -13,21 +13,3 @@ extension LinesModifier {
         }
     }
 }
-
-extension Text {
-
-    public func modifier(_ lineModifier: @escaping ([Line]) -> [Line]) -> some Text {
-        modifier(AnyLinesModifier(lineModifier: lineModifier))
-    }
-
-    public func modifier(_ lineModifier: @escaping (Line) -> Line) -> some Text {
-        modifier(AnyLinesModifier { $0.map(lineModifier) })
-    }
-}
-
-private struct AnyLinesModifier: LinesModifier {
-    let lineModifier: ([Line]) -> [Line]
-    func lines(content: [Line]) -> [Line] {
-        lineModifier(content)
-    }
-}
