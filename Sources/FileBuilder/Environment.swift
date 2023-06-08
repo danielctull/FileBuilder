@@ -25,16 +25,17 @@ struct EnvironmentModifier<Content> {
 
 @propertyWrapper
 public struct Environment<Value> {
+
     private let keyPath: KeyPath<EnvironmentValues, Value>
-    @Box private var environment: EnvironmentValues?
+    @Box private var values: EnvironmentValues?
 
     public init(_ keyPath: KeyPath<EnvironmentValues, Value>) {
         self.keyPath = keyPath
     }
 
     public var wrappedValue: Value {
-        guard let environment else { fatalError("Environment not set.") }
-        return environment[keyPath: keyPath]
+        guard let values else { fatalError("Environment values not set.") }
+        return values[keyPath: keyPath]
     }
 }
 
@@ -47,13 +48,13 @@ private final class Box<Value> {
 }
 
 private protocol DynamicProperty {
-    func install(_ environment: EnvironmentValues)
+    func install(_ values: EnvironmentValues)
 }
 
 extension Environment: DynamicProperty {
 
-    fileprivate func install(_ environment: EnvironmentValues) {
-        self.environment = environment
+    fileprivate func install(_ values: EnvironmentValues) {
+        self.values = values
     }
 }
 
