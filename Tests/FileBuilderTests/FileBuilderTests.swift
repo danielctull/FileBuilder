@@ -4,6 +4,14 @@ import XCTest
 
 final class FileBuilderTests: XCTestCase {
 
+    func testEmpty() throws {
+        try AssertFile {
+            Directory("Empty") { }
+        } outputs: {
+            .directory(name: "Empty", items: [])
+        }
+    }
+
     func testFirst() throws {
         try AssertFile {
             TextFile("Test") {

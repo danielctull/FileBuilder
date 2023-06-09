@@ -50,4 +50,8 @@ public enum FileBuilder {
     ) -> Content {
         component
     }
+
+    public static func buildBlock() -> Empty {
+        Empty()
+    }
 }
