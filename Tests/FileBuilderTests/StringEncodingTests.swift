@@ -1,5 +1,6 @@
 
 import FileBuilder
+import FileTester
 import XCTest
 
 final class StringEncodingTests: XCTestCase {
