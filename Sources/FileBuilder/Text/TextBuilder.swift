@@ -50,4 +50,8 @@ public enum TextBuilder {
     ) -> Content {
         component
     }
+
+    public static func buildBlock() -> Empty {
+        Empty()
+    }
 }

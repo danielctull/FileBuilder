@@ -4,6 +4,14 @@ import XCTest
 
 final class TextBuilderTests: XCTestCase {
 
+    func testEmpty() throws {
+        try AssertText {
+            
+        } is: {
+            ""
+        }
+    }
+
     func testFirst() throws {
         try AssertText {
             "Hi"
