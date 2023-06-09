@@ -191,7 +191,7 @@ struct If<True: Text, False: Text>: Text {
     var text: some Text {
         "if \(condition) {"
         trueContent.indent()
-        if False.self == EmptyText.self {
+        if False.self == Empty.self {
             "}"
         } else {
             "} else {"
@@ -201,7 +201,7 @@ struct If<True: Text, False: Text>: Text {
     }
 }
 
-extension If where False == EmptyText {
+extension If where False == Empty {
 
     init(
         _ condition: String,
@@ -209,6 +209,6 @@ extension If where False == EmptyText {
     ) {
         self.condition = condition
         self.trueContent = trueContent()
-        self.falseContent = EmptyText()
+        self.falseContent = Empty()
     }
 }

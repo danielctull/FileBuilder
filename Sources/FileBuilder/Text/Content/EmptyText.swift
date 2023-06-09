@@ -1,7 +1,5 @@
 
-public struct EmptyText: Text {
-
-    public init() {}
+extension Empty: Text {
 
     public var text: some Text {
         BuiltinText { _ in [] }

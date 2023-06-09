@@ -64,9 +64,9 @@ final class TextTests: XCTestCase {
         }
     }
 
-    func testNoContent() throws {
+    func testEmpty() throws {
         try AssertText {
-            EmptyText()
+            Empty()
         } is: {
             ""
         }
