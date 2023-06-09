@@ -3,27 +3,6 @@ import FileBuilder
 import Foundation
 import XCTest
 
-// MARK: - Text
-
-public func AssertText<Content: Text>(
-    @TextBuilder content: () -> Content,
-    is expected: () -> String,
-    _ message: @autoclosure () -> String = "",
-    file: StaticString = #filePath,
-    line: UInt = #line
-) throws {
-    let output = String(content())
-    let expected = expected()
-
-    XCTAssert(
-        output == expected,
-        "\n\n\(output)\n\nis not equal to\n\n\(expected)",
-        file: file,
-        line: line)
-}
-
-// MARK: - File
-
 public enum Item {
     case directory(name: String, items: [Item])
     case file(name: String, data: Data)
