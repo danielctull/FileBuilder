@@ -3,22 +3,6 @@ import FileBuilder
 import Foundation
 import XCTest
 
-public enum Item {
-    case directory(name: String, items: [Item])
-    case file(name: String, data: Data)
-}
-
-extension Item {
-
-    public static func file(name: String, text: String, encoding: String.Encoding = .utf8) throws -> Self {
-        struct DataConversionError: Error {
-            let value: String
-        }
-        guard let data = text.data(using: encoding) else { throw DataConversionError(value: text) }
-        return .file(name: name, data: data)
-    }
-}
-
 public func AssertFile<Content: File>(
     @FileBuilder content: () -> Content,
     outputs expected: () throws -> Item,
@@ -85,6 +69,22 @@ public func AssertFile<Content: File>(
     try fileManager.withTemporaryDirectory { url in
         try content().write(in: url)
         try checkDirectory(at: url, items: expected())
+    }
+}
+
+public enum Item {
+    case directory(name: String, items: [Item])
+    case file(name: String, data: Data)
+}
+
+extension Item {
+
+    public static func file(name: String, text: String, encoding: String.Encoding = .utf8) throws -> Self {
+        struct DataConversionError: Error {
+            let value: String
+        }
+        guard let data = text.data(using: encoding) else { throw DataConversionError(value: text) }
+        return .file(name: name, data: data)
     }
 }
 
