@@ -23,6 +23,11 @@ public func AssertFile<Content: File>(
 
     let fileManager = FileManager()
 
+    try fileManager.withTemporaryDirectory { url in
+        try content().write(in: url)
+        try checkDirectory(at: url, items: expected())
+    }
+
     func checkItem(_ item: Item, in directory: URL) throws {
         switch item.kind {
         case .directory(let name, let items):
@@ -73,11 +78,6 @@ public func AssertFile<Content: File>(
             "\n\n\(string)\n\nis not equal to\n\n\(expected)",
             file: file,
             line: line)
-    }
-
-    try fileManager.withTemporaryDirectory { url in
-        try content().write(in: url)
-        try checkDirectory(at: url, items: expected())
     }
 }
 
