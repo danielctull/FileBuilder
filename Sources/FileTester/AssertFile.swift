@@ -94,6 +94,10 @@ public struct Item {
 
 extension Item {
 
+    public static func directory(name: String) -> Self {
+        Item(kind: .directory(name: name, items: []))
+    }
+
     public static func directory(name: String, items: [Item]) -> Self {
         Item(kind: .directory(name: name, items: items))
     }
