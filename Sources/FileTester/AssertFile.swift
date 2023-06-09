@@ -40,11 +40,8 @@ public func AssertFile(
     }
 
     func checkDirectory(at url: URL, items: [Item]) throws {
-        XCTAssert(
-            fileManager.fileExists(atPath: url.path),
-            "Directory doesn't exist at \(url)",
-            file: file,
-            line: line)
+
+        guard checkFileExists(at: url, kind: "Directory") else { return }
 
         let contents = try fileManager.contentsOfDirectory(atPath: url.path)
         XCTAssertEqual(
@@ -60,6 +57,9 @@ public func AssertFile(
     }
 
     func checkDataFile(at url: URL, data expected: Data) throws {
+
+        guard checkFileExists(at: url, kind: "File") else { return }
+
         let data = try Data(contentsOf: url)
         XCTAssertEqual(
             data,
@@ -70,6 +70,9 @@ public func AssertFile(
     }
 
     func checkTextFile(at url: URL, text expected: String, encoding: String.Encoding) throws {
+
+        guard checkFileExists(at: url, kind: "File") else { return }
+
         let data = try Data(contentsOf: url)
         let string = try XCTUnwrap(String(data: data, encoding: encoding))
         XCTAssertEqual(
@@ -78,6 +81,19 @@ public func AssertFile(
             "\n\n\(string)\n\nis not equal to\n\n\(expected)",
             file: file,
             line: line)
+    }
+
+    func checkFileExists(at url: URL, kind: String) -> Bool {
+
+        let fileExists = fileManager.fileExists(atPath: url.path)
+
+        XCTAssert(
+            fileExists,
+            "\(kind) doesn't exist at \(url)",
+            file: file,
+            line: line)
+
+        return fileExists
     }
 }
 
