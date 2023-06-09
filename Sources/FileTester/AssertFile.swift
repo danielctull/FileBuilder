@@ -27,8 +27,8 @@ public func AssertFile<Content: File>(
         switch item.kind {
         case .directory(let name, let items):
             try checkDirectory(at: directory.appendingPathComponent(name), items: items)
-        case .file(let name, let data):
-            try checkFile(at: directory.appendingPathComponent(name), data: data)
+        case .dataFile(let name, let data):
+            try checkDataFile(at: directory.appendingPathComponent(name), data: data)
         }
     }
 
@@ -52,16 +52,12 @@ public func AssertFile<Content: File>(
         }
     }
 
-    func string(_ data: Data) -> String {
-        String(decoding: data, as: UTF8.self)
-    }
-
-    func checkFile(at url: URL, data expected: Data) throws {
+    func checkDataFile(at url: URL, data expected: Data) throws {
         let data = try Data(contentsOf: url)
         XCTAssertEqual(
             data,
             expected,
-            "\n\n\(string(data))\n\nis not equal to\n\n\(string(expected))",
+            "\n\n\(data)\n\nis not equal to\n\n\(expected)",
             file: file,
             line: line)
     }
@@ -78,7 +74,7 @@ public struct Item {
 
     fileprivate enum Kind {
         case directory(name: String, items: [Item])
-        case file(name: String, data: Data)
+        case dataFile(name: String, data: Data)
     }
 }
 
@@ -89,7 +85,7 @@ extension Item {
     }
 
     public static func file(name: String, data: Data) -> Self {
-        Item(kind: .file(name: name, data: data))
+        Item(kind: .dataFile(name: name, data: data))
     }
 
     public static func file(name: String, text: String, encoding: String.Encoding = .utf8) throws -> Self {
