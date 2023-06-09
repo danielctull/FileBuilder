@@ -32,6 +32,8 @@ public func AssertFile(
         switch item.kind {
         case .directory(let name, let items):
             try checkDirectory(at: directory.appendingPathComponent(name), items: items)
+        case .fileExists(let name):
+            checkFileExists(at: directory.appendingPathComponent(name), kind: "File")
         case .dataFile(let name, let data):
             try checkDataFile(at: directory.appendingPathComponent(name), data: data)
         case .textFile(let name, let text, let encoding):
@@ -83,6 +85,7 @@ public func AssertFile(
             line: line)
     }
 
+    @discardableResult
     func checkFileExists(at url: URL, kind: String) -> Bool {
 
         let fileExists = fileManager.fileExists(atPath: url.path)
@@ -103,6 +106,7 @@ public struct Item {
 
     fileprivate enum Kind {
         case directory(name: String, items: [Item])
+        case fileExists(name: String)
         case dataFile(name: String, data: Data)
         case textFile(name: String, text: String, encoding: String.Encoding)
     }
@@ -116,6 +120,16 @@ extension Item {
 
     public static func directory(name: String, items: [Item]) -> Self {
         Item(kind: .directory(name: name, items: items))
+    }
+    
+    /// Checks that the file exists on disk.
+    ///
+    /// This doesn't check the contents of the file, merely that it exists.
+    ///
+    /// - Parameter name: The name of the file
+    /// - Returns: An item representing a file exists check.
+    public static func file(name: String) -> Self {
+        Item(kind: .fileExists(name: name))
     }
 
     public static func file(name: String, data: Data) -> Self {
