@@ -29,7 +29,7 @@ public func AssertFile(
                 try item.assert(in: url)
             } catch let failure as Item.Failure {
                 XCTFail(
-                    failure.message(rootURL: url),
+                    failure.message(root: url),
                     file: file,
                     line: line)
             } catch {

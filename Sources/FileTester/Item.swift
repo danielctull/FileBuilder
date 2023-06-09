@@ -26,9 +26,15 @@ extension Item {
 
 extension Item.Failure {
 
-    func message(rootURL: URL) -> String {
-        let path = url.path.dropFirst(rootURL.path.count + 1)
-        return "[\(path)] \(message)"
+    func message(root: URL) -> String {
+        "[\(url.path(relativeTo: root))] \(message)"
+    }
+}
+
+extension URL {
+
+    func path(relativeTo url: URL) -> String {
+        String(path.dropFirst(url.path.count + 1))
     }
 }
 
