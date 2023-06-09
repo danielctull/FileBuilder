@@ -24,7 +24,7 @@ public func AssertFile<Content: File>(
     let fileManager = FileManager()
 
     func checkItem(_ item: Item, in directory: URL) throws {
-        switch item {
+        switch item.kind {
         case .directory(let name, let items):
             try checkDirectory(at: directory.appendingPathComponent(name), items: items)
         case .file(let name, let data):
@@ -72,12 +72,25 @@ public func AssertFile<Content: File>(
     }
 }
 
-public enum Item {
-    case directory(name: String, items: [Item])
-    case file(name: String, data: Data)
+public struct Item {
+
+    fileprivate let kind: Kind
+
+    fileprivate enum Kind {
+        case directory(name: String, items: [Item])
+        case file(name: String, data: Data)
+    }
 }
 
 extension Item {
+
+    public static func directory(name: String, items: [Item]) -> Self {
+        Item(kind: .directory(name: name, items: items))
+    }
+
+    public static func file(name: String, data: Data) -> Self {
+        Item(kind: .file(name: name, data: data))
+    }
 
     public static func file(name: String, text: String, encoding: String.Encoding = .utf8) throws -> Self {
         struct DataConversionError: Error {
