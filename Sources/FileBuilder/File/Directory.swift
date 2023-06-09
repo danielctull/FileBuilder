@@ -23,11 +23,11 @@ public struct Directory<Content: File>: File {
     }
 }
 
-extension Directory<Optional<DataFile>> {
+extension Directory<Empty> {
 
     public init(_ name: String) {
         self.init(name) {
-            Optional<DataFile>.none
+            Empty()
         }
     }
 }
