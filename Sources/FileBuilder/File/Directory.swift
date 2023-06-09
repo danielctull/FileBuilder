@@ -22,3 +22,12 @@ public struct Directory<Content: File>: File {
         }
     }
 }
+
+extension Directory<Optional<DataFile>> {
+
+    public init(_ name: String) {
+        self.init(name) {
+            Optional<DataFile>.none
+        }
+    }
+}
