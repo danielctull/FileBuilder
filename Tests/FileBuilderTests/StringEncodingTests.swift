@@ -13,7 +13,7 @@ final class StringEncodingTests: XCTestCase {
             }
             .stringEncoding(.utf8)
         } outputs: {
-            try .directory(name: "Directory", items: [
+            .directory(name: "Directory", items: [
                 .file(name: "File 1", text: "One", encoding: .utf8),
                 .file(name: "File 2", text: "Two", encoding: .utf8),
             ])
@@ -28,7 +28,7 @@ final class StringEncodingTests: XCTestCase {
             }
             .stringEncoding(.utf16)
         } outputs: {
-            try .directory(name: "Directory", items: [
+            .directory(name: "Directory", items: [
                 .file(name: "File 1", text: "One", encoding: .utf16),
                 .file(name: "File 2", text: "Two", encoding: .utf16),
             ])
@@ -43,7 +43,7 @@ final class StringEncodingTests: XCTestCase {
             }
             .stringEncoding(.utf32BigEndian)
         } outputs: {
-            try .directory(name: "Directory", items: [
+            .directory(name: "Directory", items: [
                 .file(name: "File 1", text: "One", encoding: .utf32BigEndian),
                 .file(name: "File 2", text: "Two", encoding: .utf32BigEndian),
             ])

@@ -29,6 +29,8 @@ public func AssertFile<Content: File>(
             try checkDirectory(at: directory.appendingPathComponent(name), items: items)
         case .dataFile(let name, let data):
             try checkDataFile(at: directory.appendingPathComponent(name), data: data)
+        case .textFile(let name, let text, let encoding):
+            try checkTextFile(at: directory.appendingPathComponent(name), text: text, encoding: encoding)
         }
     }
 
@@ -62,6 +64,17 @@ public func AssertFile<Content: File>(
             line: line)
     }
 
+    func checkTextFile(at url: URL, text expected: String, encoding: String.Encoding) throws {
+        let data = try Data(contentsOf: url)
+        let string = try XCTUnwrap(String(data: data, encoding: encoding))
+        XCTAssertEqual(
+            string,
+            expected,
+            "\n\n\(string)\n\nis not equal to\n\n\(expected)",
+            file: file,
+            line: line)
+    }
+
     try fileManager.withTemporaryDirectory { url in
         try content().write(in: url)
         try checkDirectory(at: url, items: expected())
@@ -75,6 +88,7 @@ public struct Item {
     fileprivate enum Kind {
         case directory(name: String, items: [Item])
         case dataFile(name: String, data: Data)
+        case textFile(name: String, text: String, encoding: String.Encoding)
     }
 }
 
@@ -88,12 +102,8 @@ extension Item {
         Item(kind: .dataFile(name: name, data: data))
     }
 
-    public static func file(name: String, text: String, encoding: String.Encoding = .utf8) throws -> Self {
-        struct DataConversionError: Error {
-            let value: String
-        }
-        guard let data = text.data(using: encoding) else { throw DataConversionError(value: text) }
-        return .file(name: name, data: data)
+    public static func file(name: String, text: String, encoding: String.Encoding = .utf8) -> Self {
+        Item(kind: .textFile(name: name, text: text, encoding: encoding))
     }
 }
 
