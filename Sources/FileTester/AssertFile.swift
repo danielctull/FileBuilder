@@ -3,8 +3,8 @@ import FileBuilder
 import Foundation
 import XCTest
 
-public func AssertFile<Content: File>(
-    @FileBuilder content: () -> Content,
+public func AssertFile(
+    @FileBuilder content: () -> some File,
     outputs expected: () throws -> Item,
     _ message: @autoclosure () -> String = "",
     file: StaticString = #filePath,
@@ -13,8 +13,8 @@ public func AssertFile<Content: File>(
     try AssertFile(content: content, outputs: { [try expected()] }, message(), file: file, line: line)
 }
 
-public func AssertFile<Content: File>(
-    @FileBuilder content: () -> Content,
+public func AssertFile(
+    @FileBuilder content: () -> some File,
     outputs expected: () throws -> [Item],
     _ message: @autoclosure () -> String = "",
     file: StaticString = #filePath,
