@@ -19,15 +19,15 @@ public struct Item {
 extension Item {
 
     struct Failure: Error {
-        fileprivate let file: URL
+        fileprivate let url: URL
         fileprivate let message: String
     }
 }
 
 extension Item.Failure {
 
-    func message(rootURL url: URL) -> String {
-        let path = file.path.dropFirst(url.path.count + 1)
+    func message(rootURL: URL) -> String {
+        let path = url.path.dropFirst(rootURL.path.count + 1)
         return "[\(path)] \(message)"
     }
 }
@@ -63,7 +63,7 @@ extension Item {
             let file = url.appendingPathComponent(name)
 
             guard FileManager().fileExists(atPath: file.path) else {
-                throw Failure(file: file, message: "File doesn't exist.")
+                throw Failure(url: file, message: "File doesn't exist.")
             }
         }
     }
@@ -82,7 +82,7 @@ extension Item {
             let data = try Data(contentsOf: file)
 
             guard data == expected else {
-                throw Failure(file: file, message: "\n\n\(data)\n\nis not equal to\n\n\(expected)")
+                throw Failure(url: file, message: "\n\n\(data)\n\nis not equal to\n\n\(expected)")
             }
         }
     }
@@ -105,11 +105,11 @@ extension Item {
             let data = try Data(contentsOf: file)
 
             guard let string = String(data: data, encoding: encoding) else {
-                throw Failure(file: file, message: "Failed to convert data to string.")
+                throw Failure(url: file, message: "Failed to convert data to string.")
             }
 
             guard string == expected else {
-                throw Failure(file: file, message: "\n\n\(string)\n\nis not equal to\n\n\(expected)")
+                throw Failure(url: file, message: "\n\n\(string)\n\nis not equal to\n\n\(expected)")
             }
         }
     }
