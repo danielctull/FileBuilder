@@ -43,12 +43,9 @@ extension Item {
     public static func directory(name: String, items: [Item]) -> Self {
         Item { url in
 
+            try file(name: name).assert(in: url)
+
             let directory = url.appendingPathComponent(name)
-
-            guard FileManager().fileExists(atPath: url.path) else {
-                throw Failure(file: directory, message: "File doesn't exist.")
-            }
-
             for item in items {
                 try item.assert(in: directory)
             }
@@ -79,12 +76,9 @@ extension Item {
     public static func file(name: String, data expected: Data) -> Self {
         Item { url in
 
+            try file(name: name).assert(in: url)
+
             let file = url.appendingPathComponent(name)
-
-            guard FileManager().fileExists(atPath: file.path) else {
-                throw Failure(file: file, message: "File doesn't exist.")
-            }
-
             let data = try Data(contentsOf: file)
 
             guard data == expected else {
@@ -105,12 +99,9 @@ extension Item {
     ) -> Self {
         Item { url in
 
+            try file(name: name).assert(in: url)
+
             let file = url.appendingPathComponent(name)
-
-            guard FileManager().fileExists(atPath: file.path) else {
-                throw Failure(file: file, message: "File doesn't exist.")
-            }
-
             let data = try Data(contentsOf: file)
 
             guard let string = String(data: data, encoding: encoding) else {
