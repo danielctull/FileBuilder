@@ -3,41 +3,123 @@ import Foundation
 
 public struct Item {
 
-    let kind: Kind
+    private let _assert: (URL) throws -> Void
 
-    enum Kind {
-        case directory(name: String, items: [Item])
-        case fileExists(name: String)
-        case dataFile(name: String, data: Data)
-        case textFile(name: String, text: String, encoding: String.Encoding)
+    init(assert: @escaping (URL) throws -> Void) {
+        _assert = assert
+    }
+
+    func assert(in url: URL) throws {
+        try _assert(url)
     }
 }
+
+// MARK: - Failure
+
+extension Item {
+
+    struct Failure: Error {
+        fileprivate let file: URL
+        fileprivate let message: String
+    }
+}
+
+extension Item.Failure {
+
+    func message(rootURL url: URL) -> String {
+        let path = file.path.dropFirst(url.path.count + 1)
+        return "[\(path)] \(message)"
+    }
+}
+
+// MARK: - Directory
 
 extension Item {
 
     public static func directory(name: String) -> Self {
-        Item(kind: .directory(name: name, items: []))
+        directory(name: name, items: [])
     }
 
     public static func directory(name: String, items: [Item]) -> Self {
-        Item(kind: .directory(name: name, items: items))
-    }
+        Item { url in
 
-    /// Checks that the file exists on disk.
-    ///
-    /// This doesn't check the contents of the file, merely that it exists.
-    ///
-    /// - Parameter name: The name of the file
-    /// - Returns: An item representing a file exists check.
+            let directory = url.appendingPathComponent(name)
+
+            guard FileManager().fileExists(atPath: url.path) else {
+                throw Failure(file: directory, message: "File doesn't exist.")
+            }
+
+            for item in items {
+                try item.assert(in: directory)
+            }
+        }
+    }
+}
+
+// MARK: - File Exists
+
+extension Item {
+
     public static func file(name: String) -> Self {
-        Item(kind: .fileExists(name: name))
-    }
+        Item { url in
 
-    public static func file(name: String, data: Data) -> Self {
-        Item(kind: .dataFile(name: name, data: data))
-    }
+            let file = url.appendingPathComponent(name)
 
-    public static func file(name: String, text: String, encoding: String.Encoding = .utf8) -> Self {
-        Item(kind: .textFile(name: name, text: text, encoding: encoding))
+            guard FileManager().fileExists(atPath: file.path) else {
+                throw Failure(file: file, message: "File doesn't exist.")
+            }
+        }
+    }
+}
+
+// MARK: - Data File
+
+extension Item {
+
+    public static func file(name: String, data expected: Data) -> Self {
+        Item { url in
+
+            let file = url.appendingPathComponent(name)
+
+            guard FileManager().fileExists(atPath: file.path) else {
+                throw Failure(file: file, message: "File doesn't exist.")
+            }
+
+            let data = try Data(contentsOf: file)
+
+            guard data == expected else {
+                throw Failure(file: file, message: "\n\n\(data)\n\nis not equal to\n\n\(expected)")
+            }
+        }
+    }
+}
+
+// MARK: - Text File
+
+extension Item {
+
+    public static func file(
+        name: String,
+        text expected: String,
+        encoding: String.Encoding = .utf8
+    ) -> Self {
+        Item { url in
+
+            let file = url.appendingPathComponent(name)
+
+            guard FileManager().fileExists(atPath: file.path) else {
+                throw Failure(file: file, message: "File doesn't exist.")
+            }
+
+            let data = try Data(contentsOf: file)
+
+            guard let string = String(data: data, encoding: encoding) else {
+                throw Failure(file: file, message: "Failed to convert data to string.")
+            }
+
+            guard string == expected else {
+                throw Failure(file: file, message: "\n\n\(string)\n\nis not equal to\n\n\(expected)")
+            }
+        }
     }
 }
