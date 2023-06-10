@@ -1,5 +1,6 @@
 
 import FileBuilder
+import FileTester
 import XCTest
 
 final class EnvironmentTests: XCTestCase {
@@ -72,7 +73,7 @@ final class EnvironmentTests: XCTestCase {
         try AssertFile {
             TestFile().environment(\.value, "Hello!")
         } outputs: {
-            try .file(name: "TestFile", text: "Hello!")
+            .file(name: "TestFile", text: "Hello!")
         }
     }
 
@@ -83,7 +84,7 @@ final class EnvironmentTests: XCTestCase {
                 .environment(\.value, "Two")
                 .environment(\.value, "Three")
         } outputs: {
-            try .file(name: "TestFile", text: "One")
+            .file(name: "TestFile", text: "One")
         }
     }
 
@@ -99,7 +100,7 @@ final class EnvironmentTests: XCTestCase {
             .environment(\.value, "Two")
             .environment(\.value, "Three")
         } outputs: {
-            try .file(name: "TestFile", text: "A")
+            .file(name: "TestFile", text: "A")
         }
     }
 
@@ -118,7 +119,7 @@ final class EnvironmentTests: XCTestCase {
                 .modifier(TestFileModifier())
                 .environment(\.value, "Foo")
         } outputs: {
-            try .file(name: "Replaced", text: "Foo")
+            .file(name: "Replaced", text: "Foo")
         }
     }
 
@@ -130,7 +131,7 @@ final class EnvironmentTests: XCTestCase {
                 .environment(\.value, "Two")
                 .environment(\.value, "Three")
         } outputs: {
-            try .file(name: "Replaced", text: "One")
+            .file(name: "Replaced", text: "One")
         }
     }
 }

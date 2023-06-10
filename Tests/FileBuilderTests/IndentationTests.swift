@@ -1,5 +1,6 @@
 
 import FileBuilder
+import FileTester
 import XCTest
 
 final class IndentationTests: XCTestCase {
@@ -57,7 +58,7 @@ final class IndentationTests: XCTestCase {
             }
             .indentation(.spaces(6))
         } outputs: {
-            try .file(name: "Test", text: "      One")
+            .file(name: "Test", text: "      One")
         }
     }
 }

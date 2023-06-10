@@ -1,5 +1,6 @@
 
 import FileBuilder
+import FileTester
 import XCTest
 
 final class FileModifierTests: XCTestCase {
@@ -21,8 +22,8 @@ final class FileModifierTests: XCTestCase {
                 }))
         } outputs: {
             [
-                try .file(name: "File 1", text: "One"),
-                try .file(name: "File 2", text: "Two"),
+                .file(name: "File 1", text: "One"),
+                .file(name: "File 2", text: "Two"),
             ]
         }
     }

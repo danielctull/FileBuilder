@@ -1,12 +1,13 @@
 
 import FileBuilder
+import FileTester
 import XCTest
 
 final class TextBuilderTests: XCTestCase {
 
     func testEmpty() throws {
         try AssertText {
-            
+
         } is: {
             ""
         }
