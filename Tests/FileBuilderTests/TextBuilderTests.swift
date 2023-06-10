@@ -7,7 +7,7 @@ final class TextBuilderTests: XCTestCase {
 
     func testEmpty() throws {
         try AssertText {
-            
+
         } is: {
             ""
         }
