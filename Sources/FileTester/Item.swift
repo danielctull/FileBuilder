@@ -47,11 +47,19 @@ extension Item {
     }
 
     public static func directory(name: String, items: [Item]) -> Self {
-        Item { url in
+        Self { url in
 
             try file(name: name).assert(in: url)
 
             let directory = url.appendingPathComponent(name)
+
+            let contents = try FileManager()
+                .contentsOfDirectory(at: directory, includingPropertiesForKeys: nil)
+
+            guard contents.count == items.count else {
+                throw Failure(url: directory, message: "Unexpected number of items in directory. Expected \(items.count), but found \(contents.count).")
+            }
+
             for item in items {
                 try item.assert(in: directory)
             }
