@@ -7,12 +7,10 @@ final class DirectoryTests: XCTestCase {
 
     func testEmpty() throws {
         try AssertFile {
-            Directory("Explicit") { Empty() }
-            Directory("Implicit")
+            Directory("Directory")
         } outputs: {
             [
-                .directory(name: "Explicit", items: []),
-                .directory(name: "Implicit", items: []),
+                .directory(name: "Directory", items: []),
             ]
         }
     }

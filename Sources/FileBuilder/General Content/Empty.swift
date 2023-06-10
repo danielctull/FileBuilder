@@ -1,5 +1,2 @@
 
-public struct Empty {
-
-    public init() {}
-}
+public struct Empty {}

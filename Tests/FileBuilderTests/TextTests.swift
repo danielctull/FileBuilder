@@ -65,14 +65,6 @@ final class TextTests: XCTestCase {
         }
     }
 
-    func testEmpty() throws {
-        try AssertText {
-            Empty()
-        } is: {
-            ""
-        }
-    }
-
     func testOptional() throws {
         try AssertText {
             Group {

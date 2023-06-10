@@ -216,8 +216,6 @@ extension If where False == Empty {
         _ condition: String,
         @TextBuilder trueContent: () -> True
     ) {
-        self.condition = condition
-        self.trueContent = trueContent()
-        self.falseContent = Empty()
+        self.init(condition, trueContent: trueContent, else: {})
     }
 }
