@@ -29,7 +29,6 @@ Two result builders are provided, `FileBuilder` and `TextBuilder`, and using the
 - ``TextModifier``
 - ``Line``
 - ``LineModifier``
-- ``EmptyText``
 - ``AnyText``
 
 ### Environment
@@ -42,5 +41,6 @@ Two result builders are provided, `FileBuilder` and `TextBuilder`, and using the
 
 - ``Accumulated``
 - ``Either``
+- ``Empty``
 - ``Group``
 - ``Modified``
