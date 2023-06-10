@@ -29,6 +29,14 @@ extension Item.Failure {
     func message(root: URL) -> String {
         "[\(url.path(relativeTo: root))] \(message)"
     }
+
+    fileprivate static func `catch`<T>(url: URL, f: () throws -> T) throws -> T {
+        do {
+            return try f()
+        } catch {
+            throw Self(url: url, message: error.localizedDescription)
+        }
+    }
 }
 
 extension URL {
@@ -53,8 +61,9 @@ extension Item {
 
             let directory = url.appendingPathComponent(name)
 
-            let contents = try FileManager()
-                .contentsOfDirectory(at: directory, includingPropertiesForKeys: nil)
+            let contents = try Failure.catch(url: directory) {
+                try FileManager().contentsOfDirectory(at: directory, includingPropertiesForKeys: nil)
+            }
 
             guard contents.count == items.count else {
                 throw Failure(url: directory, message: "Unexpected number of items in directory. Expected \(items.count), but found \(contents.count).")
@@ -93,7 +102,7 @@ extension Item {
             try file(name: name).assert(in: url)
 
             let file = url.appendingPathComponent(name)
-            let data = try Data(contentsOf: file)
+            let data = try Failure.catch(url: file) { try Data(contentsOf: file) }
 
             guard data == expected else {
                 throw Failure(url: file, message: "\n\n\(data)\n\nis not equal to\n\n\(expected)")
@@ -116,7 +125,7 @@ extension Item {
             try file(name: name).assert(in: url)
 
             let file = url.appendingPathComponent(name)
-            let data = try Data(contentsOf: file)
+            let data = try Failure.catch(url: file) { try Data(contentsOf: file) }
 
             guard let string = String(data: data, encoding: encoding) else {
                 throw Failure(url: file, message: "Failed to convert data to string.")
