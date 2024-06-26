@@ -5,14 +5,6 @@ import XCTest
 
 final class FileTests: XCTestCase {
 
-    func testAnyFile() throws {
-        try AssertFile {
-            AnyFile(TextFile("File 1") { "One" })
-        } outputs: {
-            .file(name: "File 1", text: "One")
-        }
-    }
-
     func testArray() throws {
         try AssertFile {
             [

@@ -35,8 +35,8 @@ public enum FileBuilder {
 
     public static func buildLimitedAvailability<Content: File>(
         _ content: Content
-    ) -> AnyFile {
-        AnyFile(content)
+    ) -> Content {
+        content
     }
 
     public static func buildOptional<Content: File>(

@@ -32,14 +32,6 @@ final class TextTests: XCTestCase {
         }
     }
 
-    func testAnyContent() throws {
-        try AssertText {
-            AnyText("Anything!")
-        } is: {
-            "Anything!"
-        }
-    }
-
     func testArray() throws {
         try AssertText {
             ["Hello", "World"]
