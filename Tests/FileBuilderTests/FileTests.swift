@@ -30,6 +30,16 @@ final class FileTests: XCTestCase {
         }
     }
 
+    func testDataFileThrowing() throws {
+        struct Failure: Error {}
+        try FileManager().withTemporaryDirectory { directory in
+            let file = DataFile("File 1") { throw Failure() }
+            XCTAssertThrowsError(try file.write(in: directory)) {
+                XCTAssert($0 is Failure)
+            }
+        }
+    }
+
     func testJSONFile() throws {
         let value = ["key1": "value1", "key2": "value2"]
         let json = """
