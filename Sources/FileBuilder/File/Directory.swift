@@ -3,11 +3,11 @@ import Foundation
 
 public struct Directory<Content: File>: File {
 
-    private let name: String
+    private let name: FileName
     private let content: Content
 
     public init(
-        _ name: String,
+        _ name: FileName,
         @FileBuilder content: () -> Content
     ) {
         self.name = name
@@ -16,7 +16,7 @@ public struct Directory<Content: File>: File {
 
     public var file: some File {
         BuiltinFile { directory, environment in
-            let url = directory.appendingPathComponent(name)
+            let url = directory.appending(name)
             try FileManager().createDirectory(at: url, withIntermediateDirectories: true)
             try content.write(in: url, environment: environment)
         }
@@ -25,7 +25,7 @@ public struct Directory<Content: File>: File {
 
 extension Directory<Empty> {
 
-    public init(_ name: String) {
+    public init(_ name: FileName) {
         self.init(name) {
             Empty()
         }
