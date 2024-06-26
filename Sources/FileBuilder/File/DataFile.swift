@@ -11,9 +11,13 @@ public struct DataFile: File {
         self.data = { data }
     }
 
-    public init(_ name: FileName, data: @escaping () throws -> Data) {
+    public init<Value>(
+        _ name: FileName,
+        format: Format<Value>,
+        value: @escaping () -> Value
+    ) {
         self.name = name
-        self.data = data
+        self.data = { try format(value()) }
     }
 
     public var file: some File {
@@ -24,18 +28,27 @@ public struct DataFile: File {
     }
 }
 
-// MARK: - JSON
+// MARK: - Format
 
-extension DataFile {
+public struct Format<Value> {
+    
+    private let convert: (Value) throws -> Data
+    fileprivate init(convert: @escaping (Value) throws -> Data) {
+        self.convert = convert
+    }
 
-    public static func json<JSON: Encodable>(
-        _ name: FileName,
-        json: @escaping () -> JSON
-    ) -> DataFile {
-        DataFile(name) {
+    fileprivate func callAsFunction(_ value: Value) throws -> Data {
+        try convert(value)
+    }
+}
+
+extension Format where Value: Encodable {
+
+    public static var json: Self {
+        Self { value in
             let encoder = JSONEncoder()
             encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-            return try encoder.encode(json())
+            return try encoder.encode(value)
         }
     }
 }

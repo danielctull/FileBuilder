@@ -41,7 +41,7 @@ public func AssertFile(
 
 extension FileManager {
 
-    public func withTemporaryDirectory(_ perform: (URL) throws -> Void) throws {
+    fileprivate func withTemporaryDirectory(_ perform: (URL) throws -> Void) throws {
         let url = temporaryDirectory
             .appendingPathComponent("FileBuilderTests")
             .appendingPathComponent(UUID().uuidString)
