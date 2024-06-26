@@ -13,6 +13,8 @@ jobs:
         image:
           - "swift:5.7"
           - "swift:5.8"
+          - "swift:5.9"
+          - "swift:5.10"
     name: Linux
     runs-on: ubuntu-latest
     container:
