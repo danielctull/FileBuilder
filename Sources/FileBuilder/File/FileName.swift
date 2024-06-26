@@ -15,14 +15,6 @@ extension FileName: ExpressibleByStringLiteral {
 
 extension FileName: ExpressibleByStringInterpolation {}
 
-extension FileName: CustomStringConvertible {
-    public var description: String { value }
-}
-
-extension FileName: CustomDebugStringConvertible {
-    public var debugDescription: String { value }
-}
-
 extension URL {
     func appending(_ name: FileName) -> URL {
         appendingPathComponent(name.value)
