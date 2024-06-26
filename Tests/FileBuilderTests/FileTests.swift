@@ -30,6 +30,21 @@ final class FileTests: XCTestCase {
         }
     }
 
+    func testJSONFile() throws {
+        let value = ["key1": "value1", "key2": "value2"]
+        let json = """
+            {
+              "key1" : "value1",
+              "key2" : "value2"
+            }
+            """
+        try AssertFile {
+            JSONFile("JSON File") { value }
+        } outputs: {
+            .file(name: "JSON File", text: json)
+        }
+    }
+
     func testGroup() throws {
         try AssertFile {
             Group {
