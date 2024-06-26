@@ -23,3 +23,19 @@ public struct DataFile: File {
         }
     }
 }
+
+// MARK: - JSON
+
+extension DataFile {
+
+    public static func json<JSON: Encodable>(
+        _ name: FileName,
+        json: @escaping () -> JSON
+    ) -> DataFile {
+        DataFile(name) {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+            return try encoder.encode(json())
+        }
+    }
+}

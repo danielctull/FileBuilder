@@ -41,7 +41,6 @@ final class FileTests: XCTestCase {
     }
 
     func testJSONFile() throws {
-        let value = ["key1": "value1", "key2": "value2"]
         let json = """
             {
               "key1" : "value1",
@@ -49,7 +48,12 @@ final class FileTests: XCTestCase {
             }
             """
         try AssertFile {
-            JSONFile("JSON File") { value }
+            DataFile.json("JSON File") {
+                [
+                    "key1": "value1",
+                    "key2": "value2",
+                ]
+            }
         } outputs: {
             .file(name: "JSON File", text: json)
         }
