@@ -79,7 +79,7 @@ final class TextBuilderTests: XCTestCase {
     func testLimitedAvailability() throws {
 
         try AssertText {
-            if #available(iOS 9999, macOS 9999, tvOS 9999, watchOS 9999, *) {
+            if #available(iOS 999, macOS 999, tvOS 999, watchOS 999, *) {
                 "Future Content"
             } else if #available(*) { // <-- This causes the builder to hit
                 "Current Content"     //     buildLimitedAvailability.
