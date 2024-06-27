@@ -1,5 +1,5 @@
 
-import FileBuilder
+import FileBuilderKit
 import FileTester
 import XCTest
 

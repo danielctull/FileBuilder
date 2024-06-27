@@ -11,20 +11,23 @@ let package = Package(
         .watchOS(.v7),
     ],
     products: [
-        .library(name: "FileBuilder", targets: ["FileBuilder"]),
+        .library(name: "FileBuilderKit", targets: ["FileBuilderKit"]),
         .library(name: "FileTester", targets: ["FileTester"]),
     ],
     targets: [
 
         .target(
-            name: "FileBuilder"),
+            name: "FileBuilderKit"),
 
         .target(
             name: "FileTester",
-            dependencies: ["FileBuilder"]),
+            dependencies: ["FileBuilderKit"]),
 
         .testTarget(
             name: "FileBuilderTests",
-            dependencies: ["FileBuilder", "FileTester"]),
+            dependencies: [
+                "FileBuilderKit",
+                "FileTester",
+            ]),
     ]
 )
