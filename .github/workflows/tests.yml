@@ -15,7 +15,7 @@ jobs:
           - "swift:5.8"
           - "swift:5.9"
           - "swift:5.10"
-    name: Linux
+    name: Test
     runs-on: ubuntu-latest
     container:
       image: ${{ matrix.image }}
@@ -32,7 +32,7 @@ jobs:
       run: swift test --enable-test-discovery -v -c debug
 
   macos:
-    name: MacOS
+    name: Test
     runs-on: macos-latest
     steps:
     - name: Checkout
