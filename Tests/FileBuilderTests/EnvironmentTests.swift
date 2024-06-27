@@ -1,6 +1,6 @@
 
 import FileBuilderKit
-import FileTester
+import FileBuilderTesting
 import XCTest
 
 final class EnvironmentTests: XCTestCase {
