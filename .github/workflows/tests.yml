@@ -21,29 +21,15 @@ jobs:
       image: ${{ matrix.image }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
-    - name: Swift Version
-      run: swift --version
-    - name: Release Build
-      run: swift build --enable-test-discovery -v -c release
-    - name: Debug Build
-      run: swift build --enable-test-discovery -v -c debug
-    - name: Debug Test
-      run: swift test --enable-test-discovery -v -c debug
+      uses: actions/checkout@v4
+    - name: Swift Test
+      uses: ./.github/workflows/swift-test.yml
 
   macos:
     name: Test
     runs-on: macos-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
-    - name: Swift Version
-      run: swift --version
-    - name: Release Build
-      run: swift build -v -c release
-    - name: Release Test
-      run: swift test -v -c release
-    - name: Debug Build
-      run: swift build -v -c debug
-    - name: Debug Test
-      run: swift test -v -c debug
+      uses: actions/checkout@v4
+    - name: Swift Test
+      uses: ./.github/workflows/swift-test.yml

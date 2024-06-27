@@ -1,0 +1,17 @@
+name: swift-test
+
+runs:
+  using: "composite"
+  steps:
+  - name: Swift Version
+    shell: bash
+    run: swift --version
+  - name: Release Build
+    shell: bash
+    run: swift build --enable-test-discovery -v -c release
+  - name: Debug Build
+    shell: bash
+    run: swift build --enable-test-discovery -v -c debug
+  - name: Debug Test
+    shell: bash
+    run: swift test --enable-test-discovery -v -c debug
