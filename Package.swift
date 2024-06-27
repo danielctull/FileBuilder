@@ -12,7 +12,7 @@ let package = Package(
     ],
     products: [
         .library(name: "FileBuilder", targets: ["FileBuilder"]),
-        .library(name: "FileTester", targets: ["FileTester"]),
+        .library(name: "FileBuilderTesting", targets: ["FileBuilderTesting"]),
     ],
     targets: [
 
@@ -20,11 +20,14 @@ let package = Package(
             name: "FileBuilder"),
 
         .target(
-            name: "FileTester",
+            name: "FileBuilderTesting",
             dependencies: ["FileBuilder"]),
 
         .testTarget(
             name: "FileBuilderTests",
-            dependencies: ["FileBuilder", "FileTester"]),
+            dependencies: [
+                "FileBuilder",
+                "FileBuilderTesting",
+            ]),
     ]
 )

@@ -1,6 +1,6 @@
 
 import FileBuilder
-import FileTester
+import FileBuilderTesting
 import XCTest
 
 final class FileTests: XCTestCase {
