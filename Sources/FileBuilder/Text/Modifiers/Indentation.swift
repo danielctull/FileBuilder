@@ -1,7 +1,14 @@
 
-public enum Indentation: Equatable {
-    case tab
-    case spaces(Int)
+public struct Indentation: Equatable {
+    fileprivate let value: String
+}
+
+extension Indentation {
+    public static let tab = Indentation(value: "\t")
+
+    public static func spaces(_ amount: Int) -> Indentation {
+        Indentation(value: String(repeating: " ", count: amount))
+    }
 }
 
 // MARK: - Environment
@@ -46,16 +53,6 @@ private struct Indent: LineModifier {
     @Environment(\.indentation) var indentation
 
     func line(content: Line) -> Line {
-        content.prefix(String(indentation))
-    }
-}
-
-extension String {
-
-    fileprivate init(_ indentation: Indentation) {
-        switch indentation {
-        case .tab: self = "\t"
-        case .spaces(let amount): self = String(repeating: " ", count: amount)
-        }
+        content.prefix(indentation.value)
     }
 }
