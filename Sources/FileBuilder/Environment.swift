@@ -27,7 +27,7 @@ struct EnvironmentModifier<Content> {
 public struct Environment<Value> {
 
     private let keyPath: KeyPath<EnvironmentValues, Value>
-    @Box private var values: EnvironmentValues?
+    @Mutable private var values: EnvironmentValues?
 
     public init(_ keyPath: KeyPath<EnvironmentValues, Value>) {
         self.keyPath = keyPath
@@ -40,7 +40,7 @@ public struct Environment<Value> {
 }
 
 @propertyWrapper
-private final class Box<Value> {
+private final class Mutable<Value> {
     var wrappedValue: Value
     init(wrappedValue: Value) {
         self.wrappedValue = wrappedValue
