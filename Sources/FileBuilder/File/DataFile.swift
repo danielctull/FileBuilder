@@ -31,7 +31,7 @@ public struct DataFile: File {
 // MARK: - Format
 
 public struct Format<Value> {
-    
+
     private let convert: (Value) throws -> Data
     fileprivate init(convert: @escaping (Value) throws -> Data) {
         self.convert = convert
