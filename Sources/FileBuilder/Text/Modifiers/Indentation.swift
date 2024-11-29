@@ -4,7 +4,7 @@ public struct Indentation: Equatable {
 }
 
 extension Indentation {
-    public static let tab = Indentation(value: "\t")
+    public static var tab: Indentation { Indentation(value: "\t") }
 
     public static func spaces(_ amount: Int) -> Indentation {
         Indentation(value: String(repeating: " ", count: amount))
@@ -28,7 +28,7 @@ extension File {
 }
 
 private enum IndentationKey: EnvironmentKey {
-    static let defaultValue = Indentation.spaces(4)
+    static var defaultValue: Indentation { .spaces(4) }
 }
 
 extension EnvironmentValues {

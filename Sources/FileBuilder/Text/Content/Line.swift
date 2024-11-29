@@ -8,7 +8,7 @@ public struct Line: Equatable {
 }
 
 extension Line {
-    public static let empty = Line("")
+    public static var empty: Line { Line("") }
 }
 
 // MARK: - Modification
