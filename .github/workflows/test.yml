@@ -27,8 +27,13 @@ jobs:
       run: swift test -v -c debug
 
   macos:
-    name: macOS
-    runs-on: macos-15
+    strategy:
+      fail-fast: false
+      matrix:
+        image:
+          - "15"
+    name: macOS ${{ matrix.image }}
+    runs-on: macos-${{ matrix.image }}
     steps:
     - name: Checkout
       uses: actions/checkout@v4
